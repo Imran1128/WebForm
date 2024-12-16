@@ -20,3 +20,57 @@ html {
 body {
   margin-bottom: 60px;
 }
+/* Custom Styles for Table and Buttons */
+.table-hover tbody tr:hover {
+    background-color: #f1f3f4;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table td {
+    font-size: 14px;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+}
+
+i {
+    margin-right: 5px;
+}
+
+/* Hover Effects for Table Rows */
+table tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+/* Custom Button Styles */
+.btn-info, .btn-secondary, .btn-danger {
+    transition: all 0.3s ease;
+}
+
+    .btn-info:hover {
+        background-color: #338fff;
+        border-color: #338fff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #f0ad4e;
+        border-color: #f0ad4e;
+    }
+
+    .btn-danger:hover {
+        background-color: #c9302c;
+        border-color: #c9302c;
+    }

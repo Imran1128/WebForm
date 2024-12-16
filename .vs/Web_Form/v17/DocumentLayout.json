@@ -3,20 +3,80 @@
   "WorkspaceRootPath": "C:\\Users\\Imran\\source\\repos\\Web_Form\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\forms\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\forms\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\forms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\forms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\forms\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\forms\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\forms\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\forms\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\models\\tblform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\models\\tblquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\migrations\\dbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\migrations\\dbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\web_form.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\web_form.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\migrations\\20241215081956_createdatabase.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\migrations\\20241215081956_createdatabase.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\areas\\identity\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -31,12 +91,8 @@
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\scaffoldingreadme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|c:\\users\\imran\\source\\repos\\web_form\\web_form\\migrations\\20241215081956_createdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\migrations\\20241215081956_createdatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +102,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,46 +110,84 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Web_Form\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Web_Form\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T12:14:51.592Z",
+              "DocumentIndex": 4,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-16T15:39:36.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-16T15:39:27.632Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Delete.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Forms\\Delete.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-16T15:34:31.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-14T12:08:34.551Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_LoginPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
-              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
-              "RelativeToolTip": "Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Details.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Details.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Forms\\Details.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-14T12:08:24.043Z",
+              "WhenOpened": "2024-12-16T15:34:07.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Index.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Index.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Forms\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-16T04:51:16.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Web_Form.csproj",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Web_Form.csproj",
+              "RelativeDocumentMoniker": "Web_Form\\Web_Form.csproj",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Web_Form.csproj",
+              "RelativeToolTip": "Web_Form\\Web_Form.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-16T02:47:56.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Web_Form\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
@@ -101,60 +195,82 @@
               "RelativeToolTip": "Web_Form\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-14T12:08:07.648Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-14T12:08:07.648Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "_ValidationScriptsPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "RelativeToolTip": "Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Create.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Forms\\Create.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Forms\\Create.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAADYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-14T12:08:05.009Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ScaffoldingReadMe.txt",
-              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\ScaffoldingReadMe.txt",
-              "RelativeDocumentMoniker": "Web_Form\\ScaffoldingReadMe.txt",
-              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\ScaffoldingReadMe.txt",
-              "RelativeToolTip": "Web_Form\\ScaffoldingReadMe.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-12-14T12:03:34.15Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Program.cs",
-              "RelativeDocumentMoniker": "Web_Form\\Program.cs",
-              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Program.cs",
-              "RelativeToolTip": "Web_Form\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T11:49:34.037Z",
+              "WhenOpened": "2024-12-16T02:55:22.309Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\appsettings.json",
-              "RelativeDocumentMoniker": "Web_Form\\appsettings.json",
-              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\appsettings.json",
-              "RelativeToolTip": "Web_Form\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-14T11:47:42.393Z",
+              "Title": "FormsController.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Controllers\\FormsController.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Controllers\\FormsController.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Controllers\\FormsController.cs",
+              "RelativeToolTip": "Web_Form\\Controllers\\FormsController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAmwFkAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T02:54:01.047Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Web_Form\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T12:14:51.592Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEcAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-14T12:08:34.551Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "20241215081956_createDatabase.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Migrations\\20241215081956_createDatabase.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Migrations\\20241215081956_createDatabase.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Migrations\\20241215081956_createDatabase.cs",
+              "RelativeToolTip": "Web_Form\\Migrations\\20241215081956_createDatabase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-15T08:19:56.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Migrations\\DbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Migrations\\DbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Migrations\\DbContextModelSnapshot.cs",
+              "RelativeToolTip": "Web_Form\\Migrations\\DbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-15T08:25:06.446Z"
             },
             {
               "$type": "Document",
@@ -164,10 +280,118 @@
               "RelativeDocumentMoniker": "Web_Form\\Data\\DbContext.cs",
               "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Data\\DbContext.cs",
               "RelativeToolTip": "Web_Form\\Data\\DbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAuwCMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-14T11:44:47.924Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Web_Form\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Web_Form\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAABYAAAAAAAAAAAAkwDEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-12-16T04:56:54.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-14T12:08:24.043Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TblForm.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Models\\TblForm.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Models\\TblForm.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Models\\TblForm.cs",
+              "RelativeToolTip": "Web_Form\\Models\\TblForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T02:59:12.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TblQuestion.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Models\\TblQuestion.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Models\\TblQuestion.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Models\\TblQuestion.cs",
+              "RelativeToolTip": "Web_Form\\Models\\TblQuestion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T03:56:52.625Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "Web_Form\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-14T12:08:05.009Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "20241215081956_createDatabase.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Migrations\\20241215081956_createDatabase.Designer.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Migrations\\20241215081956_createDatabase.Designer.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Migrations\\20241215081956_createDatabase.Designer.cs",
+              "RelativeToolTip": "Web_Form\\Migrations\\20241215081956_createDatabase.Designer.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAIBJwA4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-15T08:24:53.437Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\appsettings.json",
+              "RelativeDocumentMoniker": "Web_Form\\appsettings.json",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\appsettings.json",
+              "RelativeToolTip": "Web_Form\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-14T11:47:42.393Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ScaffoldingReadMe.txt",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\ScaffoldingReadMe.txt",
+              "RelativeDocumentMoniker": "Web_Form\\ScaffoldingReadMe.txt",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\ScaffoldingReadMe.txt",
+              "RelativeToolTip": "Web_Form\\ScaffoldingReadMe.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-12-14T12:03:34.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Program.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Program.cs",
+              "ToolTip": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Program.cs",
+              "RelativeToolTip": "Web_Form\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T11:49:34.037Z"
             }
           ]
         }
