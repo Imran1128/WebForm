@@ -8499,11 +8499,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Web_Form.csproj",
+      "projectUniqueName": "F:\\WebForm\\Web_Form\\Web_Form.csproj",
       "projectName": "Web_Form",
-      "projectPath": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\Web_Form.csproj",
+      "projectPath": "F:\\WebForm\\Web_Form\\Web_Form.csproj",
       "packagesPath": "C:\\Users\\Imran\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Imran\\source\\repos\\Web_Form\\Web_Form\\obj\\",
+      "outputPath": "F:\\WebForm\\Web_Form\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
