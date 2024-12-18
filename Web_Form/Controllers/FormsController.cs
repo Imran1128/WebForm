@@ -55,28 +55,8 @@ namespace Web_Form.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int FormId,string Title,string HeaderPhoto,bool IsFavourite,byte FormStatus,string? BackgroundColor,string Email,string Name,bool Status,DateTime LastOpened,string Createdby,DateTime CreatedOn,string UpdatedBy,DateTime? UpdatedOn)
+        public async Task<IActionResult> Create(TblForm tblForm)
         {
-            var tblForm = new TblForm
-            {
-                FormId = FormId,
-                Title = Title,
-                HeaderPhoto = HeaderPhoto,
-                IsFavourite = IsFavourite,
-                FormStatus = FormStatus,
-                LastOpened = DateTime.Now,
-                CreatedOn = DateTime.Now,
-                UpdatedOn = DateTime.Now,
-                BackgroundColor = BackgroundColor,
-                Email = Email,
-                Name = Name,
-                Status = Status,
-                Createdby = Createdby,
-
-
-
-
-            };
             if (ModelState.IsValid)
             {
                 _context.Add(tblForm);
