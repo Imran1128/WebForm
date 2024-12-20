@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Nr6Of1m5hUbp5IiPcqTGYnQsY8W8AHpp124h7hY2NTY=",
+  "Hash": "miA6754Eylww9WPeflVi7ocUKkZE0BOBc1kHccpAxZE=",
   "Source": "Web_Form",
   "BasePath": "_content/Web_Form",
   "Mode": "Default",
@@ -1307,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Users.js",
+      "SourceId": "Web_Form",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\WebForm\\Web_Form\\wwwroot\\",
+      "BasePath": "_content/Web_Form",
+      "RelativePath": "js/Users.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Users.js"
     },
     {
       "Identity": "F:\\WebForm\\Web_Form\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

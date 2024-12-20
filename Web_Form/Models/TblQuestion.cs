@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Form.Models;
 
@@ -9,7 +10,7 @@ public partial class TblQuestion
 
     public int FormId { get; set; }
 
-    public string? Question { get; set; }
+    public string Question { get; set; }
 
     public int? QuestionType { get; set; }
 
@@ -36,6 +37,6 @@ public partial class TblQuestion
     public virtual TblForm Form { get; set; } = null!;
 
     public virtual TblKeywordMaster? QuestionTypeNavigation { get; set; }
-
+    [NotMapped]
     public virtual ICollection<TblQuestionOption> TblQuestionOptions { get; set; } = new List<TblQuestionOption>();
 }

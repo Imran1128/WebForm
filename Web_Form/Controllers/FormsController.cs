@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web_Form.Data;
+using Web_Form.Interfaces;
 using Web_Form.Models;
+using Web_Form.ViewModels;
 using DbContext = Web_Form.Data.DbContext;
 
 namespace Web_Form.Controllers
@@ -14,10 +16,12 @@ namespace Web_Form.Controllers
     public class FormsController : Controller
     {
         private readonly DbContext _context;
+        private readonly IFormService formService;
 
-        public FormsController(DbContext context)
+        public FormsController(DbContext context ,IFormService formService)
         {
             _context = context;
+            this.formService = formService;
         }
 
         // GET: Forms
@@ -47,6 +51,7 @@ namespace Web_Form.Controllers
         // GET: Forms/Create
         public IActionResult Create()
         {
+           
             return View();
         }
 
@@ -55,16 +60,14 @@ namespace Web_Form.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TblForm tblForm)
+        public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(tblForm);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(tblForm);
+            
+
+            // If the model is not valid, return the form with the current model
+            return View(fullFormViewModel);
         }
+
 
         // GET: Forms/Edit/5
         [HttpGet]
@@ -155,5 +158,22 @@ namespace Web_Form.Controllers
         {
             return _context.TblForms.Any(e => e.FormId == id);
         }
+        [HttpPost]
+        [HttpPost]
+        public IActionResult AddQuestion(FullFormViewModel fullFormViewModel)
+        {
+            // Log the full form data
+            Console.WriteLine("Model Received: ");
+            Console.WriteLine("TblQuestion.Question: " + fullFormViewModel.TblQuestion?.Question);
+
+            if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
+            {
+                return Json(new { success = true, message = "Question added successfully!" });
+            }
+
+            return Json(new { success = false, message = "Invalid question data." });
+        }
+
+
     }
 }
