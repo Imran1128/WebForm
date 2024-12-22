@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Web_Form.Models;
 
 namespace Web_Form.Data
 {
-    public class DbContext : IdentityDbContext
+    public class DbContext : IdentityDbContext<ApplicationUser>
     {
         public DbContext(DbContextOptions<DbContext> options) : base(options)
         {

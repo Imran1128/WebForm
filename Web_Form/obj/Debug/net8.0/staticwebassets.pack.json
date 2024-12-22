@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\Form.js"
     },
     {
+      "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Users.js",
+      "PackagePath": "staticwebassets\\js\\Users.js"
+    },
+    {
       "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

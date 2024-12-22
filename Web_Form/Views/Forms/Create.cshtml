@@ -1,4 +1,4 @@
-﻿@model Web_Form.Models.TblForm
+﻿@model FullFormViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -9,19 +9,18 @@
         <div class="card shadow-lg">
 
             <!-- Header -->
-            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                <!-- Submit Button -->
-                <button type="submit" form="mainForm" class="btn btn-success btn-lg">
-                    <i class="fa-solid fa-paper-plane me-2"></i>Submit
-                </button>
-                <!-- Add Section Button -->
-                <button id="AddSection" type="button" class="btn btn-light btn-sm" title="Add New Section">
-                    <i class="fa-solid fa-plus fa-lg"></i>
-                </button>
-            </div>
+           
 
             <!-- Form Body -->
-            <form asp-action="Create" id="mainForm">
+            <form asp-action="Create" asp-controller="Forms" method="post" id="mainForm">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fa-solid fa-paper-plane me-2"></i>Submit
+                    </button>
+                    <!-- Add Section Button -->
+                   
+                </div>
                 <div class="card-body">
 
                     <!-- Title Section -->
@@ -30,71 +29,38 @@
 
                         <!-- Title Input -->
                         <div class="form-floating mb-4">
-                            <input asp-for="Title" class="form-control" placeholder="Enter Title" />
-                            <label asp-for="Title">
+                            <input asp-for="@Model.TblForm.Title" class="form-control" placeholder="Enter Title" />
+                            <label asp-for="@Model.TblForm.Title">
                                 <i class="fa-solid fa-heading me-2"></i>Title
                             </label>
-                            <span asp-validation-for="Title" class="text-danger"></span>
+                            <span asp-validation-for="@Model.TblForm.Title" class="text-danger"></span>
                         </div>
 
                         <!-- Description Input -->
                         <div class="form-floating mb-4">
-                            <textarea asp-for="Description" class="form-control" placeholder="Enter Description" style="height: 120px;"></textarea>
-                            <label asp-for="Description">
+                            <textarea asp-for="@Model.TblForm.Description" class="form-control" placeholder="Enter Description" style="height: 120px;"></textarea>
+                            <label asp-for="@Model.TblForm.Description">
                                 <i class="fa-solid fa-align-left me-2"></i>Description
                             </label>
-                            <span asp-validation-for="Description" class="text-danger"></span>
+                            <span asp-validation-for="@Model.TblForm.Description" class="text-danger"></span>
                         </div>
                     </div>
+                    <form action="" method="post" id="QuestionForm">
+                        <div class="form-floating mb-4">
+                            <input asp-for="@Model.TblQuestion.Question" class="form-control" placeholder="Enter Question" />
+                            <label asp-for="@Model.TblQuestion.Question">
+                                <i class="fa-solid fa-heading me-2"></i>Question
+                            </label>
+                            <span asp-validation-for="@Model.TblQuestion.Question" class="text-danger"></span>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button id="AddSection" type="button" class="btn btn-light btn-sm" title="Add New Section">
+                                <i class="fa-solid fa-plus fa-lg"></i>
+                            </button>
+                        </div>
+                    </form>
 
-                    <!-- Question Sections Container -->
-                    <div id="questionContainer"></div>
-
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Hidden Question Section Template -->
-<template id="questionTemplate">
-    <div class="question-section card p-3 mb-3">
-        <div class="mb-3">
-            <label class="form-label fw-bold question-number">Question 1</label>
-            <input type="text" class="form-control" placeholder="Enter your question here" name="Questions[]">
-        </div>
-
-        <!-- Options Section -->
-        <div class="mb-3">
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="option[]">
-                <label class="form-check-label fw-semibold">Option 1</label>
-            </div>
-            <div class="form-check mt-2">
-                <input type="radio" class="form-check-input" disabled>
-                <label class="form-check-label text-muted">
-                    <span class="text-secondary">Add option</span> or <a href="#" class="text-primary">add "Other"</a>
-                </label>
-            </div>
-        </div>
-
-        <!-- Bottom Section -->
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <button class="btn btn-light me-2" title="Duplicate">
-                    <i class="fa-solid fa-copy"></i>
-                </button>
-                <button class="btn btn-light btn-delete" title="Delete">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-            <div class="form-check form-switch">
-                <label class="form-check-label">Required</label>
-                <input class="form-check-input" type="checkbox" name="RequiredQuestions[]">
-            </div>
-        </div>
-    </div>
-</template>
+     </form>
 
 <!-- Back Button -->
 <div class="text-center mt-3">
@@ -105,48 +71,29 @@
 
 @section Scripts {
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const addButton = document.getElementById("AddSection");
-            const questionContainer = document.getElementById("questionContainer");
-            const questionTemplate = document.getElementById("questionTemplate");
+                    $(document).ready(function () {
+                        $("#AddSection").on("click", function () {
+                        
+                            var form = $("#QuestionForm");
 
-            let questionCount = 0;
+                            var formData = form.serialize();
 
-          
-            addButton.addEventListener("click", function () {
-                questionCount++;
-
-               
-                const newQuestionSection = document.importNode(questionTemplate.content, true);
-
-               
-                const questionLabel = newQuestionSection.querySelector('.question-number');
-                questionLabel.textContent = `Question ${questionCount}`;
-
-               
-                questionContainer.appendChild(newQuestionSection);
-
-               
-                attachDeleteEvents();
-            });
-
-            function attachDeleteEvents() {
-                document.querySelectorAll('.btn-delete').forEach(button => {
-                    button.onclick = function () {
-                        button.closest('.question-section').remove();
-                        updateQuestionNumbers();
-                    };
-                });
-            }
-
-           
-            function updateQuestionNumbers() {
-                questionCount = 0;
-                document.querySelectorAll('.question-section').forEach(section => {
-                    const questionLabel = section.querySelector('.question-number');
-                    questionLabel.textContent = `Question ${++questionCount}`;
-                });
-            }
-        });
+                            $.ajax({
+                                url: '/Forms/AddQuestion',
+                                type: 'POST',
+                                data: formData,
+                                success: function (response) {
+                                    // Handle the success scenario
+                                    
+                                    console.log(response);
+                                },
+                                error: function (xhr, status, error) {
+                                    // Handle the error scenario
+                                    alert("An error occurred: " + xhr.responseText);
+                                    console.error(error);
+                                }
+                            });
+                        });
+                    });
     </script>
 }

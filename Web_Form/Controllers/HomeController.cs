@@ -14,7 +14,7 @@ namespace Web_Form.Controllers
             _logger = logger;
         }
 
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             return View();
