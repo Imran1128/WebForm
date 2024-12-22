@@ -1,29 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\WebForm\\",
+  "WorkspaceRootPath": "D:\\Work\\Noyon\\Imran_WebForm\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\usermanagement\\manageuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\views\\forms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\forms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\views\\usermanagement\\manageuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\usermanagement\\manageuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\wwwroot\\js\\users.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\js\\users.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\wwwroot\\js\\users.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\js\\users.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|d:\\work\\noyon\\imran_webform\\web_form\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -38,15 +50,54 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Views\\Forms\\Create.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Create.cshtml",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Views\\Forms\\Create.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Forms\\Create.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAAAqwD8AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-22T12:48:58.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FormsController.cs",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Controllers\\FormsController.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Controllers\\FormsController.cs",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Controllers\\FormsController.cs",
+              "RelativeToolTip": "Web_Form\\Controllers\\FormsController.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAADgv6gAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T12:48:26.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\appsettings.json",
+              "RelativeDocumentMoniker": "Web_Form\\appsettings.json",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\appsettings.json",
+              "RelativeToolTip": "Web_Form\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-22T12:46:14.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Web_Form\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -55,11 +106,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "ManageUser.cshtml",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
               "RelativeDocumentMoniker": "Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
               "RelativeToolTip": "Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -68,55 +119,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Users.js",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Users.js",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\wwwroot\\js\\Users.js",
               "RelativeDocumentMoniker": "Web_Form\\wwwroot\\js\\Users.js",
-              "ToolTip": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Users.js",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\wwwroot\\js\\Users.js",
               "RelativeToolTip": "Web_Form\\wwwroot\\js\\Users.js",
               "ViewState": "AgIAAA0AAAAAAAAAAAAgwCQAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-12-20T19:29:50.293Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T19:29:50.293Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Register.cshtml.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "RelativeDocumentMoniker": "Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "RelativeToolTip": "Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAwwFwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T19:25:58.051Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T19:25:58.051Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "ApplicationUser.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\ApplicationUser.cs",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Models\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "Web_Form\\Models\\ApplicationUser.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Models\\ApplicationUser.cs",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Models\\ApplicationUser.cs",
               "RelativeToolTip": "Web_Form\\Models\\ApplicationUser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T19:20:41.274Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T19:20:41.274Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "UserManagementController.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Controllers\\UserManagementController.cs",
+              "DocumentMoniker": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Controllers\\UserManagementController.cs",
               "RelativeDocumentMoniker": "Web_Form\\Controllers\\UserManagementController.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Controllers\\UserManagementController.cs",
+              "ToolTip": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Controllers\\UserManagementController.cs",
               "RelativeToolTip": "Web_Form\\Controllers\\UserManagementController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T19:11:25.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T19:11:25.176Z"
             }
           ]
         }

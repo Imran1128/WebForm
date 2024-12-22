@@ -51,8 +51,8 @@ namespace Web_Form.Controllers
         // GET: Forms/Create
         public IActionResult Create()
         {
-           
-            return View();
+            var fullForm = new FullFormViewModel();
+            return View(fullForm);
         }
 
         // POST: Forms/Create
@@ -159,15 +159,15 @@ namespace Web_Form.Controllers
             return _context.TblForms.Any(e => e.FormId == id);
         }
         [HttpPost]
-        [HttpPost]
         public IActionResult AddQuestion(FullFormViewModel fullFormViewModel)
         {
-            // Log the full form data
             Console.WriteLine("Model Received: ");
             Console.WriteLine("TblQuestion.Question: " + fullFormViewModel.TblQuestion?.Question);
 
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
             {
+                fullFormViewModel.TblQuestion.tblQuestionOptionlList.Add(fullFormViewModel.tblQuestionOption);
+                fullFormViewModel.TblQuestionsList.Add(fullFormViewModel.TblQuestion);
                 return Json(new { success = true, message = "Question added successfully!" });
             }
 

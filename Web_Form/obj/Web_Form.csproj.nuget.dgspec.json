@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\WebForm\\Web_Form\\Web_Form.csproj": {}
+    "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Web_Form.csproj": {}
   },
   "projects": {
-    "F:\\WebForm\\Web_Form\\Web_Form.csproj": {
+    "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Web_Form.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\WebForm\\Web_Form\\Web_Form.csproj",
+        "projectUniqueName": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Web_Form.csproj",
         "projectName": "Web_Form",
-        "projectPath": "F:\\WebForm\\Web_Form\\Web_Form.csproj",
-        "packagesPath": "C:\\Users\\Imran\\.nuget\\packages\\",
-        "outputPath": "F:\\WebForm\\Web_Form\\obj\\",
+        "projectPath": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\Web_Form.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\Noyon\\Imran_WebForm\\Web_Form\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Imran\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,8 +26,8 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +45,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -113,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
