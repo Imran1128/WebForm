@@ -51,7 +51,11 @@ namespace Web_Form.Controllers
         // GET: Forms/Create
         public IActionResult Create()
         {
-            var fullForm = new FullFormViewModel();
+            var fullForm = new FullFormViewModel
+             {
+               tblKeywordMaster = _context.TblKeywordMasters.ToList()
+            };
+            
             return View(fullForm);
         }
 
@@ -62,8 +66,9 @@ namespace Web_Form.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel)
         {
-            
 
+          
+            
             // If the model is not valid, return the form with the current model
             return View(fullFormViewModel);
         }
@@ -161,18 +166,30 @@ namespace Web_Form.Controllers
         [HttpPost]
         public IActionResult AddQuestion(FullFormViewModel fullFormViewModel)
         {
-            Console.WriteLine("Model Received: ");
-            Console.WriteLine("TblQuestion.Question: " + fullFormViewModel.TblQuestion?.Question);
+         
+            fullFormViewModel ??= new FullFormViewModel();
+            fullFormViewModel.TblQuestion ??= new TblQuestion();
+            fullFormViewModel.tblQuestionOption ??= new TblQuestionOption();
+            fullFormViewModel.TblQuestionsList ??= new List<TblQuestion>();
+            fullFormViewModel.TblQuestion.tblQuestionOptionlList ??= new List<TblQuestionOption>();
 
+           
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
             {
+              
                 fullFormViewModel.TblQuestion.tblQuestionOptionlList.Add(fullFormViewModel.tblQuestionOption);
+
+          
                 fullFormViewModel.TblQuestionsList.Add(fullFormViewModel.TblQuestion);
-                return Json(new { success = true, message = "Question added successfully!" });
+
+               
             }
 
-            return Json(new { success = false, message = "Invalid question data." });
+            return PartialView("AddQuestion", fullFormViewModel);
         }
+
+
+
 
 
     }

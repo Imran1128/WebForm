@@ -4,101 +4,109 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card shadow-lg">
-
-            <!-- Header -->
-           
-
-            <!-- Form Body -->
-            <form asp-action="Create" asp-controller="Forms" method="post" id="mainForm">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-lg">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <!-- Submit Button -->
+                    <h4>Create New Template</h4>
                     <button type="submit" class="btn btn-success btn-lg">
                         <i class="fa-solid fa-paper-plane me-2"></i>Submit
                     </button>
-                    <!-- Add Section Button -->
-                   
                 </div>
-                <div class="card-body">
 
-                    <!-- Title Section -->
-                    <div class="title mb-4">
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <form asp-action="Create" asp-controller="Forms" method="post" id="mainForm" class="p-4">
+                    <div class="card-body">
 
-                        <!-- Title Input -->
-                        <div class="form-floating mb-4">
-                            <input asp-for="TblForm.Title" class="form-control" placeholder="Enter Title" />
-                            <label asp-for="TblForm.Title">
-                                <i class="fa-solid fa-heading me-2"></i>Title
-                            </label>
-                            <span asp-validation-for="TblForm.Title" class="text-danger"></span>
-                        </div>
+                        <!-- Title Section -->
+                        <div class="title mb-4">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-                        <!-- Description Input -->
-                        <div class="form-floating mb-4">
-                            <textarea asp-for="TblForm.Description" class="form-control" placeholder="Enter Description" style="height: 120px;"></textarea>
-                            <label asp-for="TblForm.Description">
-                                <i class="fa-solid fa-align-left me-2"></i>Description
-                            </label>
-                            <span asp-validation-for="TblForm.Description" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div id="Question">
-                        <div class="form-floating mb-4">
-                            <input asp-for="TblQuestion.Question" class="form-control" placeholder="Enter Question" />
-                            <label asp-for="TblQuestion.Question">
-                                <i class="fa-solid fa-heading me-2"></i>Question
-                            </label>
-                            <span asp-validation-for="TblQuestion.Question" class="text-danger"></span>
-                        </div>
-                        
-                        <div id="Option">
+                            <!-- Title Input -->
                             <div class="form-floating mb-4">
-                                <input asp-for="tblQuestionOption.OptionText" class="form-control" placeholder="Enter Question" />
-                                <label asp-for="tblQuestionOption.OptionText">
-                                    <i class="fa-solid fa-heading me-2"></i>Question
+                                <input asp-for="TblForm.Title" class="form-control" placeholder="Enter Title" id="title" />
+                                <label asp-for="TblForm.Title" for="title">
+                                    <i class="fa-solid fa-heading me-2"></i>Title
                                 </label>
-                                <span asp-validation-for="tblQuestionOption.OptionText" class="text-danger"></span>
+                                <span asp-validation-for="TblForm.Title" class="text-danger"></span>
+                            </div>
+
+                            <!-- Description Input -->
+                            <div class="form-floating mb-4">
+                                <textarea asp-for="TblForm.Description" class="form-control" placeholder="Enter Description" style="height: 120px;" id="description"></textarea>
+                                <label asp-for="TblForm.Description" for="description">
+                                    <i class="fa-solid fa-align-left me-2"></i>Description
+                                </label>
+                                <span asp-validation-for="TblForm.Description" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-end">
-                            <button id="AddSection" type="button" class="btn btn-light btn-sm" title="Add New Section">
-                                <i class="fa-solid fa-plus fa-lg"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-     </form>
+                        <!-- Question Section -->
+                        <div id="Question" class="mb-4">
+                            <div class="form-floating mb-4">
+                                <input asp-for="TblQuestion.Question" class="form-control" placeholder="Enter Question" id="question" />
+                                <label asp-for="TblQuestion.Question" for="question">
+                                    <i class="fa-solid fa-question-circle me-2"></i>Question
+                                </label>
+                                <span asp-validation-for="TblQuestion.Question" class="text-danger"></span>
+                            </div>
 
-<!-- Back Button -->
-<div class="text-center mt-3">
-    <a asp-action="Index" class="btn btn-outline-secondary">
-        <i class="fa-solid fa-arrow-left me-2"></i>Back to List
-    </a>
+                            <div id="Option" class="form-floating mb-4">
+                                <select asp-for="tblQuestionOption.OptionText" class="form-control" aria-label="Select Question Type" id="option">
+                                    <option value="">-- Select Question Type --</option>
+                                    @foreach (var keyword in Model.tblKeywordMaster)
+                                    {
+                                        <option value="@keyword.KeywordName">@keyword.KeywordName</option>
+                                    }
+                                </select>
+                                <label for="option">
+                                    <i class="fa-solid fa-cogs me-2"></i>Question Type
+                                </label>
+                                <span asp-validation-for="tblQuestionOption.OptionText" class="text-danger"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button id="AddSection" type="button" class="btn btn-light btn-sm" title="Add New Section">
+                                    <i class="fa-solid fa-plus fa-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive ms-4" id="beamDetails">
+                        @await Html.PartialAsync($"~/Views/forms/AddQuestion.cshtml", Model)
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fa-solid fa-arrow-left me-2"></i>Back to List
+        </a>
+    </div>
 </div>
 
 @section Scripts {
     <script>
-                    $(document).ready(function () {
-                        $("#AddSection").on("click", function () {
-                            $.ajax({
-                                url: '/Forms/AddQuestion',
-                                type: 'POST',
-                                data: $("#mainForm").serialize(),
-                                success: function (response) {                                    
-                                    console.log(response);
-                                },
-                                error: function (xhr, status, error) {
-                                    
-                                    alert("An error occurred: " + xhr.responseText);
-                                    console.error(error);
-                                }
-                            });
-                        });
-                    });
+        $(document).ready(function () {
+            $("#AddSection").on("click", function () {
+                $.ajax({
+                    url: '/Forms/AddQuestion',
+                    type: 'POST',
+                    data: $("#mainForm").serialize(),
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("An error occurred: " + xhr.responseText);
+                        console.error(error);
+                    }
+                });
+            });
+        });
     </script>
 }

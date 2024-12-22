@@ -1,0 +1,16 @@
+﻿@model FullFormViewModel
+
+@if (Model.TblQuestionsList.Any())
+{
+    for(var i = 0;i<Model.TblQuestionsList.Count;i++)
+    {
+       <h1> @Model.TblQuestionsList[i].Question</h1>
+    }
+    for (var i = 0; i < Model.TblQuestion.tblQuestionOptionlList.Count; i++)
+    {
+        <h1> @Model.TblQuestion.tblQuestionOptionlList[i].OptionText</h1>
+    }
+
+}
+else { <p>No question added yet</p> }
+

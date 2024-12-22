@@ -12,6 +12,7 @@ namespace Web_Form.ViewModels
         public TblQuestion TblQuestion { get; set; }
         public TblQuestionOption tblQuestionOption { get; set; }
         public List<TblQuestion> TblQuestionsList { get; set; }
-        
+        public List< TblKeywordMaster> tblKeywordMaster { get; set; }
+
     }
 }
