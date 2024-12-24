@@ -26,6 +26,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<DbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 // Add Razor Pages services
 builder.Services.AddRazorPages();
@@ -45,7 +47,7 @@ app.UseStaticFiles();
 
 
 app.UseRouting();
-
+app.UseSession();
 app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();

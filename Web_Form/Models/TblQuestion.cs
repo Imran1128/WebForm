@@ -6,10 +6,6 @@ namespace Web_Form.Models;
 
 public partial class TblQuestion
 {
-    public TblQuestion()
-    {
-        tblQuestionOptionlList= new List<TblQuestionOption>();
-    }
     public int QuestionId { get; set; }
 
     public int FormId { get; set; }
@@ -41,8 +37,6 @@ public partial class TblQuestion
     public virtual TblForm Form { get; set; } = null!;
 
     public virtual TblKeywordMaster? QuestionTypeNavigation { get; set; }
-    [NotMapped]
     public virtual ICollection<TblQuestionOption> TblQuestionOptions { get; set; } = new List<TblQuestionOption>();
-    [NotMapped] 
-    public List<TblQuestionOption> tblQuestionOptionlList { get; set; }
+    [NotMapped] public List<TblQuestionOption> tblQuestionOptionlList { get; set; } = new List<TblQuestionOption>();
 }

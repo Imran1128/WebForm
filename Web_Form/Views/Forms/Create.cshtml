@@ -74,7 +74,7 @@
 
                     </div>
 
-                    <div class="table-responsive ms-4" id="beamDetails">
+                    <div class="table-responsive ms-4" id="questionDetails">
                         @await Html.PartialAsync($"~/Views/forms/AddQuestion.cshtml", Model)
                     </div>
                 </form>
@@ -91,15 +91,20 @@
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
+    <script type="text/javascript" asp-append-version="true">
+        $(function () {
+            
             $("#AddSection").on("click", function () {
+                console.log($("#mainForm").serialize());
                 $.ajax({
+                    async: true,
+                    cache: false,
                     url: '/Forms/AddQuestion',
                     type: 'POST',
                     data: $("#mainForm").serialize(),
                     success: function (response) {
                         console.log(response);
+                            $('#questionDetails').html(response);
                     },
                     error: function (xhr, status, error) {
                         alert("An error occurred: " + xhr.responseText);

@@ -54,6 +54,7 @@ namespace Web_Form.Controllers
             var fullForm = new FullFormViewModel
              {
                tblKeywordMaster = _context.TblKeywordMasters.ToList()
+
             };
             
             return View(fullForm);
@@ -164,28 +165,26 @@ namespace Web_Form.Controllers
             return _context.TblForms.Any(e => e.FormId == id);
         }
         [HttpPost]
-        public IActionResult AddQuestion(FullFormViewModel fullFormViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddQuestion(FullFormViewModel fullFormViewModel)
         {
-         
-            fullFormViewModel ??= new FullFormViewModel();
-            fullFormViewModel.TblQuestion ??= new TblQuestion();
-            fullFormViewModel.tblQuestionOption ??= new TblQuestionOption();
-            fullFormViewModel.TblQuestionsList ??= new List<TblQuestion>();
-            fullFormViewModel.TblQuestion.tblQuestionOptionlList ??= new List<TblQuestionOption>();
-
-           
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
             {
-              
-                fullFormViewModel.TblQuestion.tblQuestionOptionlList.Add(fullFormViewModel.tblQuestionOption);
 
-          
-                fullFormViewModel.TblQuestionsList.Add(fullFormViewModel.TblQuestion);
+                var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
 
-               
+                if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
+                {
+                    fullFormViewModel.TblQuestion.tblQuestionOptionlList.Add(fullFormViewModel.tblQuestionOption);
+                    questionsList.Add(fullFormViewModel.TblQuestion);
+                }
+
+                HttpContext.Session.Set("TblQuestionsList", questionsList);
+                fullFormViewModel.TblQuestionsList = questionsList;
+
             }
 
-            return PartialView("AddQuestion", fullFormViewModel);
+            return PartialView($"AddQuestion", fullFormViewModel);
         }
 
 
