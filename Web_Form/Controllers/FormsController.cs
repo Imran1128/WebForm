@@ -17,11 +17,13 @@ namespace Web_Form.Controllers
     {
         private readonly DbContext _context;
         private readonly IFormService formService;
+        private readonly ILogger<FormsController> logger;
 
-        public FormsController(DbContext context ,IFormService formService)
+        public FormsController(DbContext context ,IFormService formService, ILogger<FormsController> logger)
         {
             _context = context;
             this.formService = formService;
+            this.logger = logger;
         }
 
         // GET: Forms
@@ -53,7 +55,7 @@ namespace Web_Form.Controllers
         {
             var fullForm = new FullFormViewModel
              {
-               tblKeywordMaster = _context.TblKeywordMasters.ToList()
+               //tblKeywordMaster = _context.TblKeywordMasters.ToList()
 
             };
             
@@ -65,15 +67,30 @@ namespace Web_Form.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel)
         {
+            if(ModelState.IsValid)
+            {
 
-          
-            
-            // If the model is not valid, return the form with the current model
-            return View(fullFormViewModel);
+                if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
+                {
+                    var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
+
+                    if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
+                    {
+                        fullFormViewModel.TblQuestion.tblQuestionOptionlList.Add(fullFormViewModel.tblQuestionOption);
+                        questionsList.Add(fullFormViewModel.TblQuestion);
+                    }
+                   
+                    _context.Add(fullFormViewModel);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Index"); 
+                }
+            }
+           return View();
         }
-
 
         // GET: Forms/Edit/5
         [HttpGet]
@@ -166,26 +183,58 @@ namespace Web_Form.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddQuestion(FullFormViewModel fullFormViewModel)
+        public async Task<IActionResult> AddQuestion(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
+            
+
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
             {
-
                 var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
+                var optionlist = HttpContext.Session.Get<List<TblQuestionOption>>("TblOptionList") ?? new List<TblQuestionOption>();
 
                 if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
                 {
-                    fullFormViewModel.TblQuestion.tblQuestionOptionlList.Add(fullFormViewModel.tblQuestionOption);
+                    optionlist.Add(fullFormViewModel.tblQuestionOption);
                     questionsList.Add(fullFormViewModel.TblQuestion);
                 }
 
                 HttpContext.Session.Set("TblQuestionsList", questionsList);
                 fullFormViewModel.TblQuestionsList = questionsList;
-
+                HttpContext.Session.Set("TblOptionList", optionlist);
+                fullFormViewModel.TblQuestion.tblQuestionOptionlList = optionlist;
             }
 
             return PartialView($"AddQuestion", fullFormViewModel);
         }
+        [HttpPost]
+        public IActionResult ClearSession()
+        {
+            HttpContext.Session.Clear(); // Clear all session data
+            return Ok(new { message = "Session cleared successfully." });
+        }
+        [HttpPost]
+        public IActionResult DeleteQuestion(int questionIndex)
+        {
+           
+            var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
+
+            if (questionIndex < 0 || questionIndex >= questionsList.Count)
+            {
+                return BadRequest("Invalid question index.");
+            }
+
+           
+            questionsList.RemoveAt(questionIndex);
+
+            HttpContext.Session.Set("TblQuestionsList", questionsList);
+
+            var model = new FullFormViewModel { TblQuestionsList = questionsList };
+
+         
+            return PartialView("AddQuestion", model); 
+        }
+
+
 
 
 

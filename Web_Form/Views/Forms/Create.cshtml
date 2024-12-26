@@ -10,14 +10,15 @@
             <div class="card shadow-lg rounded-lg">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h4>Create New Template</h4>
-                    <button type="submit" class="btn btn-success btn-lg">
+                    <button type="submit" class="btn btn-success btn-lg" id="Submit">
                         <i class="fa-solid fa-paper-plane me-2"></i>Submit
-                    </button>
                 </div>
 
-                <form asp-action="Create" asp-controller="Forms" method="post" id="mainForm" class="p-4">
+                <form method="post" asp-controller="forms" asp-action="Create" id="mainForm" class="p-4">
+                    
+                    </button>
                     <div class="card-body">
-
+                       
                         <!-- Title Section -->
                         <div class="title mb-4">
                             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
@@ -39,45 +40,52 @@
                                 </label>
                                 <span asp-validation-for="TblForm.Description" class="text-danger"></span>
                             </div>
+                            
                         </div>
+                        
 
                         <!-- Question Section -->
-                        <div id="Question" class="mb-4">
-                            <div class="form-floating mb-4">
-                                <input asp-for="TblQuestion.Question" class="form-control" placeholder="Enter Question" id="question" />
-                                <label asp-for="TblQuestion.Question" for="question">
-                                    <i class="fa-solid fa-question-circle me-2"></i>Question
-                                </label>
-                                <span asp-validation-for="TblQuestion.Question" class="text-danger"></span>
-                            </div>
-
-                            <div id="Option" class="form-floating mb-4">
-                                <select asp-for="tblQuestionOption.OptionText" class="form-control" aria-label="Select Question Type" id="option">
-                                    <option value="">-- Select Question Type --</option>
-                                    @foreach (var keyword in Model.tblKeywordMaster)
-                                    {
-                                        <option value="@keyword.KeywordName">@keyword.KeywordName</option>
-                                    }
-                                </select>
-                                <label for="option">
-                                    <i class="fa-solid fa-cogs me-2"></i>Question Type
-                                </label>
-                                <span asp-validation-for="tblQuestionOption.OptionText" class="text-danger"></span>
-                            </div>
-
-                            <div class="d-flex justify-content-end">
-                                <button id="AddSection" type="button" class="btn btn-light btn-sm" title="Add New Section">
-                                    <i class="fa-solid fa-plus fa-lg"></i>
-                                </button>
-                            </div>
+                        <div class="table-responsive " id="questionDetails">
+                            @*  @await Html.PartialAsync($"~/Views/forms/AddQuestion.cshtml", Model) *@
                         </div>
 
                     </div>
+                    <div id="Question" class="mb-4">
+                        <div class="form-floating mb-4">
+                            <input asp-for="TblQuestion.Question" class="form-control" placeholder="Enter Question" id="question" />
+                            <label asp-for="TblQuestion.Question" for="question">
+                                <i class="fa-solid fa-question-circle me-2"></i>Question
+                            </label>
+                            <span asp-validation-for="TblQuestion.Question" class="text-danger"></span>
+                        </div>
 
-                    <div class="table-responsive ms-4" id="questionDetails">
-                        @await Html.PartialAsync($"~/Views/forms/AddQuestion.cshtml", Model)
+                        <div id="Option" class="form-floating mb-4">
+                            <select asp-for="tblQuestionOption.OptionText" class="form-control" aria-label="Select Question Type" id="option">
+                                <option value="">-- Select Question Type --</option>
+                                <option value="Single Line">Single Line</option>
+                                <option value="Mult-Line">Mult-Line</option>
+                                <option value="Checkbox">Checkbox</option>
+                                <option value="">Multiple Choice</option>
+
+                            </select>
+                            <label for="option">
+                                <i class="fa-solid fa-cogs me-2"></i>Question Type
+                            </label>
+                            <span asp-validation-for="tblQuestionOption.OptionText" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button id="AddSection" type="button" class="btn btn-light btn-sm" title="Add New Section">
+                                <i class="fa-solid fa-plus fa-lg"></i>
+                            </button>
+                        </div>
                     </div>
                 </form>
+               
+
+                <form method="post" id="QuestionForm" >
+                    
+               </form>
             </div>
         </div>
     </div>
@@ -92,8 +100,43 @@
 
 @section Scripts {
     <script type="text/javascript" asp-append-version="true">
-        $(function () {
-            
+        // Clear server-side session when the page is being unloaded
+        window.onbeforeunload = function () {
+            $.ajax({
+                async: false, // Ensure request completes before page unloads
+                cache: false,
+                url: '/Forms/ClearSession', // Endpoint to clear the server-side session
+                type: 'POST',
+                success: function () {
+                    console.log("Server-side session cleared.");
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error clearing server-side session: " + error);
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            $("#Submit").on("click", function () {
+                console.log($("#mainForm").serialize());
+                $.ajax({
+                    async: true,
+                    cache: false,
+                    url: '/Forms/Create',
+                    type: 'POST',
+                    data: $("#mainForm").serialize(),
+                    success: function () {
+                        console.log("success");
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        
+                        console.error(error);
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
             $("#AddSection").on("click", function () {
                 console.log($("#mainForm").serialize());
                 $.ajax({
@@ -103,8 +146,8 @@
                     type: 'POST',
                     data: $("#mainForm").serialize(),
                     success: function (response) {
-                        console.log(response);
-                            $('#questionDetails').html(response);
+                        // console.log(response);
+                        $('#questionDetails').html(response);
                     },
                     error: function (xhr, status, error) {
                         alert("An error occurred: " + xhr.responseText);
@@ -114,4 +157,6 @@
             });
         });
     </script>
+}
+
 }

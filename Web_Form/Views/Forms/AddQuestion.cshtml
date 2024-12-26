@@ -1,17 +1,81 @@
 ﻿@model FullFormViewModel
 
-@if (Model.TblQuestionsList.Any())
-{
-    for(var i = 0;i<Model.TblQuestionsList.Count;i++)
+<div id="questionDetail" class="container mt-4">
+    @if (Model.TblQuestionsList.Any() && Model.TblQuestionsList.Any())
     {
-        <h1> @Model.TblQuestionsList[i].Question</h1>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Your Form Questions</h4>
+            </div>
+            <div class="card-body">
+                @for (var i = 0; i < Model.TblQuestionsList.Count; i++)
+                {
+                    <div class="mb-4 question-item" data-question-id="@i">
+                        <!-- Question Header -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="fw-bold">Question @(@i + 1):</h5>
+                            <!-- Delete Icon -->
+                            <button class="btn btn-sm btn-danger delete-question" data-index="@i">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                        <!-- Question Text -->
+                        <p class="text-secondary">@Model.TblQuestionsList[i].Question</p>
 
-        @for (var j = 0; j < Model.TblQuestionsList[i].tblQuestionOptionlList.Count; j++)
-        {
-            <h1> @Model.TblQuestionsList[i].tblQuestionOptionlList[j].OptionText</h1>
-        }
+                        <!-- Options -->
+                        @if (Model.TblQuestionsList[i].tblQuestionOptionlList != null && Model.TblQuestionsList[i].tblQuestionOptionlList.Any())
+                        {
+                            <ul class="list-group">
+                                @for (var j = 0; j < Model.TblQuestionsList[i].tblQuestionOptionlList.Count; j++)
+                                {
+                                    <li class="list-group-item">
+                                        <i class="bi bi-check-circle text-success"></i>
+                                        @Model.TblQuestionsList[i].tblQuestionOptionlList[j].OptionText
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p class="text-danger">No options available for this question.</p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
     }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No questions added yet. Start by adding some questions!
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        // Delegate event for dynamic elements
+        $("#questionDetail").on("click", ".delete-question", function () {
+            event.preventDefault();
+            var index = $(this).data("index"); // Get question index
+            if (index === undefined || index === null) {
+                alert("Invalid question index. Please refresh the page.");
+                return;
+            }
 
-}
-else { <p>No question added yet</p> }
+            $.ajax({
+                url: '/Forms/DeleteQuestion',
+                type: 'POST',
+                data: { questionIndex: index },
+                success: function (response) {
+                    // Replace the content with updated questions list
+                    $('#questionDetail').html(response);
+                },
+                error: function (xhr, status, error) {
+                    
+                    console.error("Error: ", error);
+                }
+            });
+        });
+    });
 
+</script>
