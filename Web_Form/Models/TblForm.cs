@@ -34,5 +34,5 @@ public partial class TblForm
 
     public DateTime? UpdatedOn { get; set; } = DateTime.Now;
 
-    public virtual ICollection<TblQuestion> TblQuestions { get; set; } = null;
+    public virtual ICollection<TblQuestion>? TblQuestions { get; set; } = null;
 }

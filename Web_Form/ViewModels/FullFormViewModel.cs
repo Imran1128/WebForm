@@ -4,11 +4,12 @@ namespace Web_Form.ViewModels
 {
     public class FullFormViewModel
     {
-        public TblForm  TblForm { get; set; }
-        public TblQuestion TblQuestion { get; set; }
-        public TblQuestionOption tblQuestionOption { get; set; }
-        public List<TblQuestion> TblQuestionsList { get; set; }=new List<TblQuestion>();
-        //public List< TblKeywordMaster> tblKeywordMaster { get; set; }
+        public TblForm?  TblForm { get; set; }
+        public TblQuestion? TblQuestion { get; set; }
+        public TblQuestionOption? tblQuestionOption { get; set; }
+        public List<TblQuestion>? TblQuestionsList { get; set; }=new List<TblQuestion>();
+        public List<TblQuestionOption>? tblQuestionOptionList { get; set; }=new List<TblQuestionOption>();
+        public List< TblKeywordMaster>? QuestionType { get; set; }
 
     }
 }

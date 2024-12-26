@@ -9,7 +9,7 @@ public partial class TblQuestionOption
 
     public int QuestionId { get; set; }
 
-    public string OptionText { get; set; } = null!;
+    public string? OptionText { get; set; } = null!;
 
-    public virtual TblQuestion Question { get; set; } = null!;
+    public virtual TblQuestion? Question { get; set; } = null!;
 }

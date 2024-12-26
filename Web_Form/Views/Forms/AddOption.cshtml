@@ -1,0 +1,40 @@
+﻿@model FullFormViewModel
+
+<div id="Options" class="container mt-4">
+    @if (Model.tblQuestionOptionList.Any())
+    {
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Options</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+
+                    @for (var i = 0; i < Model.tblQuestionOptionList.Count; i++)
+                    {
+                        <div class="mb-4 question-item" data-question-id="@i">
+                            <!-- Question Header -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="fw-bold">Option @(@i + 1):</h5>
+                                <!-- Delete Icon -->
+                                @* <button class="btn btn-sm btn-danger delete-question" data-index="@i">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button> *@
+                            </div>
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                                @Model.tblQuestionOptionList[i].OptionText
+                        </li>
+                </div>
+                    }
+            </ul>
+        </div>
+    </div>
+    }
+    else
+    {
+    <div class="alert alert-info" role="alert">
+        No Option added yet!
+    </div>
+    }
+</div>
