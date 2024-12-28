@@ -144,27 +144,27 @@
             }
 
         }
-        // $(document).ready(function () {
-        //     $("#Option").hide();
-        //     $("#Submit").on("click", function () {
-        //         console.log($("#mainForm").serialize());
-        //         $.ajax({
-        //             async: true,
-        //             cache: false,
-        //             url: '/Forms/Create',
-        //             type: 'POST',
-        //             data: $("#mainForm").serialize(),
-        //             success: function () {
-        //                 console.log("success");
+        $(document).ready(function () {
+            $("#Option").hide();
+            $("#Submit").on("click", function () {
+                console.log($("#mainForm").serialize());
+                $.ajax({
+                    async: true,
+                    cache: false,
+                    url: '/Forms/Create',
+                    type: 'POST',
+                    data: $("#mainForm").serialize(),
+                    success: function () {
+                        console.log("success");
 
-        //             },
-        //             error: function (xhr, status, error) {
+                    },
+                    error: function (xhr, status, error) {
 
-        //                 console.error(error);
-        //             }
-        //         });
-        //     });
-        // });
+                        console.error(error);
+                    }
+                });
+            });
+        });
         function ResetAddOption()
         {
             $.ajax({

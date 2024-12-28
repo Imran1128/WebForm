@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
 using Web_Form.Data;
 using Web_Form.Interfaces;
 using Web_Form.Migrations;
@@ -19,12 +22,14 @@ namespace Web_Form.Controllers
         private readonly DbContext _context;
         private readonly IFormService formService;
         private readonly ILogger<FormsController> logger;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public FormsController(DbContext context, IFormService formService, ILogger<FormsController> logger)
+        public FormsController(DbContext context, IFormService formService, ILogger<FormsController> logger,UserManager<ApplicationUser> userManager)
         {
             _context = context;
             this.formService = formService;
             this.logger = logger;
+            this.userManager = userManager;
         }
 
         // GET: Forms
@@ -34,22 +39,75 @@ namespace Web_Form.Controllers
         }
 
         // GET: Forms/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int FormId)
         {
-            if (id == null)
+            var tblForm = await _context.TblForms
+    .Include(f => f.TblQuestions)
+        .ThenInclude(q => q.TblQuestionOptions)
+    .Include(f => f.TblComments)
+    .Include(f => f.TblLikes)
+    .AsNoTracking()
+    .FirstOrDefaultAsync(f => f.FormId == FormId);
+
+            if (tblForm == null)
             {
-                return NotFound();
+                return NotFound("Form not found.");
             }
 
-            var tblForm = await _context.TblForms
-                .FirstOrDefaultAsync(m => m.FormId == id);
+            if (tblForm.TblLikes == null)
+            {
+                throw new Exception("TblLikes collection is null.");
+            }
+
+            if (tblForm.TblComments == null)
+            {
+                throw new Exception("TblComments collection is null.");
+            }
+
+            if (tblForm.TblQuestions == null)
+            {
+                throw new Exception("TblQuestions collection is null.");
+            }
+
             if (tblForm == null)
             {
                 return NotFound();
             }
 
-            return View(tblForm);
+            // Ensure collections are initialized
+            //tblForm.TblQuestions ??= new List<TblQuestion>();
+            //tblForm.TblComments ??= new List<TblComment>();
+            //tblForm.TblLikes ??= new List<TblLike>();
+
+            // Get current user ID
+            var user = await userManager.GetUserAsync(User);
+            bool isLikedByCurrentUser = false;
+
+            if (user != null)
+            {
+                isLikedByCurrentUser = tblForm.TblLikes.Any(l => l.UserId == user.Id);
+            }
+
+            // Populate view model
+            var fullFormViewModel = new FullFormViewModel
+            {
+                TblForm = tblForm,
+                TblQuestionsList = tblForm.TblQuestions.ToList(),
+                tblQuestionOptionList = tblForm.TblQuestions.SelectMany(q => q.TblQuestionOptions).ToList(),
+                tblCommentList = tblForm.TblComments.ToList(),
+                LikeCount = tblForm.TblLikes.Count,
+                IsLikedByCurrentUser = isLikedByCurrentUser
+            };
+            var hasLiked = await _context.TblLikes
+       .AnyAsync(l => l.FormId == FormId && l.UserId == user.Id);
+            ViewBag.HasLiked = hasLiked;
+            
+            return View(fullFormViewModel);
         }
+
+
+
+
 
         // GET: Forms/Create
         public IActionResult Create()
@@ -283,7 +341,130 @@ namespace Web_Form.Controllers
 
             return PartialView("AddQuestion", model);
         }
+        [HttpPost]
+        public IActionResult AddComment(TblComment tblComment)
+        {
+            if (ModelState.IsValid)
+            {
+                // Ensure Commented_On is set to the current time
+                tblComment.Commented_On = DateTime.Now;
 
+                // Validate that the FormId exists
+                var formExists = _context.TblForms.Any(f => f.FormId == tblComment.FormId);
+                if (!formExists)
+                {
+                    ModelState.AddModelError("FormId", "The specified form does not exist.");
+                    return RedirectToAction("Details", "Forms", new { FormId = tblComment.FormId });
+                }
+
+                try
+                {
+                    _context.TblComments.Add(tblComment);
+                    _context.SaveChanges();
+
+                    // Redirect to a relevant view (e.g., the form details page)
+                    return RedirectToAction("Details", "Forms", new { FormId = tblComment.FormId });
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception (logging logic depends on your setup)
+                    ModelState.AddModelError("", "An error occurred while adding the comment.");
+                }
+            }
+
+            // If we reach here, something went wrong, redisplay the form
+            return RedirectToAction("Details", "Forms", new { FormId = tblComment.FormId });
+        }
+
+        [HttpGet]
+        public IActionResult GetComments(int formId)
+        {
+            var comments = _context.TblComments
+    .Where(c => c.FormId == formId)
+    .OrderByDescending(c => c.Commented_On) // Ensure this is a DateTime
+    .Select(c => new
+    {
+        c.Id,
+        c.UserId,
+        c.Comment,
+        CommentedOn = c.Commented_On // No formatting needed here; handle it in the front end
+    })
+    .ToList();
+
+            return Json(comments);
+        }
+        public async Task<IActionResult>  Like(TblLike tblLike)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid data provided.");
+            }
+
+            // Check if the user exists
+            var user = await userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Check if the form exists
+            var form = _context.TblForms.FirstOrDefault(f => f.FormId == tblLike.FormId);
+            if (form == null)
+            {
+                return NotFound("Form not found.");
+            }
+
+            // Add the like to the TblLikes table
+            _context.TblLikes.Add(tblLike);
+
+            // Increment the Likes count on the form
+            form.Likes++; // Assuming `Likes` is a property in `TblForm`
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            // Return the updated like count
+            return RedirectToAction("Details", "Forms", new { FormId = tblLike.FormId });
+        }
+        public async Task<IActionResult> Unlike(int FormId)
+        {
+            // Get the current authenticated user
+            var user = await userManager.GetUserAsync(User);
+            
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            // Check if the like exists for this user and form
+            var like = _context.TblLikes
+    .Where(l => l.FormId == FormId && l.UserId == user.Id)
+    .FirstOrDefault();
+
+
+            if (like == null)
+            {
+                // If the user hasn't liked the form, return a message or do nothing
+                return NotFound("Like not found.");
+            }
+
+            // Remove the like from the TblLikes table
+            _context.TblLikes.Remove(like);
+
+            // Get the form and decrement the like count
+            var form = await _context.TblForms.FirstOrDefaultAsync(f => f.FormId == FormId);
+            if (form != null)
+            {
+                form.Likes--; // Decrement the like count
+                _context.TblForms.Update(form);
+            }
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            // Return the updated like count
+            return RedirectToAction("Details", "Forms", new { FormId = FormId });
+        }
 
 
 
@@ -291,4 +472,15 @@ namespace Web_Form.Controllers
 
 
     }
+
 }
+
+
+
+
+
+
+
+
+
+

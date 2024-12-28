@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\Web_Form.bundle.scp.css"
     },
     {
+      "Id": "F:\\WebForm\\Web_Form\\wwwroot\\Images\\default-avatar.png",
+      "PackagePath": "staticwebassets\\Images\\default-avatar.png"
+    },
+    {
+      "Id": "F:\\WebForm\\Web_Form\\wwwroot\\css\\form.css",
+      "PackagePath": "staticwebassets\\css\\form.css"
+    },
+    {
       "Id": "F:\\WebForm\\Web_Form\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

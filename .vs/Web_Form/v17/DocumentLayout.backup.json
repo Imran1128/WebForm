@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "F:\\WebForm\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\forms\\addquestion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\forms\\addquestion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\wwwroot\\css\\form.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\css\\form.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\forms\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\forms\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\forms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -15,64 +19,56 @@
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\viewmodels\\fullformviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\viewmodels\\fullformviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\tbllike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tbllike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\tblform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\tblquestionoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblquestionoption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\tblquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\questions\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\questions\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\viewmodels\\fullformviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\viewmodels\\fullformviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\tblkeywordmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblkeywordmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\tblcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\tblquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\tblquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\usermanagement\\manageuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\usermanagement\\manageuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\wwwroot\\js\\form.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\js\\form.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\wwwroot\\js\\users.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\js\\users.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|f:\\webform\\web_form\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{FED59A9E-B14F-41BC-AA60-BC99581380EC}|Web_Form\\Web_Form.csproj|solutionrelative:web_form\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,7 +78,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,69 +86,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Questions\\Details.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Views\\Questions\\Details.cshtml",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Questions\\Details.cshtml",
-              "RelativeToolTip": "Web_Form\\Views\\Questions\\Details.cshtml",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAE8AAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-25T16:33:12.223Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "TblQuestion.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\TblQuestion.cs",
-              "RelativeDocumentMoniker": "Web_Form\\Models\\TblQuestion.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Models\\TblQuestion.cs",
-              "RelativeToolTip": "Web_Form\\Models\\TblQuestion.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA5wAYAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T16:31:06.149Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "TblForm.cs",
               "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\TblForm.cs",
               "RelativeDocumentMoniker": "Web_Form\\Models\\TblForm.cs",
               "ToolTip": "F:\\WebForm\\Web_Form\\Models\\TblForm.cs",
               "RelativeToolTip": "Web_Form\\Models\\TblForm.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAiwCEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T16:29:38.173Z",
+              "WhenOpened": "2024-12-27T17:22:29.569Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 5,
+              "Title": "TblLike.cs",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\TblLike.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Models\\TblLike.cs",
+              "ToolTip": "F:\\WebForm\\Web_Form\\Models\\TblLike.cs",
+              "RelativeToolTip": "Web_Form\\Models\\TblLike.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T10:55:17.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Forms\\Create.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Create.cshtml",
+              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Forms\\Create.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Forms\\Create.cshtml",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAAAKYAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-27T14:56:07.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\WebForm\\Web_Form\\Program.cs",
               "RelativeDocumentMoniker": "Web_Form\\Program.cs",
               "ToolTip": "F:\\WebForm\\Web_Form\\Program.cs",
               "RelativeToolTip": "Web_Form\\Program.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwDUAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-22T19:10:30.726Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FullFormViewModel.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\ViewModels\\FullFormViewModel.cs",
-              "RelativeDocumentMoniker": "Web_Form\\ViewModels\\FullFormViewModel.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\ViewModels\\FullFormViewModel.cs",
-              "RelativeToolTip": "Web_Form\\ViewModels\\FullFormViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-22T18:38:07.322Z",
+              "WhenOpened": "2024-12-27T14:41:35.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "TblKeywordMaster.cs",
               "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\TblKeywordMaster.cs",
               "RelativeDocumentMoniker": "Web_Form\\Models\\TblKeywordMaster.cs",
@@ -160,154 +146,160 @@
               "RelativeToolTip": "Web_Form\\Models\\TblKeywordMaster.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-22T18:35:57.532Z"
+              "WhenOpened": "2024-12-27T17:23:47.183Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TblQuestionOption.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\TblQuestionOption.cs",
-              "RelativeDocumentMoniker": "Web_Form\\Models\\TblQuestionOption.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Models\\TblQuestionOption.cs",
-              "RelativeToolTip": "Web_Form\\Models\\TblQuestionOption.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAqwA0AAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-22T18:35:36.944Z"
+              "DocumentIndex": 1,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Forms\\Details.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Details.cshtml",
+              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Forms\\Details.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Forms\\Details.cshtml",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAHsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-27T10:11:20.342Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 13,
+              "Title": "Form.js",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Form.js",
+              "RelativeDocumentMoniker": "Web_Form\\wwwroot\\js\\Form.js",
+              "ToolTip": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Form.js",
+              "RelativeToolTip": "Web_Form\\wwwroot\\js\\Form.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-12-27T17:50:07.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "FormsController.cs",
               "DocumentMoniker": "F:\\WebForm\\Web_Form\\Controllers\\FormsController.cs",
               "RelativeDocumentMoniker": "Web_Form\\Controllers\\FormsController.cs",
               "ToolTip": "F:\\WebForm\\Web_Form\\Controllers\\FormsController.cs",
               "RelativeToolTip": "Web_Form\\Controllers\\FormsController.cs",
-              "ViewState": "AgIAAMkAAAAAAAAAAAAuwOkAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAmwGgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-22T12:48:26.408Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DataContext.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Data\\DataContext.cs",
-              "RelativeDocumentMoniker": "Web_Form\\Data\\DataContext.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Data\\DataContext.cs",
-              "RelativeToolTip": "Web_Form\\Data\\DataContext.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAD4v3IAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-25T16:34:13.988Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Forms\\Create.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\Create.cshtml",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Forms\\Create.cshtml",
-              "RelativeToolTip": "Web_Form\\Views\\Forms\\Create.cshtml",
-              "ViewState": "AgIAACsAAAAAAAAAAAAgwJUAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-22T12:48:58.777Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AddQuestion.cshtml",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Forms\\AddQuestion.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Views\\Forms\\AddQuestion.cshtml",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Forms\\AddQuestion.cshtml",
-              "RelativeToolTip": "Web_Form\\Views\\Forms\\AddQuestion.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-22T16:15:56.591Z",
+              "WhenOpened": "2024-12-27T10:10:33.377Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\appsettings.json",
-              "RelativeDocumentMoniker": "Web_Form\\appsettings.json",
-              "ToolTip": "F:\\WebForm\\Web_Form\\appsettings.json",
-              "RelativeToolTip": "Web_Form\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-12-22T12:46:14.539Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Web_Form\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T19:55:12.599Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ManageUser.cshtml",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
-              "RelativeDocumentMoniker": "Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
-              "RelativeToolTip": "Web_Form\\Views\\UserManagement\\ManageUser.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T19:41:35.786Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Users.js",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Users.js",
-              "RelativeDocumentMoniker": "Web_Form\\wwwroot\\js\\Users.js",
-              "ToolTip": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Users.js",
-              "RelativeToolTip": "Web_Form\\wwwroot\\js\\Users.js",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAgwCQAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-12-20T19:29:50.293Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Register.cshtml.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "RelativeDocumentMoniker": "Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "RelativeToolTip": "Web_Form\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAwwFwAAAAIAAAAAAAAAA==",
+              "Title": "TblComment.cs",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\TblComment.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Models\\TblComment.cs",
+              "ToolTip": "F:\\WebForm\\Web_Form\\Models\\TblComment.cs",
+              "RelativeToolTip": "Web_Form\\Models\\TblComment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T19:25:58.051Z"
+              "WhenOpened": "2024-12-27T15:01:26.513Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 9,
+              "Title": "FullFormViewModel.cs",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\ViewModels\\FullFormViewModel.cs",
+              "RelativeDocumentMoniker": "Web_Form\\ViewModels\\FullFormViewModel.cs",
+              "ToolTip": "F:\\WebForm\\Web_Form\\ViewModels\\FullFormViewModel.cs",
+              "RelativeToolTip": "Web_Form\\ViewModels\\FullFormViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-27T14:51:19.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DbContext.cs",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Data\\DbContext.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Data\\DbContext.cs",
+              "ToolTip": "F:\\WebForm\\Web_Form\\Data\\DbContext.cs",
+              "RelativeToolTip": "Web_Form\\Data\\DbContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAGIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-27T14:44:30.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "form.css",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\wwwroot\\css\\form.css",
+              "RelativeDocumentMoniker": "Web_Form\\wwwroot\\css\\form.css",
+              "ToolTip": "F:\\WebForm\\Web_Form\\wwwroot\\css\\form.css",
+              "RelativeToolTip": "Web_Form\\wwwroot\\css\\form.css",
+              "ViewState": "AgIAANsAAAAAAAAAAAAgwOkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-12-27T15:29:15.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ApplicationUser.cs",
               "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\ApplicationUser.cs",
               "RelativeDocumentMoniker": "Web_Form\\Models\\ApplicationUser.cs",
               "ToolTip": "F:\\WebForm\\Web_Form\\Models\\ApplicationUser.cs",
               "RelativeToolTip": "Web_Form\\Models\\ApplicationUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T19:20:41.274Z"
+              "WhenOpened": "2024-12-27T15:33:06.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "bootstrap.esm.js",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+              "RelativeDocumentMoniker": "Web_Form\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+              "ToolTip": "F:\\WebForm\\Web_Form\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+              "RelativeToolTip": "Web_Form\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+              "ViewState": "AgIAACECAAAAAAAAAAAYwDoCAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-12-27T17:27:12.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TblQuestion.cs",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Models\\TblQuestion.cs",
+              "RelativeDocumentMoniker": "Web_Form\\Models\\TblQuestion.cs",
+              "ToolTip": "F:\\WebForm\\Web_Form\\Models\\TblQuestion.cs",
+              "RelativeToolTip": "Web_Form\\Models\\TblQuestion.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAIwBwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-27T17:23:49.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "site.css",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "Web_Form\\wwwroot\\css\\site.css",
+              "ToolTip": "F:\\WebForm\\Web_Form\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "Web_Form\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-12-27T15:56:12.497Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "UserManagementController.cs",
-              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Controllers\\UserManagementController.cs",
-              "RelativeDocumentMoniker": "Web_Form\\Controllers\\UserManagementController.cs",
-              "ToolTip": "F:\\WebForm\\Web_Form\\Controllers\\UserManagementController.cs",
-              "RelativeToolTip": "Web_Form\\Controllers\\UserManagementController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T19:11:25.176Z"
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "F:\\WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "F:\\WebForm\\Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Web_Form\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwBgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-27T15:52:10.417Z"
             }
           ]
         }

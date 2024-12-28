@@ -9,7 +9,6 @@ public partial class TblForm
 
     public string Title { get; set; } = null!;
 
-    public string Description { get; set; } = null!;
     public string? HeaderPhoto { get; set; }
 
     public bool? IsFavourite { get; set; }
@@ -24,15 +23,22 @@ public partial class TblForm
 
     public bool? Status { get; set; }
 
-    public DateTime? LastOpened { get; set; } = DateTime.Now;
+    public DateTime? LastOpened { get; set; }
 
     public string? Createdby { get; set; }
 
-    public DateTime? CreatedOn { get; set; } = DateTime.Now;
+    public DateTime? CreatedOn { get; set; }
 
     public string? UpdatedBy { get; set; }
 
-    public DateTime? UpdatedOn { get; set; } = DateTime.Now;
+    public DateTime? UpdatedOn { get; set; }
+    public int? Likes { get; set; } 
 
-    public virtual ICollection<TblQuestion>? TblQuestions { get; set; } = null;
+    public string Description { get; set; }
+
+    
+    public virtual ICollection<TblQuestion>? TblQuestions { get; set; } = new List<TblQuestion>();
+    public virtual ICollection<TblLike>? TblLikes { get; set; } = new List<TblLike>();
+    public virtual ICollection<TblComment>? TblComments { get; set; } = new List<TblComment>();
 }
+

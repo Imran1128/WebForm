@@ -97,9 +97,7 @@ namespace Web_Form.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tbl_Questions_tbl_Forms");
 
-                entity.HasOne(d => d.QuestionTypeNavigation).WithMany(p => p.TblQuestions)
-                    .HasForeignKey(d => d.QuestionType)
-                    .HasConstraintName("FK_tbl_Questions_tbl_KeywordMaster");
+               
             });
 
             modelBuilder.Entity<TblQuestionOption>(entity =>

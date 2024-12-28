@@ -36,7 +36,7 @@ public partial class TblQuestion
 
     public virtual TblForm? Form { get; set; }
 
-    public virtual TblKeywordMaster? QuestionTypeNavigation { get; set; }
+    //public virtual TblKeywordMaster? QuestionTypeNavigation { get; set; }
     public virtual ICollection<TblQuestionOption>? TblQuestionOptions { get; set; } = new List<TblQuestionOption>();
     [NotMapped] public List<TblQuestionOption>? tblQuestionOptionlList { get; set; } = new List<TblQuestionOption>();
 }

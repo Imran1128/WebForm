@@ -12,6 +12,4 @@ public partial class TblKeywordMaster
     public string? KeywordType { get; set; }
 
     public bool? Status { get; set; }
-
-    public virtual ICollection<TblQuestion> TblQuestions { get; set; } = new List<TblQuestion>();
 }

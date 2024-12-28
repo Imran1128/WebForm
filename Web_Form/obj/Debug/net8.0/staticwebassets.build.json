@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "miA6754Eylww9WPeflVi7ocUKkZE0BOBc1kHccpAxZE=",
+  "Hash": "Y6Qlupylbp78tc2sq0Leeqdq/vlsa3mKfMNY+mF6iWI=",
   "Source": "Web_Form",
   "BasePath": "_content/Web_Form",
   "Mode": "Default",
@@ -1233,6 +1233,25 @@
       "OriginalItemSpec": "F:\\WebForm\\Web_Form\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Web_Form.bundle.scp.css"
     },
     {
+      "Identity": "F:\\WebForm\\Web_Form\\wwwroot\\css\\form.css",
+      "SourceId": "Web_Form",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\WebForm\\Web_Form\\wwwroot\\",
+      "BasePath": "_content/Web_Form",
+      "RelativePath": "css/form.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\form.css"
+    },
+    {
       "Identity": "F:\\WebForm\\Web_Form\\wwwroot\\css\\site.css",
       "SourceId": "Web_Form",
       "SourceType": "Discovered",
@@ -1269,6 +1288,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "F:\\WebForm\\Web_Form\\wwwroot\\Images\\default-avatar.png",
+      "SourceId": "Web_Form",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\WebForm\\Web_Form\\wwwroot\\",
+      "BasePath": "_content/Web_Form",
+      "RelativePath": "Images/default-avatar.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\default-avatar.png"
     },
     {
       "Identity": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Form.js",
