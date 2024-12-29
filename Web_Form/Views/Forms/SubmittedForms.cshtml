@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Submitted Forms";
+}
+
+<div class="container mt-5">
+    <h2>Submitted Forms</h2>
+    <table id="answeredFormsTable" class="display">
+        <thead>
+            <tr>
+                <th>Form Title</th>
+                <th>Created By</th>
+                <th>Answered By</th>
+                <th>Submission Date</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be populated by AJAX -->
+        </tbody>
+    </table>
+</div>
+<script>
+ $(document).ready(function () {
+        // Initialize DataTable
+        dataTable = $('#answeredFormsTable').DataTable({
+            ordering: false,
+            "ajax": {
+                "url": '/forms/submittedFormsapi',
+                "method": "GET",
+                "datatype": "json",
+                "async": true,
+                "dataSrc": function (json) {
+                    console.log("Response Data:", json);  // Log the data returned from the server
+                    return json;  // Ensure this returns the user data array
+                },
+            },
+            "columns": [
+                
+                {
+                    data: 'form.title',
+                    name: "Form Title",
+                },
+                {
+                    data: 'createdBy',
+                    name: "Created By",
+
+                },
+                {
+                    data: 'form.answers[0].answeredBy',
+                    name: "Answered By"
+                },
+                
+                {
+                    data: 'answers.submissionDate.tostring()',
+                    name: "Submission Date",
+                    
+                }
+            ]
+        });
+    });
+</script>

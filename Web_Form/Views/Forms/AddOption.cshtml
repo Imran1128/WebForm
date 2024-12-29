@@ -9,25 +9,30 @@
             </div>
             <div class="card-body">
                 <ul class="list-group">
-
                     @for (var i = 0; i < Model.tblQuestionOptionList.Count; i++)
                     {
                         <div class="mb-4 question-item" data-question-id="@i">
                             <!-- Question Header -->
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="fw-bold">Option @(@i + 1):</h5>
-                                <!-- Delete Icon -->
-                                @* <button class="btn btn-sm btn-danger delete-question" data-index="@i">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button> *@
                             </div>
+
+                            <!-- List Item with Radio Buttons -->
                         <li class="list-group-item">
-                            <i class="bi bi-check-circle text-success"></i>
-                                @Model.tblQuestionOptionList[i].OptionText
+                            <input type="radio" name="selectedOption" value="@Model.tblQuestionOptionList[i].OptionId"
+                                   id="option-@i" class="form-check-input" required />
+                            <label for="option-@i">
+                                <i class="bi bi-check-circle text-success"></i>
+                                    @Model.tblQuestionOptionList[i].OptionText
+                            </label>
                         </li>
                 </div>
                     }
             </ul>
+            <!-- Error message for validation -->
+            <div id="optionsError" class="text-danger mt-2" style="display: none;">
+                Please select an option.
+            </div>
         </div>
     </div>
     }
@@ -38,3 +43,21 @@
     </div>
     }
 </div>
+
+@* <script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            // Check if an option is selected
+            var isSelected = $("input[name='selectedOption']:checked").length > 0;
+
+            if (!isSelected) {
+                // Show error if no option is selected
+                $("#optionsError").show();
+                e.preventDefault(); // Prevent form submission
+            } else {
+                // Hide error if an option is selected
+                $("#optionsError").hide();
+            }
+        });
+    });
+</script> *@

@@ -81,24 +81,9 @@ p {
     color: #495057;
 }
 
-.btn-primary {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.2rem;
-    border-radius: 25px;
-    background: linear-gradient(to right, #007bff, #0056b3);
-    border: none;
-    color: white;
-    transition: background 0.3s ease;
-}
 
-    .btn-primary:hover {
-        background: linear-gradient(to right, #0056b3, #003f7f);
-    }
 
-    .btn-primary i {
-        margin-right: 8px;
-    }
+   
 
 
 body {
@@ -120,26 +105,7 @@ h1 {
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     }
 
-.btn {
-    border-radius: 50px;
-    font-size: 14px;
-    padding: 5px 15px;
-}
 
-.btn-outline-info:hover {
-    background-color: #17a2b8;
-    color: white;
-}
-
-.btn-outline-secondary:hover {
-    background-color: #6c757d;
-    color: white;
-}
-
-.btn-outline-danger:hover {
-    background-color: #dc3545;
-    color: white;
-}
 
 /* General styling */
 .comments-section {

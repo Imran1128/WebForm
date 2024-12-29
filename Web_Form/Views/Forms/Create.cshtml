@@ -1,7 +1,12 @@
 ﻿@model FullFormViewModel
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Create";
+}
+@{
+    var user = UserManager.GetUserAsync(User).Result;
 }
 
 <div class="container mt-5">
@@ -10,7 +15,7 @@
             <div class="card shadow-lg rounded-lg">
 
                 <form method="post" asp-controller="forms" asp-action="Create" id="mainForm" class="p-4">
-
+                    <input hidden asp-for="TblForm.Createdby" value="@user.Name" />
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h4>Create New Template</h4>
                         <button type="submit" class="btn btn-success btn-lg" id="Submit">
@@ -132,14 +137,11 @@
                 }
             });
         };
-        function showOptionAddButton()
-        {
-            if($('#TblQuestion_QuestionType').val()==3)
-            {
+        function showOptionAddButton() {
+            if ($('#TblQuestion_QuestionType').val() == 3) {
                 $("#Option").show();
             }
-            else
-            {
+            else {
                 $("#Option").hide();
             }
 
@@ -165,8 +167,7 @@
                 });
             });
         });
-        function ResetAddOption()
-        {
+        function ResetAddOption() {
             $.ajax({
                 async: true,
                 cache: false,

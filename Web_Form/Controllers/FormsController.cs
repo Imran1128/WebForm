@@ -41,6 +41,7 @@ namespace Web_Form.Controllers
         // GET: Forms/Details/5
         public async Task<IActionResult> Details(int FormId)
         {
+            
             var tblForm = await _context.TblForms
     .Include(f => f.TblQuestions)
         .ThenInclude(q => q.TblQuestionOptions)
@@ -104,7 +105,7 @@ namespace Web_Form.Controllers
             
             return View(fullFormViewModel);
         }
-
+      
 
 
 
@@ -466,8 +467,89 @@ namespace Web_Form.Controllers
             return RedirectToAction("Details", "Forms", new { FormId = FormId });
         }
 
+        [HttpPost]
+        public IActionResult SubmitForm(int formId, Dictionary<int, string> answers,string UniqueId)
+        {
+            if (answers != null && answers.Any())  // Ensure that answers are not null or empty
+            {
+                // Loop through the answers
+                foreach (var answer in answers)
+                {
+                    var userId = userManager.GetUserId(User);
+
+                    // Create a new response entry for each question answered
+                    var answerEntry = new TblResponse
+                    {
+                        FormId = formId,
+                        QuestionId = answer.Key,
+                        ResponseText = answer.Value,
+                        SubmissionDate = DateTime.Now,
+                        UserId = userId,
+                        UniqueId = UniqueId,
+                    };
+
+                    // Add the response to the context
+                    _context.TblResponses.Add(answerEntry);
+                    
+                }
+
+                // Retrieve the form from the database and increment the submission count
+                var tblForm = _context.TblForms.FirstOrDefault(f => f.FormId == formId);
+                if (tblForm != null)
+                {
+                    tblForm.SubmissionCount++;  // Increment the submission count
+                    _context.SaveChanges();  // Save the changes to TblForms and TblResponses
+                }
+
+                // Commit changes to the database
+                _context.SaveChanges();
+               
+              
+
+                // Redirect to a Thank You page
+                return RedirectToAction("ThankYou");
+            }
+
+            // If no answers are submitted, show an error page
+            return View("Error");
+        }
 
 
+        public ActionResult ThankYou()
+        {
+            return View();  // This will return the ThankYou.cshtml view
+        }
+        [HttpGet]
+        public IActionResult SubmittedForms()
+        {
+            return View();
+        }
+            [HttpGet]
+        public IActionResult SubmittedFormsApi()
+        {
+            // Fetch forms that have answers, including created by, answered by, and submission date
+            var submissions = _context.TblResponses
+         .Include(r => r.Form) // Ensure Form navigation property is loaded
+         .GroupBy(r => r.UniqueId) // Group by UniqueId
+         .Select(group => new
+         {
+             UniqueId = group.Key,
+             SubmissionDate = group.FirstOrDefault().SubmissionDate,
+             FormId = group.FirstOrDefault().FormId,
+             CreatedBy = group.FirstOrDefault().Form.Createdby, // Fetch CreatedBy from Form
+             AnsweredBy = group.FirstOrDefault().UserId, // Fetch AnsweredBy from Response
+             Responses = group.Select(r => new
+             {
+                 QuestionId = r.QuestionId,
+                 ResponseText = r.ResponseText
+             }).ToList()
+         })
+         .ToList();
+
+           
+
+            return Ok(submissions); // Pass the forms with the extra info to the view
+        }
 
 
 

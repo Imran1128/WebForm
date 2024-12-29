@@ -10,11 +10,13 @@ namespace Web_Form.ViewModels
         public TblQuestionOption? tblQuestionOption { get; set; }
         public TblLike? tblLike { get; set; }
         public List<TblQuestion>? TblQuestionsList { get; set; }=new List<TblQuestion>();
+        public List<TblForm>? tblForms { get; set; } = new List<TblForm>();
         public List<TblQuestionOption>? tblQuestionOptionList { get; set; }=new List<TblQuestionOption>();
+        public List<TblResponse>? tblResponsesList { get; set; } = new List<TblResponse>();
         public List<TblKeywordMaster>? QuestionType { get; set; }
         public List<TblLike>? tblLikes { get; set; }
         public TblResponse? tblResponse { get; set; }
-        public TblComment tblComment { get; set; }
+        public TblComment? tblComment { get; set; }
         public List<TblComment>? tblCommentList { get; set; }
         public bool IsLikedByCurrentUser { get; set; }
         public int LikeCount { get; set; }

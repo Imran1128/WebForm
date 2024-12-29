@@ -1,7 +1,7 @@
 ﻿@model FullFormViewModel
 
 <div id="questionDetail" class="container mt-4">
-    @if (Model.TblQuestionsList.Any() && Model.TblQuestionsList.Any())
+    @if (Model.TblQuestionsList.Any())
     {
         <div class="card">
             <div class="card-header bg-primary text-white">
@@ -22,6 +22,9 @@
                         <!-- Question Text -->
                         <p class="text-secondary">@Model.TblQuestionsList[i].Question</p>
 
+                        <!-- Validation Message for Question -->
+                        <span class="text-danger" id="questionError-@i"></span>
+
                         <!-- Options -->
                         @if (Model.TblQuestionsList[i].tblQuestionOptionlList != null && Model.TblQuestionsList[i].tblQuestionOptionlList.Any())
                         {
@@ -37,7 +40,7 @@
                         }
                         else
                         {
-                            <p class=""></p>
+                            <p class="text-muted">No options added yet.</p>
                         }
                     </div>
                 }
@@ -77,5 +80,27 @@
             });
         });
     });
+        @* $(document).ready(function () {
+            // Validate the form before submission
+            $("form").on("submit", function (e) {
+                var isValid = true;
+                $(".question-item").each(function () {
+                    var questionId = $(this).data("question-id");
+                    var questionAnswer = $("#question-" + questionId).val();
+
+                    // Check if the answer is provided for the required fields
+                    if (!questionAnswer || questionAnswer.trim() === "") {
+                        isValid = false;
+                        $("#questionError-" + questionId).text("This field is required.");
+                    } else {
+                        $("#questionError-" + questionId).text("");
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault(); // Prevent form submission if validation fails
+                }
+            });
+        }); *@
 
 </script>

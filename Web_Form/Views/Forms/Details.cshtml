@@ -2,9 +2,9 @@
 @using System.Linq
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
-
 @{
     var userId = UserManager.GetUserId(User);
+    var UniqId = Guid.NewGuid();
 }
 @{
     var hasLiked = ViewBag.HasLiked ;
@@ -36,64 +36,75 @@
             </div>
         </div>
 
-        <form  method="post" action="/Form/Submit">
-            @foreach (var question in Model.TblQuestionsList)
-            {
-                <div class="question-card">
-                    <label class="question-title" for="question-@question.QuestionId">
-                        @if (question.QuestionType == 1)
 
-                        {
-                            <i class="fas fa-pencil-alt"></i>
-                        }
-                        @if (question.QuestionType == 2)
 
-                        {
-                            <i class="fas fa-paragraph"></i>
-                        }
-                        @if (question.QuestionType == 4)
 
-                        {
-                            <i class="fas fa-sort-numeric-up"></i>
-                        }
 
-                        else if (question.QuestionType == 3)
 
-                        {
-                            <i class="fas fa-check-square"></i>
-                        }
-                        @question.Question
-                    </label>
+
+
+
+    @using (Html.BeginForm("SubmitForm", "Forms", FormMethod.Post, new { @id = "FormSubmit" }))
+    {
+        @Html.Hidden("formId", Model.TblForm.FormId)
+        @Html.Hidden("UniqueId", UniqId)
+        
+        @foreach (var question in Model.TblQuestionsList)
+        {
+            <div class="question-card">
+                <label class="question-title" for="question-@question.QuestionId">
                     @if (question.QuestionType == 1)
                     {
-                        <input type="text" class="form-control" name="ResponseText_@question.QuestionId" id="question-@question.QuestionId" placeholder="Enter your answer">
+                        <i class="fas fa-pencil-alt"></i>
                     }
-                    @if (question.QuestionType == 2)
+                    else if (question.QuestionType == 2)
                     {
-                        <textarea class="form-control" name="ResponseText_@question.QuestionId" id="question-@question.QuestionId" placeholder="Enter your answer"></textarea>
+                        <i class="fas fa-paragraph"></i>
                     }
-                    @if (question.QuestionType == 4)
+                    else if (question.QuestionType == 4)
                     {
-                        <input type="number" class="form-control" name="ResponseText_@question.QuestionId" id="question-@question.QuestionId" placeholder="Enter your answer">
+                        <i class="fas fa-sort-numeric-up"></i>
                     }
                     else if (question.QuestionType == 3)
                     {
-                        @foreach (var option in Model.tblQuestionOptionList.Where(o => o.QuestionId == question.QuestionId))
-
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="OptionId_@question.QuestionId" value="@option.OptionId" id="option-@option.OptionId">
-                                <label class="form-check-label" for="option-@option.OptionId">@option.OptionText</label>
-                            </div>
-                        }
+                        <i class="fas fa-check-square"></i>
                     }
-                </div>
-            }
+                    @question.Question
+                </label>
 
-          
+                @if (question.QuestionType == 1)
+                {
+                    <input type="text" name="answers[@question.QuestionId]" class="form-control" id="question-@question.QuestionId" placeholder="Enter your answer" required />
+                }
+                else if (question.QuestionType == 2)
+                {
+                    <textarea name="answers[@question.QuestionId]" class="form-control" id="question-@question.QuestionId" placeholder="Enter your answer" required></textarea>
+                }
+                else if (question.QuestionType == 4)
+                {
+                    <input type="number" name="answers[@question.QuestionId]" class="form-control" id="question-@question.QuestionId" placeholder="Enter your answer" required />
+                }
+                else if (question.QuestionType == 3)
+                {
+                    foreach (var option in Model.tblQuestionOptionList.Where(o => o.QuestionId == question.QuestionId))
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="answers[@question.QuestionId]" value="@option.OptionText" id="option-@option.OptionId" required />
+                            <label class="form-check-label" for="option-@option.OptionId">@option.OptionText</label>
+                        </div>
+                    }
+                }
+            </div>
+        }
 
-        </form>
-    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
+        <button type="submit" class="btn-primary"><i class="fas fa-check"></i> Submit</button>
+    }
+
+
+    
+
+
+    
     <div class="like-container d-flex justify-content-start align-items-center">
         <!-- Like/Unlike Form -->
         @if (!hasLiked)
@@ -264,6 +275,29 @@
             });
         });
     });
+        @* $(document).ready(function () {
+            // Handle form submission
+            $('#FormSubmit').submit(function (e) {
+                var isValid = true;
+
+                // Check if each question has been answered
+                $("input, textarea").each(function () {
+                    if ($(this).attr("required") && !$(this).val()) {
+                        isValid = false;
+                        $(this).addClass('is-invalid'); // Mark the field as invalid
+                        $(this).siblings(".invalid-feedback").show(); // Show error message
+                    } else {
+                        $(this).removeClass('is-invalid'); // Remove invalid class
+                        $(this).siblings(".invalid-feedback").hide(); // Hide error message
+                    }
+                });
+
+                // Prevent form submission if invalid
+                if (!isValid) {
+                    e.preventDefault(); // Prevent form submission
+                }
+            });
+        }); *@
 </script>
 
 

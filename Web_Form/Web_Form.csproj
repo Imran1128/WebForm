@@ -26,4 +26,15 @@
     <Folder Include="DemoModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Forms\SubmittedForms.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Forms\ThankYou.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,7 @@ namespace Web_Form.Models
         public string? Name { get; set; }
         public bool IsAdmin { get; set; }
         public bool Liked { get; set; }
-       
+        
+
     }
 }

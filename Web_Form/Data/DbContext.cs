@@ -144,9 +144,8 @@ namespace Web_Form.Data
 
             modelBuilder.Entity<TblResponse>(entity =>
             {
-                entity
-                    .HasNoKey()
-                    .ToTable("tbl_Response");
+                entity.HasKey(e => e.Id);
+                entity.ToTable("tbl_Response");
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.SubmissionDate).HasColumnType("datetime");

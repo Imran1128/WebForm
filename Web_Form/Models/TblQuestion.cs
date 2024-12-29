@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Form.Models;
@@ -9,9 +10,10 @@ public partial class TblQuestion
     public int QuestionId { get; set; }
 
     public int FormId { get; set; }
+    
 
     public string Question { get; set; }
-
+    
     public int? QuestionType { get; set; }
 
     public string? InlineImage { get; set; }
@@ -33,7 +35,7 @@ public partial class TblQuestion
     public string? UpdatedBy { get; set; }
 
     public DateTime? UpdatedOn { get; set; }
-
+   
     public virtual TblForm? Form { get; set; }
 
     //public virtual TblKeywordMaster? QuestionTypeNavigation { get; set; }
