@@ -9,9 +9,10 @@ public partial class TblResponse
     public int Id { get; set; }
 
     public int FormId { get; set; }
-
+    public string? question { get; set; }
     public int QuestionId { get; set; }
-
+    public string? CreatedBy { get; set; }
+    public string? SubmittedBy { get; set; }
     public int? OptionId { get; set; }
     [Required(ErrorMessage = "Please provide an answer.")]
     public string? ResponseText { get; set; }

@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 @{
+    var CurrentUser = UserManager.GetUserAsync(User).Result;
     var userId = UserManager.GetUserId(User);
     var UniqId = Guid.NewGuid();
 }
@@ -48,6 +49,7 @@
     {
         @Html.Hidden("formId", Model.TblForm.FormId)
         @Html.Hidden("UniqueId", UniqId)
+        @Html.Hidden("SubmittedBy", CurrentUser.Name)
         
         @foreach (var question in Model.TblQuestionsList)
         {
@@ -97,7 +99,7 @@
             </div>
         }
 
-        <button type="submit" class="btn-primary"><i class="fas fa-check"></i> Submit</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
     }
 
 

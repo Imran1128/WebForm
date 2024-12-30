@@ -133,36 +133,69 @@ namespace Web_Form.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Ensure there's a question to add
                     if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
                     {
                         var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ??
-                                            new List<TblQuestion>();
-
+                                             new List<TblQuestion>();
 
                         if (fullFormViewModel.TblForm != null)
                         {
-                            var formInsert = await _context.TblForms.AddAsync(fullFormViewModel.TblForm);
-                            await _context.SaveChangesAsync();
+                            // Check if the form already exists by Title or another unique field (e.g., FormId)
+                            var existingForm = await _context.TblForms
+                                .FirstOrDefaultAsync(f => f.Title == fullFormViewModel.TblForm.Title);
+
+                            TblForm formInsert;
+
+                            if (existingForm == null)
+                            {
+                                // If no existing form, add the new form and get the entity
+                                var formEntry = await _context.TblForms.AddAsync(fullFormViewModel.TblForm);
+                                await _context.SaveChangesAsync();
+
+                                // Get the entity from the EntityEntry
+                                formInsert = formEntry.Entity;
+                            }
+                            else
+                            {
+                                // If the form already exists, use the existing form
+                                formInsert = existingForm;
+                            }
+
+                            // Process the questions associated with the form
                             foreach (var tblQuestion in questionsList)
                             {
-                                if (formInsert.Entity != null) tblQuestion.FormId = formInsert.Entity.FormId;
+                                // Set the FormId for the question
+                                tblQuestion.FormId = formInsert.FormId;
+
+                                // Add the question
                                 var isQuestionInsert = await _context.TblQuestions.AddAsync(tblQuestion);
-
                                 await _context.SaveChangesAsync();
-                                if (tblQuestion.tblQuestionOptionlList == null) continue;
 
-                                foreach (var tblQuestionOption in tblQuestion.tblQuestionOptionlList)
+                                // Add options to the question if they exist
+                                if (tblQuestion.tblQuestionOptionlList != null)
                                 {
-                                    tblQuestionOption.QuestionId = isQuestionInsert.Entity.QuestionId;
+                                    foreach (var tblQuestionOption in tblQuestion.tblQuestionOptionlList)
+                                    {
+                                        // Set the QuestionId for the options
+                                        tblQuestionOption.QuestionId = isQuestionInsert.Entity.QuestionId;
+                                    }
+
+                                    // Add the question options
+                                    await _context.TblQuestionOptions.AddRangeAsync(tblQuestion.tblQuestionOptionlList);
+                                    await _context.SaveChangesAsync();
                                 }
-                                await _context.TblQuestionOptions.AddRangeAsync(tblQuestion.tblQuestionOptionlList);
-                                await _context.SaveChangesAsync();
                             }
+
+                            // Save changes to the database (if any)
                             await _context.SaveChangesAsync();
                         }
+
                         return RedirectToAction("Index");
                     }
                 }
+
+                // If validation fails, return the form view with validation errors
                 return View(fullFormViewModel);
             }
             catch (Exception e)
@@ -171,6 +204,8 @@ namespace Web_Form.Controllers
                 throw;
             }
         }
+
+
 
         // GET: Forms/Edit/5
         [HttpGet]
@@ -468,8 +503,9 @@ namespace Web_Form.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitForm(int formId, Dictionary<int, string> answers,string UniqueId)
+        public IActionResult SubmitForm(int formId, Dictionary<int, string> answers,string UniqueId,string SubmittedBy)
         {
+           var CreatedBy= _context.TblForms.Find(formId).Createdby;
             if (answers != null && answers.Any())  // Ensure that answers are not null or empty
             {
                 // Loop through the answers
@@ -486,6 +522,8 @@ namespace Web_Form.Controllers
                         SubmissionDate = DateTime.Now,
                         UserId = userId,
                         UniqueId = UniqueId,
+                        CreatedBy = CreatedBy,
+                        SubmittedBy = SubmittedBy
                     };
 
                     // Add the response to the context
@@ -527,28 +565,86 @@ namespace Web_Form.Controllers
             [HttpGet]
         public IActionResult SubmittedFormsApi()
         {
-            // Fetch forms that have answers, including created by, answered by, and submission date
-            var submissions = _context.TblResponses
-         .Include(r => r.Form) // Ensure Form navigation property is loaded
-         .GroupBy(r => r.UniqueId) // Group by UniqueId
-         .Select(group => new
-         {
-             UniqueId = group.Key,
-             SubmissionDate = group.FirstOrDefault().SubmissionDate,
-             FormId = group.FirstOrDefault().FormId,
-             CreatedBy = group.FirstOrDefault().Form.Createdby, // Fetch CreatedBy from Form
-             AnsweredBy = group.FirstOrDefault().UserId, // Fetch AnsweredBy from Response
-             Responses = group.Select(r => new
-             {
-                 QuestionId = r.QuestionId,
-                 ResponseText = r.ResponseText
-             }).ToList()
-         })
-         .ToList();
+            try
+            {
+                var groupedSubmissions =_context.TblResponses
+                    .GroupBy(r => r.UniqueId)
+                    .Select(g => new
+                    {
+                        UniqueId = g.Key,
+                        Title = g.FirstOrDefault().Form.Title,
+                        CreatedBy = g.FirstOrDefault().CreatedBy,
+                        SubmittedBy = g.FirstOrDefault().SubmittedBy,
+                        SubmissionDate = g.FirstOrDefault().SubmissionDate
+                    })
+                    .ToList();
 
-           
+                return Ok(groupedSubmissions);
+            }
+            catch (Exception ex)
+            {
+                // Log exception (optional)
+                return StatusCode(500, new { error = "An error occurred while retrieving submissions.", details = ex.Message });
+            }
+        }
+        [HttpGet]
+        public IActionResult ViewResponse(string uniqueId)
+        {
+            if (string.IsNullOrWhiteSpace(uniqueId))
+            {
+                return BadRequest(new { Message = "UniqueId is required." });
+            }
 
-            return Ok(submissions); // Pass the forms with the extra info to the view
+            var groupedSubmissions = _context.TblResponses
+                .Where(r => r.UniqueId == uniqueId)
+                .Select(r => new
+                {
+                    r.Id,
+                    r.Question.Question,
+                    r.UniqueId,
+                    r.Form.Title,
+                    r.CreatedBy,
+                    r.SubmittedBy,
+                    r.SubmissionDate,
+                    r.QuestionId,
+                    r.ResponseText,
+                    r.Form.Description
+                })
+                .ToList();
+
+            if (!groupedSubmissions.Any())
+            {
+                return NotFound(new { Message = $"No submissions found for UniqueId: {uniqueId}" });
+            }
+
+            // Creating ViewModel
+            var formResponseViewModel = new ResponseViewModel
+            {
+                Title = groupedSubmissions.First().Title,
+                Description = groupedSubmissions.First().Description,
+                CreatedBy = groupedSubmissions.First().CreatedBy,
+                SubmittedBy = groupedSubmissions.First().SubmittedBy,
+                SubmissionDate = groupedSubmissions.First().SubmissionDate,
+                tblResponses = groupedSubmissions.Select(r => new TblResponse
+                {
+                    // Include the Form object
+                    Form = new TblForm { Title = r.Title, Description = r.Description },
+                    Question = new TblQuestion
+                    {
+                        QuestionId = r.QuestionId,   // Assuming you have QuestionId
+                        Question = r.Question        // The actual question text
+                    },
+                    ResponseText = r.ResponseText
+                }).ToList()
+            };
+
+            return View(formResponseViewModel);
+        }
+
+
+        public IActionResult ViewResponse()
+        {
+            return View();
         }
 
 

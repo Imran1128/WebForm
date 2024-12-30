@@ -46,21 +46,4 @@ table tbody tr:hover {
 }
 
 /* Custom Button Styles */
-.btn-info, .btn-secondary, .btn-danger {
-    transition: all 0.3s ease;
-}
 
-    .btn-info:hover {
-        background-color: #338fff;
-        border-color: #338fff;
-    }
-
-    .btn-secondary:hover {
-        background-color: #f0ad4e;
-        border-color: #f0ad4e;
-    }
-
-    .btn-danger:hover {
-        background-color: #c9302c;
-        border-color: #c9302c;
-    }

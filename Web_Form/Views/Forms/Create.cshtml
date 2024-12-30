@@ -147,26 +147,30 @@
 
         }
         $(document).ready(function () {
-            $("#Option").hide();
-            $("#Submit").on("click", function () {
-                console.log($("#mainForm").serialize());
+
+            $("#Submit").on("click", function (e) {
+                e.preventDefault(); // Prevent default form submission
+                $("#Submit").prop('disabled', true); // Disable the submit button to prevent multiple clicks
+
                 $.ajax({
                     async: true,
                     cache: false,
                     url: '/Forms/Create',
                     type: 'POST',
                     data: $("#mainForm").serialize(),
-                    success: function () {
-                        console.log("success");
-
+                    success: function (response) {
+                        console.log("Form submitted successfully");
+                        // Optionally redirect or display a success message
+                        window.location.href = '/Forms/Index';  // Redirect after success
                     },
                     error: function (xhr, status, error) {
-
-                        console.error(error);
+                        console.error("Error: " + error);
+                        $("#Submit").prop('disabled', false); // Re-enable button on error
                     }
                 });
             });
         });
+
         function ResetAddOption() {
             $.ajax({
                 async: true,
