@@ -41,7 +41,16 @@ namespace Web_Form.Controllers
         // GET: Forms/Details/5
         public async Task<IActionResult> Details(int FormId)
         {
-            
+            var subMittedByUser = _context.TblFormSubmissionByUsers
+    .FirstOrDefault(e => e.FormId == FormId); // Fetch the single record or null
+
+            var userId = userManager.GetUserId(User); // Get the current user's ID
+
+            if (subMittedByUser != null && subMittedByUser.UserId == userId) // Compare UserId safely
+            {
+                return RedirectToAction("AlreadySubmitted");
+            }
+
             var tblForm = await _context.TblForms
     .Include(f => f.TblQuestions)
         .ThenInclude(q => q.TblQuestionOptions)
@@ -505,13 +514,16 @@ namespace Web_Form.Controllers
         [HttpPost]
         public IActionResult SubmitForm(int formId, Dictionary<int, string> answers,string UniqueId,string SubmittedBy)
         {
-           var CreatedBy= _context.TblForms.Find(formId).Createdby;
+           
+            var userId = userManager.GetUserId(User);
+            
+            var CreatedBy= _context.TblForms.Find(formId).Createdby;
             if (answers != null && answers.Any())  // Ensure that answers are not null or empty
             {
                 // Loop through the answers
                 foreach (var answer in answers)
                 {
-                    var userId = userManager.GetUserId(User);
+                    
 
                     // Create a new response entry for each question answered
                     var answerEntry = new TblResponse
@@ -528,7 +540,14 @@ namespace Web_Form.Controllers
 
                     // Add the response to the context
                     _context.TblResponses.Add(answerEntry);
-                    
+                    _context.SaveChanges();
+                    var submittedByUser = new TblFormSubmissionByUser
+                    {
+                        UserId = userId,
+                        FormId = formId,
+                    };
+                    _context.TblFormSubmissionByUsers.Add(submittedByUser);
+                    _context.SaveChanges();
                 }
 
                 // Retrieve the form from the database and increment the submission count
@@ -551,7 +570,10 @@ namespace Web_Form.Controllers
             // If no answers are submitted, show an error page
             return View("Error");
         }
-
+        public IActionResult AlreadySubmitted()
+        {
+            return View();
+        }
 
         public ActionResult ThankYou()
         {

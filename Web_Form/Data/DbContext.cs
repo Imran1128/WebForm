@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
 using Web_Form.Models;
 
 namespace Web_Form.Data
@@ -22,6 +21,7 @@ namespace Web_Form.Data
         public virtual DbSet<TblResponse> TblResponses { get; set; }
         public virtual DbSet<TblComment> TblComments { get; set; }
         public virtual DbSet<TblLike> TblLikes { get; set; }
+        public virtual DbSet<TblFormSubmissionByUser> TblFormSubmissionByUsers { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -98,7 +98,15 @@ namespace Web_Form.Data
                     .HasConstraintName("FK_tbl_Likes_tbl_Forms");
                 
             });
+            modelBuilder.Entity<TblFormSubmissionByUser>(entity =>
+            {
+                entity.ToTable("tbl_FormSubmissionByUser");
 
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(450)
+                    .HasColumnName("UserID");
+            });
             modelBuilder.Entity<TblQuestion>(entity =>
             {
                 entity.HasKey(e => e.QuestionId);

@@ -9,7 +9,7 @@ public partial class TblResponse
     public int Id { get; set; }
 
     public int FormId { get; set; }
-    public string? question { get; set; }
+    //public string? question { get; set; }
     public int QuestionId { get; set; }
     public string? CreatedBy { get; set; }
     public string? SubmittedBy { get; set; }
@@ -25,6 +25,6 @@ public partial class TblResponse
 
     public virtual TblQuestionOption? Option { get; set; }
 
-    public virtual TblQuestion Question { get; set; } = null!;
+    public virtual TblQuestion? Question { get; set; } = null!;
 
 }
