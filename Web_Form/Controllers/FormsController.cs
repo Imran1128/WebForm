@@ -38,6 +38,24 @@ namespace Web_Form.Controllers
         {
             return View(await _context.TblForms.ToListAsync());
         }
+        public async Task<IActionResult>  GetAllFormsApi()
+        {
+            var user =await userManager.GetUserAsync(User);
+            var isAdmin =await userManager.IsInRoleAsync(user, "Admin");
+            if (isAdmin)
+            {
+                return Ok(await _context.TblForms.ToListAsync());
+            }
+            else
+            {
+                var result = await _context.TblForms.Where(c=> c.UserId == user.Id).ToListAsync();
+                return Ok(result);
+            }
+        }
+        public IActionResult GetAllForms()
+        {
+            return View();
+        }
         public IActionResult LatestTemplateApi()
         {
             var result = _context.TblForms.OrderBy(x => x.CreatedOn).ToList();
@@ -146,7 +164,7 @@ namespace Web_Form.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         [Authorize]
         public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel)
         {
@@ -369,8 +387,8 @@ namespace Web_Form.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
+        
+        
         public async Task<IActionResult> AddOptionReset(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
             HttpContext.Session.Remove("TblQuestionOptionList");
@@ -612,23 +630,56 @@ namespace Web_Form.Controllers
         }
         [HttpGet]
         [Authorize]
-        public IActionResult SubmittedFormsApi()
+        public async Task<IActionResult> SubmittedFormsApi()
         {
             try
             {
-                var groupedSubmissions = _context.TblResponses
-                    .GroupBy(r => r.UniqueId)
-                    .Select(g => new
-                    {
-                        UniqueId = g.Key,
-                        Title = g.FirstOrDefault().Form.Title,
-                        CreatedBy = g.FirstOrDefault().CreatedBy,
-                        SubmittedBy = g.FirstOrDefault().SubmittedBy,
-                        SubmissionDate = g.FirstOrDefault().SubmissionDate
-                    })
-                    .ToList();
+                 // Assuming this is the identifier for the current user
 
-                return Ok(groupedSubmissions);
+                // Check if the current user is an admin
+                var user = await userManager.GetUserAsync(User);
+                var isAdmin = await userManager.IsInRoleAsync(user, "Admin");
+
+                // Declare groupedSubmissions first
+                 // Declare it as an empty list initially
+
+                // Now, populate the groupedSubmissions based on role
+                if (isAdmin)
+                {
+                    // If the user is an admin, get all data
+                    var groupedSubmissions = _context.TblResponses
+                        .GroupBy(r => r.UniqueId)
+                        .Select(g => new
+                        {
+                            UniqueId = g.Key,
+                            Title = g.FirstOrDefault().Form.Title,
+                            CreatedBy = g.FirstOrDefault().CreatedBy,
+                            SubmittedBy = g.FirstOrDefault().SubmittedBy,
+                            SubmissionDate = g.FirstOrDefault().SubmissionDate
+                        })
+                        .ToList();
+                    return Ok(groupedSubmissions);
+                }
+                else
+                {
+                    // If the user is not an admin, only get their own data
+                   var groupedSubmissions = _context.TblResponses
+                         .Where(r => r.UserId == user.Id)
+                        .GroupBy(r => r.UniqueId)
+                        
+                        .Select(g => new
+                        {
+                            UniqueId = g.Key,
+                            Title = g.FirstOrDefault().Form.Title,
+                            CreatedBy = g.FirstOrDefault().CreatedBy,
+                            SubmittedBy = g.FirstOrDefault().SubmittedBy,
+                            SubmissionDate = g.FirstOrDefault().SubmissionDate
+                        })
+                        .ToList();
+                    return Ok(groupedSubmissions);
+                }
+
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -636,16 +687,19 @@ namespace Web_Form.Controllers
                 return StatusCode(500, new { error = "An error occurred while retrieving submissions.", details = ex.Message });
             }
         }
+
+
+
         [HttpGet]
         [Authorize]
-        public IActionResult ViewResponse(string uniqueId)
+        public async Task<IActionResult>  ViewResponse(string uniqueId)
         {
             if (string.IsNullOrWhiteSpace(uniqueId))
             {
                 return BadRequest(new { Message = "UniqueId is required." });
             }
 
-            var groupedSubmissions = _context.TblResponses
+            var groupedSubmissions =await _context.TblResponses
                 .Where(r => r.UniqueId == uniqueId)
                 .Select(r => new
                 {
@@ -660,8 +714,8 @@ namespace Web_Form.Controllers
                     r.ResponseText,
                     r.Form.Description
                 })
-                .ToList();
-
+                .ToArrayAsync();
+            
             if (!groupedSubmissions.Any())
             {
                 return NotFound(new { Message = $"No submissions found for UniqueId: {uniqueId}" });
@@ -691,11 +745,11 @@ namespace Web_Form.Controllers
             return View(formResponseViewModel);
         }
 
-        [Authorize]
-        public IActionResult ViewResponse()
-        {
-            return View();
-        }
+        //[Authorize]
+        //public IActionResult ViewResponse()
+        //{
+        //    return View();
+        //}
         [Authorize]
         public IActionResult EditResponse(string uniqueId)
         {
@@ -770,6 +824,101 @@ namespace Web_Form.Controllers
 
             return RedirectToAction("SubmittedForms"); // Redirect to a success page
         }
+        [HttpGet]
+        public async Task<IActionResult> EditForm(int FormId)
+        {
+            var form = await _context.TblForms
+                .Include(f => f.TblQuestions)
+                .ThenInclude(q => q.TblQuestionOptions)
+                .FirstOrDefaultAsync(f => f.FormId == FormId);
+
+            if (form == null)
+            {
+                return NotFound(); // Handle case where form is not found
+            }
+
+            var viewModel = new EditFormViewModel
+            {
+                FormId = form.FormId,
+                Title = form.Title,
+                Description = form.Description,
+                HeaderPhoto = form.HeaderPhoto,
+                IsFavourite = form.IsFavourite,
+                FormStatus = form.FormStatus,
+                BackgroundColor = form.BackgroundColor,
+                Email = form.Email,
+                Name = form.Name,
+                Status = form.Status,
+                LastOpened = form.LastOpened,
+                Createdby = form.Createdby,
+                CreatedOn = form.CreatedOn,
+                UpdatedBy = form.UpdatedBy,
+                UpdatedOn = form.UpdatedOn,
+                SubmissionCount = form.SubmissionCount,
+                Likes = form.Likes,
+                TblQuestions = form.TblQuestions
+           .Select(q => new QuestionViewModel
+           {
+               QuestionId = q.QuestionId,
+               Question = q.Question,
+               QuestionType = q.QuestionType,
+               tblQuestionOptionlList = q.TblQuestionOptions
+                   .Select(o => new QuestionOptionViewModel
+                   {
+                       OptionId = o.OptionId,
+                       OptionText = o.OptionText
+                   })
+                   .ToList()
+           })
+           .ToList()
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        
+        public async Task<IActionResult> EditForm(EditFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model); // Return the view with validation errors
+            }
+
+            var form = await _context.TblForms
+                .Include(f => f.TblQuestions)
+                .FirstOrDefaultAsync(f => f.FormId == model.FormId);
+
+            if (form == null)
+            {
+                return NotFound(); // Handle case where form is not found
+            }
+
+            // Update form properties
+            form.Title = model.Title;
+            form.Description = model.Description;
+            form.FormId = model.FormId;
+            form.UpdatedOn = DateTime.Now;
+
+            // Update questions
+            form.TblQuestions = model.TblQuestions.Select(q => new TblQuestion
+            {
+                QuestionId = q.QuestionId,
+                Question = q.Question,
+                QuestionType = q.QuestionType,
+                TblQuestionOptions = q.tblQuestionOptionlList.Select(o => new TblQuestionOption
+                {
+                    OptionId = o.OptionId,
+                    OptionText = o.OptionText
+                }).ToList()
+            }).ToList();
+
+            // Save changes
+            _context.TblForms.Update(form);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index)); // Redirect to the list or detail view
+        }
+
 
 
 

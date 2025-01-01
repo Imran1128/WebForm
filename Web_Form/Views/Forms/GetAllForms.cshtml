@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Submitted Forms";
+}
+
+<div class="container ">
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Submitted Forms</h1>
+        <p class="lead text-muted">Browse and manage all submitted forms efficiently.</p>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Forms Overview</h3>
+        </div>
+        <div class="card-body">
+            <table id="answeredFormsTable" class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Created By</th>
+                        <th>Created On</th>
+                        <th>Submission Count</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated by AJAX -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        // Initialize DataTable
+        $('#answeredFormsTable').DataTable({
+            ordering: false,
+            responsive: true, // Make the table responsive
+            "ajax": {
+                "url": '/forms/GetAllFormsApi',
+                "method": "GET",
+                "datatype": "json",
+                "async": true,
+                "dataSrc": function (json) {
+                    console.log("Response Data:", json);  // Log the data returned from the server
+                    return json;  // Ensure this returns the user data array
+                },
+            },
+            "columns": [
+                {
+                    data: 'title',
+                    name: "Form Title"
+                },
+                {
+                    data: 'createdby',
+                    name: "Created By"
+                },
+                
+                {
+                    data: 'createdOn',
+                    name: "Created On",
+                    render: function (data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            // Ensure the data is a valid date
+                            const date = new Date(data);
+                            if (isNaN(date.getTime())) {
+                                return 'Invalid Date';  // Fallback in case of invalid date
+                            }
+                            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                        }
+                        return data; // Unformatted for sorting and other operations
+                    }
+                },
+
+                {
+                    data: 'submissionCount',
+                    name: 'Submission Count'
+                    
+                },
+
+                    {
+                    data: 'formId', // This column doesn't use a field from the dataset
+                    name: "Action",
+                    render: function (data, type, row) {
+                        return `
+
+                                            <button class="btn btn-warning btn-sm" onclick="editForm('${data}')">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
+                                        </div>
+                                    `;
+                    }
+                }
+            ]
+        });
+    });
+
+    // JavaScript functions for View and Edit actions
+    
+
+    function editForm(FormId) {
+        window.location.href = `/forms/EditForm/?FormId=${FormId}`;
+    }
+</script>
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

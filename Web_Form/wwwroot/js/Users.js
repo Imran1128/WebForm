@@ -8,6 +8,7 @@ function loadUserData() {
         "ajax": {
             "url": '/UserManagement/GetTableData',
             "method": "GET",
+            info: false,
             "datatype": "json",
             "async": true,
             "dataSrc": function (json) {
@@ -116,6 +117,7 @@ $('#RemoveFromAdmin').on('click', function () {
         data: { 'email': val },
         success: function () {
             dataTable.ajax.reload();
+            location.reload();
         },
         error: function () {
             console.log('Error deleting users');

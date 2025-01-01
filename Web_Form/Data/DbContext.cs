@@ -130,7 +130,7 @@ namespace Web_Form.Data
 
                 entity.HasOne(d => d.Form).WithMany(p => p.TblQuestions)
                     .HasForeignKey(d => d.FormId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_tbl_Questions_tbl_Forms");
             });
 
@@ -146,7 +146,7 @@ namespace Web_Form.Data
 
                 entity.HasOne(d => d.Question).WithMany(p => p.TblQuestionOptions)
                     .HasForeignKey(d => d.QuestionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_tbl_QuestionOption_tbl_QuestionOption");
             });
 

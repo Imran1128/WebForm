@@ -16,6 +16,7 @@
 
                 <form method="post" asp-controller="forms" asp-action="Create" id="mainForm" class="p-4">
                     <input hidden asp-for="TblForm.Createdby" value="@user.Name" />
+                    <input hidden asp-for="TblForm.UserId" value="@user.Id" />
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h4>Create New Template</h4>
                         <button type="submit" class="btn btn-success btn-lg" id="Submit">

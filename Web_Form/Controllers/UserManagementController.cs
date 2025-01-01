@@ -151,10 +151,15 @@ namespace Web_Form.Controllers
                     if (user != null && await userManager.IsInRoleAsync(user, "Admin"))
                     {
                        var result = await userManager.RemoveFromRoleAsync(user, "Admin");
-                        if(result.Succeeded)
+                        
+                        if (result.Succeeded)
                         {
                             user.IsAdmin = false;
                             await userManager.UpdateAsync(user);
+
+                            // Invalidate the user's authentication cookie
+                            //await signInManager.SignOutAsync();
+                            await signInManager.SignInAsync(user, isPersistent: false);
                         }
                     
                     }

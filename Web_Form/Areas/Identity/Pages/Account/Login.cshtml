@@ -1,5 +1,4 @@
 ﻿@page
-
 @model LoginModel
 
 @{
@@ -13,31 +12,67 @@
         <hr />
         <form id="account" method="post">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <!-- Email Input -->
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <input asp-for="Input.Email"
+                       class="form-control @(ViewData.ModelState["Input.Email"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                       autocomplete="username"
+                       aria-required="true"
+                       placeholder="Enter your email" />
                 <label asp-for="Input.Email" class="form-label">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <span asp-validation-for="Input.Email" class="invalid-feedback"></span>
             </div>
+
+            <!-- Password Input -->
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                <input asp-for="Input.Password"
+                       type="password"
+                       class="form-control @(ViewData.ModelState["Input.Password"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                       autocomplete="current-password"
+                       aria-required="true"
+                       placeholder="Enter your password" />
                 <label asp-for="Input.Password" class="form-label">Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <span asp-validation-for="Input.Password" class="invalid-feedback"></span>
             </div>
+
+            <!-- Remember Me Checkbox -->
             <div class="form-check mb-3">
                 <input class="form-check-input" asp-for="Input.RememberMe" />
                 <label class="form-check-label" asp-for="Input.RememberMe">Remember me</label>
             </div>
-            <button id="login-submit" type="submit" class="btn btn-primary w-100 btn-lg">Log in</button>
+
+            <!-- Submit Button -->
+            <button id="login-submit"
+                    type="submit"
+                    class="btn btn-primary w-100 btn-lg"
+                    onclick="this.disabled=true; this.form.submit();">
+                Log in
+            </button>
+
+            <!-- Forgot Password Link -->
             <div class="text-center mt-3">
                 <a id="forgot-password" asp-page="./ForgotPassword" class="text-decoration-none">Forgot your password?</a>
             </div>
         </form>
+
         <hr />
+
+        <!-- Additional Links -->
         <div class="text-center">
-            <p>Don't have an account? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none">Register now</a>.</p>
-            <p>Need to confirm your email? <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-decoration-none">Resend confirmation</a>.</p>
+            <p>
+                Don't have an account?
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none">
+                    Register now
+                </a>.
+            </p>
+            <p>
+                Need to confirm your email?
+                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-decoration-none">
+                    Resend confirmation
+                </a>.
+            </p>
         </div>
-        
     </div>
 </div>
 

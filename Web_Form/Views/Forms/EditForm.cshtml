@@ -1,0 +1,156 @@
+﻿@model Web_Form.ViewModels.EditFormViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Edit Form";
+    var user = UserManager.GetUserAsync(User).Result;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-lg">
+                <form method="post" asp-controller="Forms" asp-action="EditForm" id="editForm" class="p-4">
+                    <input type="hidden" asp-for="FormId" />
+                    <input type="hidden" asp-for="UpdatedBy" value="@user.Name" />
+                    <input type="hidden" asp-for="UpdatedOn" value="@DateTime.UtcNow" />
+
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h4>Edit Form</h4>
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fa-solid fa-save me-2"></i>Save Changes
+                        </button>
+                    </div>
+
+                    <div class="card-body">
+
+                        <!-- Title Input -->
+                        <div class="form-floating mb-4">
+                            <input asp-for="Title" class="form-control" placeholder="Enter Title" id="title" />
+                            <label asp-for="Title" for="title">
+                                <i class="fa-solid fa-heading me-2"></i>Title
+                            </label>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <!-- Description Input -->
+                        <div class="form-floating mb-4">
+                            <textarea asp-for="Description" class="form-control" placeholder="Enter Description" style="height: 120px;" id="description"></textarea>
+                            <label asp-for="Description" for="description">
+                                <i class="fa-solid fa-align-left me-2"></i>Description
+                            </label>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <!-- Questions Section -->
+                        <div class="mb-4">
+                            <h5>Questions</h5>
+                            <div id="questionList" class="table-responsive">
+                                @for (var i = 0; i < Model.TblQuestions.Count; i++)
+                                {
+                                    var question = Model.TblQuestions[i];
+                                    <div class="mb-3 p-3 border rounded shadow-sm">
+                                        <div class="form-floating mb-3">
+                                            <input asp-for="TblQuestions[i].Question" class="form-control" placeholder="Enter Question" />
+                                            <label>Question</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select asp-for="TblQuestions[i].QuestionType" class="form-control">
+                                                <option value="1" selected="@(question.QuestionType == 1)">Single Line</option>
+                                                <option value="2" selected="@(question.QuestionType == 2)">Multi-Line</option>
+                                                <option value="3" selected="@(question.QuestionType == 3)">Multiple Choice</option>
+                                                <option value="4" selected="@(question.QuestionType == 4)">Number</option>
+                                            </select>
+                                            <label>Question Type</label>
+                                        </div>
+
+                                        @if ( question.QuestionType == 3)
+                                        {
+                                            <div id="optionsList">
+                                                @if (question.tblQuestionOptionlList != null && question.tblQuestionOptionlList.Count > 0)
+                                                {
+                                                    for (var j = 0; j < question.tblQuestionOptionlList.Count; j++)
+                                                    {
+                                                        var option = question.tblQuestionOptionlList[j];
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <input asp-for="TblQuestions[i].tblQuestionOptionlList[j].OptionText" class="form-control me-2" placeholder="Enter Option" />
+                                                            <button type="button" class="btn btn-danger btn-sm remove-option">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p>No options available for this question.</p>
+                                                }
+
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="btn btn-light btn-sm add-question">
+                            <i class="fa-solid fa-plus"></i> Add Question
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fa-solid fa-arrow-left me-2"></i>Back to List
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Add a new question dynamically
+            $(".add-question").on("click", function () {
+                const questionTemplate = `
+                <div class="mb-3 p-3 border rounded shadow-sm">
+                    <div class="form-floating mb-3">
+                        <input name="NewQuestions[].Question" class="form-control" placeholder="Enter Question" />
+                        <label>Question</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select name="NewQuestions[].QuestionType" class="form-control">
+                            <option value="1">Text</option>
+                            <option value="2">Multiple Choice</option>
+                            <option value="3">Checkbox</option>
+                        </select>
+                        <label>Question Type</label>
+                    </div>
+                </div>`;
+                $("#questionList").append(questionTemplate);
+            });
+
+            // Add a new option dynamically
+            $(document).on("click", ".add-option", function () {
+                const optionTemplate = `
+                <div class="d-flex align-items-center mb-2">
+                    <input name="NewOptions[]" class="form-control me-2" placeholder="Enter Option" />
+                    <button type="button" class="btn btn-danger btn-sm remove-option">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>`;
+                $(this).siblings("#optionsList").append(optionTemplate);
+            });
+
+            // Remove an option
+            $(document).on("click", ".remove-option", function () {
+                $(this).closest("div").remove();
+            });
+        });
+    </script>
+}
