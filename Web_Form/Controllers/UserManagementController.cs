@@ -9,6 +9,7 @@ using Web_Form.Models;
 namespace Web_Form.Controllers
 {
     [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UserManagementController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;

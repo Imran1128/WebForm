@@ -245,6 +245,7 @@
                 type: 'POST', // HTTP method
                 success: function (response) {
                     location.reload();
+
                     // Handle success (e.g., update like count or button visibility)
                     console.log('Successfully unliked the form');
                     // You can update the UI here based on the response (e.g., hide the unlike button)
@@ -266,6 +267,7 @@
                     data: $("#LikeForm").serialize(),
                     success: function () {
                         location.reload();
+
                         console.log("success");
 
                     },

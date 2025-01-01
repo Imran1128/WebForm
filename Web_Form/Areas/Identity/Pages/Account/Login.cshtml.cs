@@ -22,7 +22,9 @@ namespace Web_Form.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
+        [BindProperty]
+        
+        public string ReturnUrl { get; set; }
         public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
@@ -46,7 +48,7 @@ namespace Web_Form.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        public string ReturnUrl { get; set; }
+       
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -85,24 +87,36 @@ namespace Web_Form.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string? returnUrl)
         {
+            // If there's an error message, add it to the model state
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
+            // If no returnUrl, redirect to the home page
             returnUrl ??= Url.Content("~/");
 
-            // Clear the existing external cookie to ensure a clean login process
+            // Ensure the returnUrl is a local URL to prevent open redirects
+            if (!Url.IsLocalUrl(returnUrl))
+            {
+                returnUrl = returnUrl ?? Url.Content("~/"); // Default fallback
+            }
+
+            // Sign out of any existing external login cookies
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
+            // Retrieve external login providers like Google, Facebook, etc.
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
+            // Set the ReturnUrl to be used in the view
             ReturnUrl = returnUrl;
+
+            return Page();  // Ensure this renders the login form
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string? returnUrl)
         {
             returnUrl ??= Url.Content("~/");
 
@@ -136,6 +150,14 @@ namespace Web_Form.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToPage("/Index"); // Fallback to homepage
         }
     }
 }

@@ -14,7 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options => options.LoginPath = "/Account/Login");
+
 
 builder.Services.AddScoped<IFormService, FormRepository>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>(); // Register the custom email sender
@@ -68,6 +70,7 @@ app.UseSession();
 app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Forms}/{action=Index}/{id?}");
