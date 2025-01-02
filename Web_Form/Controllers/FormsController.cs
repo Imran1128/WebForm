@@ -1054,6 +1054,11 @@ namespace Web_Form.Controllers
             return RedirectToAction(nameof(Index)); // Redirect to the list or detail view
         }
 
+        public IActionResult PrivateDetailsPartial()
+        {
+            // Add any necessary data to the model
+            return PartialView("_PrivateDetailsPartial");
+        }
 
 
 

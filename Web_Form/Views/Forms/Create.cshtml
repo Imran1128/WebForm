@@ -15,6 +15,7 @@
             <div class="card shadow-lg rounded-lg">
 
                 <form method="post" asp-controller="forms" asp-action="Create" id="mainForm" class="p-4">
+
                     <input hidden asp-for="TblForm.Createdby" value="@user.Name" />
                     <input hidden asp-for="TblForm.UserId" value="@user.Id" />
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
@@ -107,6 +108,20 @@
                             </button>
                         </div>
                     </div>
+                    <div class="form-floating mb-4">
+                        <select asp-for="TblForm.IsPublic" id="visibility" class="form-control" aria-label="Select Visibility">
+                            <option value="true">Public</option>
+                            <option value="false">Private</option>
+                        </select>
+                        <label asp-for="TblForm.IsPublic">
+                            <i class="fa-solid fa-eye me-2"></i>Visibility
+                        </label>
+                    </div>
+
+                    <div id="privateDetails" class="mt-4" style="display: none;">
+                        <!-- This will hold the partial view content -->
+                    </div>
+
                 </form>
 
             </div>
@@ -228,5 +243,29 @@
                 });
             });
         });
+        $(document).ready(function () {
+            // Monitor changes to the visibility dropdown
+            $('#visibility').on('change', function () {
+                const selectedValue = $(this).val();
+
+                if (selectedValue === 'Private') {
+                    // Show the private details partial view
+                    $.ajax({
+                        url: '/Forms/PrivateDetailsPartial', // Adjust the URL to your endpoint
+                        type: 'GET',
+                        success: function (response) {
+                            $('#privateDetails').html(response).show();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error loading private details: " + error);
+                        }
+                    });
+                } else {
+                    // Hide the private details section
+                    $('#privateDetails').hide().empty();
+                }
+            });
+        });
+
     </script>
 }

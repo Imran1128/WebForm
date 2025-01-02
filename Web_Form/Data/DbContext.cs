@@ -18,6 +18,7 @@ namespace Web_Form.Data
         public virtual DbSet<TblQuestion> TblQuestions { get; set; }
 
         public virtual DbSet<TblQuestionOption> TblQuestionOptions { get; set; }
+        public virtual DbSet<TblPrivateUser> TblPrivateUsers { get; set; }
         public virtual DbSet<TblResponse> TblResponses { get; set; }
         public virtual DbSet<TblComment> TblComments { get; set; }
         public virtual DbSet<TblLike> TblLikes { get; set; }
@@ -87,6 +88,14 @@ namespace Web_Form.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
                 entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            });
+            modelBuilder.Entity<TblPrivateUser>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK_PrivateUsers");
+
+                entity.ToTable("tbl_PrivateUsers");
+
+                entity.Property(e => e.UserId).HasMaxLength(450);
             });
             modelBuilder.Entity<TblLike>(entity =>
             {
