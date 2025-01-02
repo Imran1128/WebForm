@@ -93,6 +93,10 @@
                                                 <i class="fas fa-edit"></i> Edit
                                             </button>
                                         </div>
+                                                 <button class="btn btn-danger btn-sm" onclick="deleteForm('${data}')">
+        <i class="fas fa-trash-alt"></i> Delete
+    </button>
+
                                     `;
                     }
                 }
@@ -101,7 +105,31 @@
     });
 
     // JavaScript functions for View and Edit actions
-    
+    function deleteForm(FormId) {
+        if (confirm("Are you sure you want to delete this form?")) {
+            // Send POST request to delete the form
+            fetch(`/forms/deleteForm?FormId=${FormId}`, {
+                method: 'POST',  // Use POST method for deletion
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Form deleted successfully.");
+                        location.reload(); // Optionally refresh the page
+                    } else {
+                        alert("Error deleting form.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while deleting the form.");
+                });
+        }
+    }
+
 
     function editForm(FormId) {
         window.location.href = `/forms/EditForm/?FormId=${FormId}`;

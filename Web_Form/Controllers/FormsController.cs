@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.SqlServer.Server;
 using Web_Form.Data;
 using Web_Form.Interfaces;
-using Web_Form.Migrations;
 using Web_Form.Models;
 using Web_Form.ViewModels;
 using DbContext = Web_Form.Data.DbContext;
@@ -26,7 +22,7 @@ namespace Web_Form.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
 
-        public FormsController(DbContext context, IFormService formService, ILogger<FormsController> logger, UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
+        public FormsController(DbContext context, IFormService formService, ILogger<FormsController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             this.formService = formService;
@@ -35,30 +31,31 @@ namespace Web_Form.Controllers
             this.signInManager = signInManager;
         }
 
-        // GET: Forms
         public async Task<IActionResult> Index()
         {
             return View(await _context.TblForms.ToListAsync());
         }
-        public async Task<IActionResult>  GetAllFormsApi()
+
+        public async Task<IActionResult> GetAllFormsApi()
         {
             var userId = userManager.GetUserId(User);
             if (!signInManager.IsSignedIn(User))
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
-            var user =await userManager.GetUserAsync(User);
-            var isAdmin =await userManager.IsInRoleAsync(user, "Admin");
+            var user = await userManager.GetUserAsync(User);
+            var isAdmin = await userManager.IsInRoleAsync(user, "Admin");
             if (isAdmin)
             {
                 return Ok(await _context.TblForms.ToListAsync());
             }
             else
             {
-                var result = await _context.TblForms.Where(c=> c.UserId == user.Id).ToListAsync();
+                var result = await _context.TblForms.Where(c => c.UserId == user.Id).ToListAsync();
                 return Ok(result);
             }
         }
+
         public IActionResult GetAllForms()
         {
             var userId = userManager.GetUserId(User);
@@ -68,19 +65,19 @@ namespace Web_Form.Controllers
             }
             return View();
         }
+
         public IActionResult LatestTemplateApi()
         {
-
             var result = _context.TblForms.OrderBy(x => x.CreatedOn).ToList();
             return Ok(result);
         }
+
         public IActionResult PopularFormApi()
         {
             var result = _context.TblForms.OrderBy(x => x.SubmissionCount).ToList();
             return Ok(result);
         }
-        // GET: Forms/Details/5
-        
+
         public async Task<IActionResult> Details(int FormId)
         {
             var userId = userManager.GetUserId(User);
@@ -89,13 +86,10 @@ namespace Web_Form.Controllers
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
 
-
             var subMittedByUser = _context.TblFormSubmissionByUsers
-    .FirstOrDefault(e => e.FormId == FormId); // Fetch the single record or null
+    .FirstOrDefault(e => e.FormId == FormId);
 
-             // Get the current user's ID
-
-            if (subMittedByUser != null && subMittedByUser.UserId == userId) // Compare UserId safely
+            if (subMittedByUser != null && subMittedByUser.UserId == userId)
             {
                 return RedirectToAction("AlreadySubmitted");
             }
@@ -128,17 +122,6 @@ namespace Web_Form.Controllers
                 throw new Exception("TblQuestions collection is null.");
             }
 
-            if (tblForm == null)
-            {
-                return NotFound();
-            }
-
-            // Ensure collections are initialized
-            //tblForm.TblQuestions ??= new List<TblQuestion>();
-            //tblForm.TblComments ??= new List<TblComment>();
-            //tblForm.TblLikes ??= new List<TblLike>();
-
-            // Get current user ID
             var user = await userManager.GetUserAsync(User);
             bool isLikedByCurrentUser = false;
 
@@ -147,7 +130,6 @@ namespace Web_Form.Controllers
                 isLikedByCurrentUser = tblForm.TblLikes.Any(l => l.UserId == user.Id);
             }
 
-            // Populate view model
             var fullFormViewModel = new FullFormViewModel
             {
                 TblForm = tblForm,
@@ -164,12 +146,6 @@ namespace Web_Form.Controllers
             return View(fullFormViewModel);
         }
 
-
-
-
-
-        // GET: Forms/Create
-        
         public IActionResult Create()
         {
             var userId = userManager.GetUserId(User);
@@ -185,12 +161,7 @@ namespace Web_Form.Controllers
             return View(fullForm);
         }
 
-        // POST: Forms/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
-        
         public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel)
         {
             var userId = userManager.GetUserId(User);
@@ -202,7 +173,6 @@ namespace Web_Form.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // Ensure there's a question to add
                     if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
                     {
                         var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ??
@@ -210,7 +180,6 @@ namespace Web_Form.Controllers
 
                         if (fullFormViewModel.TblForm != null)
                         {
-                            // Check if the form already exists by Title or another unique field (e.g., FormId)
                             var existingForm = await _context.TblForms
                                 .FirstOrDefaultAsync(f => f.Title == fullFormViewModel.TblForm.Title);
 
@@ -218,45 +187,34 @@ namespace Web_Form.Controllers
 
                             if (existingForm == null)
                             {
-                                // If no existing form, add the new form and get the entity
                                 var formEntry = await _context.TblForms.AddAsync(fullFormViewModel.TblForm);
                                 await _context.SaveChangesAsync();
-
-                                // Get the entity from the EntityEntry
                                 formInsert = formEntry.Entity;
                             }
                             else
                             {
-                                // If the form already exists, use the existing form
                                 formInsert = existingForm;
                             }
 
-                            // Process the questions associated with the form
                             foreach (var tblQuestion in questionsList)
                             {
-                                // Set the FormId for the question
                                 tblQuestion.FormId = formInsert.FormId;
 
-                                // Add the question
                                 var isQuestionInsert = await _context.TblQuestions.AddAsync(tblQuestion);
                                 await _context.SaveChangesAsync();
 
-                                // Add options to the question if they exist
                                 if (tblQuestion.tblQuestionOptionlList != null)
                                 {
                                     foreach (var tblQuestionOption in tblQuestion.tblQuestionOptionlList)
                                     {
-                                        // Set the QuestionId for the options
                                         tblQuestionOption.QuestionId = isQuestionInsert.Entity.QuestionId;
                                     }
 
-                                    // Add the question options
                                     await _context.TblQuestionOptions.AddRangeAsync(tblQuestion.tblQuestionOptionlList);
                                     await _context.SaveChangesAsync();
                                 }
                             }
 
-                            // Save changes to the database (if any)
                             await _context.SaveChangesAsync();
                         }
 
@@ -264,7 +222,6 @@ namespace Web_Form.Controllers
                     }
                 }
 
-                // If validation fails, return the form view with validation errors
                 return View(fullFormViewModel);
             }
             catch (Exception e)
@@ -273,12 +230,11 @@ namespace Web_Form.Controllers
                 throw;
             }
         }
+    
 
+// GET: Forms/Edit/5
+[HttpGet]
 
-
-        // GET: Forms/Edit/5
-        [HttpGet]
-        
         public async Task<IActionResult> Edit(int id)
         {
             var userId = userManager.GetUserId(User);
@@ -300,11 +256,9 @@ namespace Web_Form.Controllers
         }
 
         // POST: Forms/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Edit(int id, [Bind("FormId,Title,HeaderPhoto,IsFavourite,FormStatus,BackgroundColor,Email,Name,Status,LastOpened,Createdby,CreatedOn,UpdatedBy,UpdatedOn")] TblForm tblForm)
         {
             var userId = userManager.GetUserId(User);
@@ -341,7 +295,7 @@ namespace Web_Form.Controllers
         }
 
         // GET: Forms/Delete/5
-        
+
         public async Task<IActionResult> Delete(int id)
         {
             var userId = userManager.GetUserId(User);
@@ -367,7 +321,7 @@ namespace Web_Form.Controllers
         // POST: Forms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        
+
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var userId = userManager.GetUserId(User);
@@ -389,9 +343,9 @@ namespace Web_Form.Controllers
         {
             return _context.TblForms.Any(e => e.FormId == id);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public async Task<IActionResult> AddQuestion(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
             var userId = userManager.GetUserId(User);
@@ -402,14 +356,10 @@ namespace Web_Form.Controllers
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
             {
                 var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
-                //var optionlist = HttpContext.Session.Get<List<TblQuestionOption>>("TblOptionList") ?? new List<TblQuestionOption>();
 
                 if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
                 {
-                    //fullFormViewModel.TblQuestion.tblQuestionOptionlList = optionlist;
-                    //    optionlist.Add(fullFormViewModel.tblQuestionOption);
                     fullFormViewModel.TblQuestion.tblQuestionOptionlList = HttpContext.Session.Get<List<TblQuestionOption>>("TblQuestionOptionList");
-
                     questionsList.Add(fullFormViewModel.TblQuestion);
                 }
 
@@ -419,9 +369,9 @@ namespace Web_Form.Controllers
 
             return PartialView($"AddQuestion", fullFormViewModel);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public async Task<IActionResult> AddOption(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
             var userId = userManager.GetUserId(User);
@@ -432,7 +382,6 @@ namespace Web_Form.Controllers
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.tblQuestionOption.OptionText))
             {
                 var optionList = HttpContext.Session.Get<List<TblQuestionOption>>("TblQuestionOptionList") ?? new List<TblQuestionOption>();
-                //var optionlist = HttpContext.Session.Get<List<TblQuestionOption>>("TblOptionList") ?? new List<TblQuestionOption>();
 
                 if (!string.IsNullOrWhiteSpace(fullFormViewModel.tblQuestionOption?.OptionText))
                 {
@@ -447,8 +396,6 @@ namespace Web_Form.Controllers
         }
 
         [HttpPost]
-        
-        
         public async Task<IActionResult> AddOptionReset(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
             var userId = userManager.GetUserId(User);
@@ -464,12 +411,11 @@ namespace Web_Form.Controllers
         [HttpPost]
         public IActionResult ClearSession()
         {
-
-            HttpContext.Session.Clear(); // Clear all session data
+            HttpContext.Session.Clear();
             return Ok(new { message = "Session cleared successfully." });
         }
+
         [HttpPost]
-        
         public IActionResult DeleteQuestion(int questionIndex)
         {
             var userId = userManager.GetUserId(User);
@@ -484,18 +430,16 @@ namespace Web_Form.Controllers
                 return BadRequest("Invalid question index.");
             }
 
-
             questionsList.RemoveAt(questionIndex);
 
             HttpContext.Session.Set("TblQuestionsList", questionsList);
 
             var model = new FullFormViewModel { TblQuestionsList = questionsList };
 
-
             return PartialView("AddQuestion", model);
         }
+
         [HttpPost]
-        
         public IActionResult AddComment(TblComment tblComment)
         {
             var userId = userManager.GetUserId(User);
@@ -505,10 +449,8 @@ namespace Web_Form.Controllers
             }
             if (ModelState.IsValid)
             {
-                // Ensure Commented_On is set to the current time
                 tblComment.Commented_On = DateTime.Now;
 
-                // Validate that the FormId exists
                 var formExists = _context.TblForms.Any(f => f.FormId == tblComment.FormId);
                 if (!formExists)
                 {
@@ -520,23 +462,18 @@ namespace Web_Form.Controllers
                 {
                     _context.TblComments.Add(tblComment);
                     _context.SaveChanges();
-
-                    // Redirect to a relevant view (e.g., the form details page)
                     return RedirectToAction("Details", "Forms", new { FormId = tblComment.FormId });
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception (logging logic depends on your setup)
                     ModelState.AddModelError("", "An error occurred while adding the comment.");
                 }
             }
 
-            // If we reach here, something went wrong, redisplay the form
             return RedirectToAction("Details", "Forms", new { FormId = tblComment.FormId });
         }
 
         [HttpGet]
-        
         public IActionResult GetComments(int formId)
         {
             var userId = userManager.GetUserId(User);
@@ -545,20 +482,20 @@ namespace Web_Form.Controllers
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
             var comments = _context.TblComments
-    .Where(c => c.FormId == formId)
-    .OrderByDescending(c => c.Commented_On) // Ensure this is a DateTime
-    .Select(c => new
-    {
-        c.Id,
-        c.UserId,
-        c.Comment,
-        CommentedOn = c.Commented_On // No formatting needed here; handle it in the front end
-    })
-    .ToList();
+                .Where(c => c.FormId == formId)
+                .OrderByDescending(c => c.Commented_On)
+                .Select(c => new
+                {
+                    c.Id,
+                    c.UserId,
+                    c.Comment,
+                    CommentedOn = c.Commented_On
+                })
+                .ToList();
 
             return Json(comments);
         }
-        
+
         public async Task<IActionResult> Like(TblLike tblLike)
         {
             var userId = userManager.GetUserId(User);
@@ -571,33 +508,26 @@ namespace Web_Form.Controllers
                 return BadRequest("Invalid data provided.");
             }
 
-            // Check if the user exists
             var user = await userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound("User not found.");
             }
 
-            // Check if the form exists
             var form = _context.TblForms.FirstOrDefault(f => f.FormId == tblLike.FormId);
             if (form == null)
             {
                 return NotFound("Form not found.");
             }
 
-            // Add the like to the TblLikes table
             _context.TblLikes.Add(tblLike);
+            form.Likes++;
 
-            // Increment the Likes count on the form
-            form.Likes++; // Assuming `Likes` is a property in `TblForm`
-
-            // Save changes to the database
             _context.SaveChanges();
 
-            // Return the updated like count
             return RedirectToAction("Details", "Forms", new { FormId = tblLike.FormId });
         }
-        
+
         public async Task<IActionResult> Unlike(int FormId)
         {
             var userId = userManager.GetUserId(User);
@@ -605,7 +535,6 @@ namespace Web_Form.Controllers
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
-            // Get the current authenticated user
             var user = await userManager.GetUserAsync(User);
 
             if (user == null)
@@ -613,36 +542,29 @@ namespace Web_Form.Controllers
                 return Unauthorized();
             }
 
-            // Check if the like exists for this user and form
             var like = _context.TblLikes
-    .Where(l => l.FormId == FormId && l.UserId == user.Id)
-    .FirstOrDefault();
-
+                .Where(l => l.FormId == FormId && l.UserId == user.Id)
+                .FirstOrDefault();
 
             if (like == null)
             {
-                // If the user hasn't liked the form, return a message or do nothing
                 return NotFound("Like not found.");
             }
 
-            // Remove the like from the TblLikes table
             _context.TblLikes.Remove(like);
 
-            // Get the form and decrement the like count
             var form = await _context.TblForms.FirstOrDefaultAsync(f => f.FormId == FormId);
             if (form != null)
             {
-                form.Likes--; // Decrement the like count
+                form.Likes--;
                 _context.TblForms.Update(form);
             }
 
-            // Save changes to the database
             await _context.SaveChangesAsync();
 
-            // Return the updated like count
             return RedirectToAction("Details", "Forms", new { FormId = FormId });
         }
-        
+
         [HttpPost]
         public IActionResult SubmitForm(int formId, Dictionary<int, string> answers, string UniqueId, string SubmittedBy)
         {
@@ -655,14 +577,10 @@ namespace Web_Form.Controllers
             var userId = userManager.GetUserId(User);
 
             var CreatedBy = _context.TblForms.Find(formId).Createdby;
-            if (answers != null && answers.Any())  // Ensure that answers are not null or empty
+            if (answers != null && answers.Any())
             {
-                // Loop through the answers
                 foreach (var answer in answers)
                 {
-
-
-                    // Create a new response entry for each question answered
                     var answerEntry = new TblResponse
                     {
                         FormId = formId,
@@ -675,7 +593,6 @@ namespace Web_Form.Controllers
                         SubmittedBy = SubmittedBy
                     };
 
-                    // Add the response to the context
                     _context.TblResponses.Add(answerEntry);
                     _context.SaveChanges();
                     var submittedByUser = new TblFormSubmissionByUser
@@ -687,27 +604,22 @@ namespace Web_Form.Controllers
                     _context.SaveChanges();
                 }
 
-                // Retrieve the form from the database and increment the submission count
                 var tblForm = _context.TblForms.FirstOrDefault(f => f.FormId == formId);
                 if (tblForm != null)
                 {
-                    tblForm.SubmissionCount++;  // Increment the submission count
-                    _context.SaveChanges();  // Save the changes to TblForms and TblResponses
+                    tblForm.SubmissionCount++;
+                    _context.SaveChanges();
                 }
 
-                // Commit changes to the database
                 _context.SaveChanges();
 
-
-
-                // Redirect to a Thank You page
                 return RedirectToAction("ThankYou");
             }
 
-            // If no answers are submitted, show an error page
             return View("Error");
         }
-        
+
+
         public IActionResult AlreadySubmitted()
         {
             var userId = userManager.GetUserId(User);
@@ -717,7 +629,7 @@ namespace Web_Form.Controllers
             }
             return View();
         }
-        
+
         public ActionResult ThankYou()
         {
             var userId = userManager.GetUserId(User);
@@ -725,10 +637,10 @@ namespace Web_Form.Controllers
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
-            return View();  // This will return the ThankYou.cshtml view
+            return View();
         }
+
         [HttpGet]
-        
         public IActionResult SubmittedForms()
         {
             var userId = userManager.GetUserId(User);
@@ -738,8 +650,8 @@ namespace Web_Form.Controllers
             }
             return View();
         }
+
         [HttpGet]
-        
         public async Task<IActionResult> SubmittedFormsApi()
         {
             var userId = userManager.GetUserId(User);
@@ -749,19 +661,11 @@ namespace Web_Form.Controllers
             }
             try
             {
-                 // Assuming this is the identifier for the current user
-
-                // Check if the current user is an admin
                 var user = await userManager.GetUserAsync(User);
                 var isAdmin = await userManager.IsInRoleAsync(user, "Admin");
 
-                // Declare groupedSubmissions first
-                 // Declare it as an empty list initially
-
-                // Now, populate the groupedSubmissions based on role
                 if (isAdmin)
                 {
-                    // If the user is an admin, get all data
                     var groupedSubmissions = _context.TblResponses
                         .GroupBy(r => r.UniqueId)
                         .Select(g => new
@@ -777,11 +681,9 @@ namespace Web_Form.Controllers
                 }
                 else
                 {
-                    // If the user is not an admin, only get their own data
-                   var groupedSubmissions = _context.TblResponses
-                         .Where(r => r.UserId == user.Id)
+                    var groupedSubmissions = _context.TblResponses
+                        .Where(r => r.UserId == user.Id)
                         .GroupBy(r => r.UniqueId)
-                        
                         .Select(g => new
                         {
                             UniqueId = g.Key,
@@ -798,16 +700,12 @@ namespace Web_Form.Controllers
             }
             catch (Exception ex)
             {
-                // Log exception (optional)
                 return StatusCode(500, new { error = "An error occurred while retrieving submissions.", details = ex.Message });
             }
         }
 
-
-
         [HttpGet]
-        
-        public async Task<IActionResult>  ViewResponse(string uniqueId)
+        public async Task<IActionResult> ViewResponse(string uniqueId)
         {
             var userId = userManager.GetUserId(User);
             if (!signInManager.IsSignedIn(User))
@@ -819,7 +717,7 @@ namespace Web_Form.Controllers
                 return BadRequest(new { Message = "UniqueId is required." });
             }
 
-            var groupedSubmissions =await _context.TblResponses
+            var groupedSubmissions = await _context.TblResponses
                 .Where(r => r.UniqueId == uniqueId)
                 .Select(r => new
                 {
@@ -835,13 +733,12 @@ namespace Web_Form.Controllers
                     r.Form.Description
                 })
                 .ToArrayAsync();
-            
+
             if (!groupedSubmissions.Any())
             {
                 return NotFound(new { Message = $"No submissions found for UniqueId: {uniqueId}" });
             }
 
-            // Creating ViewModel
             var formResponseViewModel = new ResponseViewModel
             {
                 Title = groupedSubmissions.First().Title,
@@ -851,12 +748,11 @@ namespace Web_Form.Controllers
                 SubmissionDate = groupedSubmissions.First().SubmissionDate,
                 tblResponses = groupedSubmissions.Select(r => new TblResponse
                 {
-                    // Include the Form object
                     Form = new TblForm { Title = r.Title, Description = r.Description },
                     Question = new TblQuestion
                     {
-                        QuestionId = r.QuestionId,   // Assuming you have QuestionId
-                        Question = r.Question        // The actual question text
+                        QuestionId = r.QuestionId,
+                        Question = r.Question
                     },
                     ResponseText = r.ResponseText
                 }).ToList()
@@ -865,21 +761,15 @@ namespace Web_Form.Controllers
             return View(formResponseViewModel);
         }
 
-        //[Authorize]
-        //public IActionResult ViewResponse()
-        //{
-        //    return View();
-        //}
         [Authorize]
         public IActionResult EditResponse(string uniqueId)
         {
             var userId = userManager.GetUserId(User);
 
-            // Include related entities (Questions and their Options)
             var responses = _context.TblResponses
                 .Include(r => r.Question)
-                    .ThenInclude(q => q.TblQuestionOptions) // Include QuestionOptions
-                .Include(r => r.Form) // Include Form for Title and Description
+                    .ThenInclude(q => q.TblQuestionOptions)
+                .Include(r => r.Form)
                 .Where(e => e.UniqueId == uniqueId)
                 .ToList();
 
@@ -888,7 +778,6 @@ namespace Web_Form.Controllers
                 return View("Error", "No responses found for the provided unique ID.");
             }
 
-            // Map the data to the view model
             var editResponseViewModels = responses.Select(res => new EditResponseviewModel
             {
                 Id = res.Id,
@@ -903,13 +792,13 @@ namespace Web_Form.Controllers
                 FormId = res.FormId,
                 UserId = userId,
                 OptionId = res.OptionId,
-                Questions = res.Question, // Pass the Question entity
+                Questions = res.Question,
             }).ToList();
 
             return View(editResponseViewModels);
         }
+
         [HttpPost]
-        
         public IActionResult EditResponse(List<EditResponseviewModel> model)
         {
             var userId = userManager.GetUserId(User);
@@ -924,31 +813,27 @@ namespace Web_Form.Controllers
 
             foreach (var responseModel in model)
             {
-                // Find the existing response in the database
                 var existingResponse = _context.TblResponses
-                    .Include(r => r.Question) // Include related question
+                    .Include(r => r.Question)
                     .FirstOrDefault(r => r.Id == responseModel.Id);
 
                 if (existingResponse == null)
                 {
-                    // Log or handle missing response error
-                    continue; // Skip if the response is not found
+                    continue;
                 }
 
-                // Update fields based on the model
                 existingResponse.ResponseText = responseModel.ResponseText;
-                existingResponse.OptionId = responseModel.OptionId; // For questions with options
-                existingResponse.SubmissionDate = DateTime.Now; // Update submission date
+                existingResponse.OptionId = responseModel.OptionId;
+                existingResponse.SubmissionDate = DateTime.Now;
 
-                // Save changes for each response
                 _context.TblResponses.Update(existingResponse);
             }
 
-            // Commit all changes to the database
             _context.SaveChanges();
 
-            return RedirectToAction("SubmittedForms"); // Redirect to a success page
+            return RedirectToAction("SubmittedForms");
         }
+
         [HttpGet]
         public async Task<IActionResult> EditForm(int FormId)
         {
@@ -959,12 +844,12 @@ namespace Web_Form.Controllers
             }
             var form = await _context.TblForms
                 .Include(f => f.TblQuestions)
-                .ThenInclude(q => q.TblQuestionOptions)
+                    .ThenInclude(q => q.TblQuestionOptions)
                 .FirstOrDefaultAsync(f => f.FormId == FormId);
 
             if (form == null)
             {
-                return NotFound(); // Handle case where form is not found
+                return NotFound();
             }
 
             var viewModel = new EditFormViewModel
@@ -987,26 +872,26 @@ namespace Web_Form.Controllers
                 SubmissionCount = form.SubmissionCount,
                 Likes = form.Likes,
                 TblQuestions = form.TblQuestions
-           .Select(q => new QuestionViewModel
-           {
-               QuestionId = q.QuestionId,
-               Question = q.Question,
-               QuestionType = q.QuestionType,
-               tblQuestionOptionlList = q.TblQuestionOptions
-                   .Select(o => new QuestionOptionViewModel
-                   {
-                       OptionId = o.OptionId,
-                       OptionText = o.OptionText
-                   })
-                   .ToList()
-           })
-           .ToList()
+                    .Select(q => new QuestionViewModel
+                    {
+                        QuestionId = q.QuestionId,
+                        Question = q.Question,
+                        QuestionType = q.QuestionType,
+                        tblQuestionOptionlList = q.TblQuestionOptions
+                            .Select(o => new QuestionOptionViewModel
+                            {
+                                OptionId = o.OptionId,
+                                OptionText = o.OptionText
+                            })
+                            .ToList()
+                    })
+                    .ToList()
             };
 
             return View(viewModel);
         }
+
         [HttpPost]
-        
         public async Task<IActionResult> EditForm(EditFormViewModel model)
         {
             var userId = userManager.GetUserId(User);
@@ -1016,7 +901,7 @@ namespace Web_Form.Controllers
             }
             if (!ModelState.IsValid)
             {
-                return View(model); // Return the view with validation errors
+                return View(model);
             }
 
             var form = await _context.TblForms
@@ -1025,16 +910,14 @@ namespace Web_Form.Controllers
 
             if (form == null)
             {
-                return NotFound(); // Handle case where form is not found
+                return NotFound();
             }
 
-            // Update form properties
             form.Title = model.Title;
             form.Description = model.Description;
             form.FormId = model.FormId;
             form.UpdatedOn = DateTime.Now;
 
-            // Update questions
             form.TblQuestions = model.TblQuestions.Select(q => new TblQuestion
             {
                 QuestionId = q.QuestionId,
@@ -1047,16 +930,14 @@ namespace Web_Form.Controllers
                 }).ToList()
             }).ToList();
 
-            // Save changes
             _context.TblForms.Update(form);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index)); // Redirect to the list or detail view
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult PrivateDetailsPartial()
         {
-            // Add any necessary data to the model
             return PartialView("_PrivateDetailsPartial");
         }
 
@@ -1065,17 +946,35 @@ namespace Web_Form.Controllers
             var result = _context.TblForms.ToList();
             return Ok(result);
         }
+
         public IActionResult AutoCompleteUserApi()
         {
             var result = userManager.Users.ToList();
             return Ok(result);
+        }
+        [HttpPost]
+        [HttpPost]
+        public async Task<IActionResult> DeleteForm(int FormId)
+        {
+            var form = await _context.TblForms.FindAsync(FormId);
+
+            if (form == null)
+            {
+                return NotFound();
+            }
+
+            // Remove the form and save changes
+            _context.TblForms.Remove(form);
+            await _context.SaveChangesAsync();
+
+            // Optionally, you can redirect to another action or return a JSON response
+            return RedirectToAction(nameof(GetAllForms)); // or any other action you want to redirect to after deleting
         }
 
 
 
     }
 }
-
 
 
 

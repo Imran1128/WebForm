@@ -23,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="DemoModels\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

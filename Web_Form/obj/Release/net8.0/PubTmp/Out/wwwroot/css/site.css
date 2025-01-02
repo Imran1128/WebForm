@@ -1,0 +1,49 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+/* Custom Styles for Table and Buttons */
+.table-hover tbody tr:hover {
+    background-color: #f1f3f4;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+i {
+    margin-right: 5px;
+}
+
+/* Hover Effects for Table Rows */
+table tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+/* Custom Button Styles */
+

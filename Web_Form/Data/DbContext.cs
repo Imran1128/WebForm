@@ -26,7 +26,7 @@ namespace Web_Form.Data
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=MehediForm;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=imr112868_;User ID=imr112868_;Password=Imr98765;Trusted_Connection=False;MultipleActiveResultSets=true;TrustServerCertificate=True;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

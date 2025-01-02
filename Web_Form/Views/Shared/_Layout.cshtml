@@ -91,15 +91,35 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="getallforms">
-                                <i class="fas fa-users"></i> My Forms
-                            </a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="GetAllForms">
+                                    <i class="fas fa-folder-open"></i> All Forms
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="GetAllForms">
+                                    <i class="fas fa-file-alt"></i> My Forms
+                                </a>
+                            }
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="SubmittedForms">
-                                <i class="fas fa-users"></i> My Responses
-                            </a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="GetAllForms">
+                                    <i class="fas fa-comments"></i> All Responses
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="GetAllForms">
+                                    <i class="fas fa-reply"></i> My Responses
+                                </a>
+                            }
                         </li>
+
                     </ul>
                 </div>
                 <!-- Right Side: User Info and Logout -->
