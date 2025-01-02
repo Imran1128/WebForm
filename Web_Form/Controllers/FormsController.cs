@@ -1060,7 +1060,16 @@ namespace Web_Form.Controllers
             return PartialView("_PrivateDetailsPartial");
         }
 
-
+        public IActionResult AutoCompleteTagApi()
+        {
+            var result = _context.TblForms.ToList();
+            return Ok(result);
+        }
+        public IActionResult AutoCompleteUserApi()
+        {
+            var result = userManager.Users.ToList();
+            return Ok(result);
+        }
 
 
 

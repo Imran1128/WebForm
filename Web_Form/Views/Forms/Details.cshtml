@@ -8,52 +8,41 @@
     var UniqId = Guid.NewGuid();
 }
 @{
-    var hasLiked = ViewBag.HasLiked ;
+    var hasLiked = ViewBag.HasLiked;
     var formId = ViewBag.FormId as int?;
 }
 
-    <title>@Model.TblForm.Title</title>
-    
-        
+<title>@Model.TblForm.Title</title>
 
+<div class="container">
+    <h1><i class="fas fa-poll"></i> @Model.TblForm.Title</h1>
+    <p>@Model.TblForm.Description</p>
 
-    <div class="container">
-        <h1><i class="fas fa-poll"></i> @Model.TblForm.Title</h1>
-        <p>@Model.TblForm.Description</p>
-
-        <!-- Progress Indicator -->
-        <div class="progress-indicator">
-            <div class="progress-step">
-                <i class="fas fa-clipboard"></i>
-                <p>Create</p>
-            </div>
-            <div class="progress-step">
-                <i class="fas fa-tasks"></i>
-                <p>Answer</p>
-            </div>
-            <div class="progress-step">
-                <i class="fas fa-check-circle"></i>
-                <p>Submit</p>
-            </div>
+    <!-- Progress Indicator -->
+    <div class="progress-indicator d-flex justify-content-between">
+        <div class="progress-step text-center">
+            <i class="fas fa-clipboard"></i>
+            <p>Create</p>
         </div>
-
-
-
-
-
-
-
-
+        <div class="progress-step text-center">
+            <i class="fas fa-tasks"></i>
+            <p>Answer</p>
+        </div>
+        <div class="progress-step text-center">
+            <i class="fas fa-check-circle"></i>
+            <p>Submit</p>
+        </div>
+    </div>
 
     @using (Html.BeginForm("SubmitForm", "Forms", FormMethod.Post, new { @id = "FormSubmit" }))
     {
         @Html.Hidden("formId", Model.TblForm.FormId)
         @Html.Hidden("UniqueId", UniqId)
         @Html.Hidden("SubmittedBy", CurrentUser.Name)
-        
+
         @foreach (var question in Model.TblQuestionsList)
         {
-            <div class="question-card">
+            <div class="question-card mb-3">
                 <label class="question-title" for="question-@question.QuestionId">
                     @if (question.QuestionType == 1)
                     {
@@ -99,16 +88,11 @@
             </div>
         }
 
-        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Submit</button>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-check"></i> Submit</button>
     }
 
-
-    
-
-
-    
-    <div class="like-container d-flex justify-content-start align-items-center">
-        <!-- Like/Unlike Form -->
+    <!-- Like/Unlike Section -->
+    <div class="like-container d-flex justify-content-start align-items-center mt-4">
         @if (!hasLiked)
         {
             <form method="post" asp-controller="Forms" id="LikeForm" asp-action="Like">
@@ -116,192 +100,67 @@
                 <input type="hidden" asp-for="@Model.tblLike.UserId" value="@userId" />
             </form>
 
-            <!-- Like Button with FontAwesome Icon -->
             <button type="submit" id="LikeButton" class="btn btn-outline-primary btn-sm mb-4">
                 <i class="fas fa-thumbs-up"></i> Like
             </button>
         }
         else
         {
-            <!-- Unlike Button with FontAwesome Icon -->
             <button id="UnLikeButton" class="btn btn-outline-danger btn-sm mb-4">
                 <i class="fas fa-thumbs-down"></i> Unlike
             </button>
         }
 
-        <!-- Likes count -->
         <p class="likes-count mt-3 ms-2 text-muted">
             <span class="">@Model.TblForm.Likes</span>
             @if (@Model.TblForm.Likes > 1)
             {
                 <span>Likes</span>
-            } 
-            else 
-            {<span>Like</span>}
+            }
+            else
+            {
+                <span>Like</span>
+            }
         </p>
     </div>
+</div>
 
-
-
-
- 
-    <div class="comment-card mt-5">
-
-        <form asp-controller="forms" asp-action="AddComment" id="CommentForm" method="post">
-            <input type="hidden" name="FormId" asp-for="@Model.tblComment.FormId" value="@Model.TblForm.FormId" />
-            <input type="hidden" asp-for="@Model.tblComment.UserId" name="UserId" value="@userId" />
-
-            <div class="mb-3">
-                <label for="Comment" class="form-label">Add a Comment:</label>
-                <textarea asp-for="@Model.tblComment.Comment" class="form-control" name="Comment" id="Comment" rows="3" placeholder="Write your comment here..."></textarea>
-            </div>
-
-            <button id="Add_Comment" type="submit" class="btn btn-secondary">
-                <i class="fas fa-comment"></i> Submit Comment
-            </button>
-        </form>
-
-    </div>
-    <div id="CommentsList" class="comments-section mt-5">
-        <h3 class="comments-title mb-4">
-            <i class="fas fa-comments"></i> Comments
-        </h3>
-
-        @if (Model.tblCommentList.Any())
-        {
-            <div class="comment-list">
-                @foreach (var comment in Model.tblCommentList.OrderByDescending(c => c.Commented_On))
-                {
-                    var user = await UserManager.FindByIdAsync(comment.UserId);
-
-                    <div class="comment-list mb-4 p-3 shadow-sm">
-                        <div class="d-flex align-items-center mb-2">
-                            <!-- User Avatar -->
-                            
-
-                            <!-- User Info and Date -->
-                            <div class="ml-3">
-                                <strong>@user?.Name</strong>
-                                <br />
-                                <span class="text-muted justify-content-around small">@comment.Commented_On.ToString("g")</span>
-                            </div>
-                        </div>
-
-                        <!-- Comment Body -->
-                        <div class="comment mt-2">
-                            <p class="mb-0">@comment.Comment</p>
-                        </div>
-                    </div>
-                }
-            </div>
-        }
-        else
-        {
-            <p class="no-comments text-muted">
-                <i class="fas fa-comment-slash"></i> No comments yet. Be the first to comment!
-            </p>
-        }
-    </div>
-
-
-    </div>
 <script>
     $(document).ready(function () {
-        const formId = @Model.TblForm.FormId;  // Ensure this is passed correctly from the model
-        const userId = '@userId' || null;  // Ensure userId is available or null
-
-        // Function to load comments
-        function loadComments(formId) {
-            $.ajax({
-                url: `/Forms/GetComments?formId=${formId}`,
-                type: 'GET',
-                success: function (comments) {
-                    const commentsList = $("#CommentsList ul");
-                    commentsList.empty(); // Clear existing comments
-                    if (comments.length > 0) {
-                        comments.forEach(comment => {
-                            commentsList.append(`
-                                <li class="list-group-item">
-                                    <strong>${comment.UserId}:</strong> ${comment.Comment}
-                                    <br>
-                                    <small class="text-muted">${comment.CommentedOn}</small>
-                                </li>
-                            `);
-                        });
-                    } else {
-                        commentsList.append("<p>No comments yet. Be the first to comment!</p>");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error loading comments:", error);
-                }
-            });
-        }
+        const formId = @Model.TblForm.FormId;
+        const userId = '@userId' || null;
 
         // Handle Unlike button click
         $('#UnLikeButton').on('click', function () {
             $.ajax({
-                url: `/Forms/Unlike?formId=${formId}`, // Use formId directly here
-                type: 'POST', // HTTP method
+                url: `/Forms/Unlike?formId=${formId}`,
+                type: 'POST',
                 success: function (response) {
                     location.reload();
-
-                    // Handle success (e.g., update like count or button visibility)
                     console.log('Successfully unliked the form');
-                    // You can update the UI here based on the response (e.g., hide the unlike button)
                 },
                 error: function (xhr, status, error) {
                     console.error('Error unliking the form:', error);
                 }
             });
         });
-        $(document).ready(function () {
-          
-            $("#LikeButton").on("click", function () {
-                console.log($("#LikeForm").serialize());
-                $.ajax({
-                    async: true,
-                    cache: false,
-                    url: '/Forms/Like?formId=${formId}',
-                    type: 'POST',
-                    data: $("#LikeForm").serialize(),
-                    success: function () {
-                        location.reload();
 
-                        console.log("success");
-
-                    },
-                    error: function (xhr, status, error) {
-
-                        console.error(error);
-                    }
-                });
+        // Handle Like button click
+        $("#LikeButton").on("click", function () {
+            $.ajax({
+                async: true,
+                cache: false,
+                url: '/Forms/Like?formId=${formId}',
+                type: 'POST',
+                data: $("#LikeForm").serialize(),
+                success: function () {
+                    location.reload();
+                    console.log("success");
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
             });
         });
     });
-        @* $(document).ready(function () {
-            // Handle form submission
-            $('#FormSubmit').submit(function (e) {
-                var isValid = true;
-
-                // Check if each question has been answered
-                $("input, textarea").each(function () {
-                    if ($(this).attr("required") && !$(this).val()) {
-                        isValid = false;
-                        $(this).addClass('is-invalid'); // Mark the field as invalid
-                        $(this).siblings(".invalid-feedback").show(); // Show error message
-                    } else {
-                        $(this).removeClass('is-invalid'); // Remove invalid class
-                        $(this).siblings(".invalid-feedback").hide(); // Hide error message
-                    }
-                });
-
-                // Prevent form submission if invalid
-                if (!isValid) {
-                    e.preventDefault(); // Prevent form submission
-                }
-            });
-        }); *@
 </script>
-
-

@@ -2,14 +2,12 @@
     ViewData["Title"] = "Submitted Forms";
 }
 
-<div class="container ">
-    <!-- Page Header -->
+<div class="container">
     <div class="text-center mb-4">
         <h1 class="display-4">Submitted Forms</h1>
         <p class="lead text-muted">Browse and manage all submitted forms efficiently.</p>
     </div>
 
-    <!-- Table Card -->
     <div class="card shadow-lg">
         <div class="card-header bg-primary text-white">
             <h3 class="mb-0">Forms Overview</h3>
@@ -26,29 +24,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data will be populated by AJAX -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-
-
 <script>
     $(document).ready(function () {
-        // Initialize DataTable
         $('#answeredFormsTable').DataTable({
             ordering: false,
-            responsive: true, // Make the table responsive
+            responsive: true,
             "ajax": {
                 "url": '/forms/submittedFormsapi',
                 "method": "GET",
                 "datatype": "json",
                 "async": true,
                 "dataSrc": function (json) {
-                    console.log("Response Data:", json);  // Log the data returned from the server
-                    return json;  // Ensure this returns the user data array
+                    console.log("Response Data:", json);
+                    return json;
                 },
             },
             "columns": [
@@ -72,11 +66,11 @@
                             const date = new Date(data);
                             return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
                         }
-                        return data; // Unformatted for sorting and other operations
+                        return data;
                     }
                 },
                 {
-                    data: 'uniqueId', // This column doesn't use a field from the dataset
+                    data: 'uniqueId',
                     name: "Actions",
                     render: function (data, type, row) {
                         return `
@@ -95,7 +89,6 @@
         });
     });
 
-    // JavaScript functions for View and Edit actions
     function viewForm(uniqueId) {
         window.location.href = `/forms/ViewResponse/?uniqueId=${uniqueId}`;
     }
@@ -105,5 +98,4 @@
     }
 </script>
 
-<!-- Font Awesome for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

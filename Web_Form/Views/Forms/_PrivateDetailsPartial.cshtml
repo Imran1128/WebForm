@@ -1,10 +1,99 @@
-﻿<div class="card p-3">
-    <h5>Private Settings</h5>
-    <div class="form-floating mb-4">
-        <input type="text" class="form-control" placeholder="Private Note" id="privateNote" />
-        <label for="privateNote">
-            <i class="fa-solid fa-lock me-2"></i>Private Note
-        </label>
-    </div>
+﻿<div style="position: relative; width: 300px;">
+    <!-- Autocomplete Input Field -->
+    <input type="text" id="user-autocomplete" placeholder="Search for a user by ID..." autocomplete="off" />
+    <!-- Suggestions Container -->
+    <div id="autocomplete-suggestions"></div>
 </div>
 
+<!-- Add Button to Confirm Selection -->
+<button id="add-button">Add</button>
+
+<!-- Container to Display Selected Data -->
+<div id="selected-data"></div>
+
+<script>
+    // Temporary storage for selected user ID
+    let selectedUserId = null;
+
+    // JavaScript to Handle Autocomplete and Posting Data
+    document.getElementById('user-autocomplete').addEventListener('input', function () {
+        const query = this.value;
+        if (query.length > 0) {
+            fetch(`https://localhost:7078/forms/AutoCompleteUserApi?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    displaySuggestions(data, query);
+                })
+                .catch(error => console.error('Error fetching autocomplete data:', error));
+        } else {
+            clearSuggestions();
+        }
+    });
+
+    function displaySuggestions(data, query) {
+        const suggestionsContainer = document.getElementById('autocomplete-suggestions');
+        suggestionsContainer.innerHTML = ''; // Clear existing suggestions
+
+        // Prioritize exact matches
+        const exactMatches = data.filter(user => user.id && user.id.toLowerCase() === query.toLowerCase());
+        const partialMatches = data.filter(user => user.id && user.id.toLowerCase().includes(query.toLowerCase()));
+
+        // Combine matches, with exact matches first
+        const sortedMatches = [...exactMatches, ...partialMatches.filter(user => !exactMatches.includes(user))];
+
+        sortedMatches.forEach(user => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.classList.add('suggestion-item');
+            suggestionItem.textContent = user.id;
+            suggestionItem.addEventListener('click', function () {
+                selectedUserId = user.id; // Store selected ID
+                document.getElementById('user-autocomplete').value = user.id;  // Set input field to ID
+                clearSuggestions();
+            });
+            suggestionsContainer.appendChild(suggestionItem);
+        });
+
+        if (sortedMatches.length === 0) {
+            suggestionsContainer.innerHTML = '<div class="suggestion-item">No results found</div>';
+        }
+    }
+
+    function clearSuggestions() {
+        const suggestionsContainer = document.getElementById('autocomplete-suggestions');
+        suggestionsContainer.innerHTML = '';
+    }
+
+    // Event listener for Add Button
+    document.getElementById('add-button').addEventListener('click', function () {
+        if (selectedUserId) {
+            // POST the selected data to the backend
+            postSelectedData(selectedUserId);
+        } else {
+            alert("Please select a user first.");
+        }
+    });
+
+    // Function to POST selected ID data to the backend
+    function postSelectedData(userId) {
+        fetch('https://localhost:7078/forms/SubmitSelectedData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: userId })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data posted successfully:', data);
+                // Display the selected user data below the input field
+                displaySelectedData(data);
+            })
+            .catch(error => console.error('Error posting data:', error));
+    }
+
+    // Function to display the selected user data below the input field
+    function displaySelectedData(user) {
+        const selectedDataContainer = document.getElementById('selected-data');
+        selectedDataContainer.textContent = `Selected User ID: ${user.id} - Name: ${user.name || 'No Name'}`;
+    }
+</script>

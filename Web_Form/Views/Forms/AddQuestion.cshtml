@@ -11,21 +11,16 @@
                 @for (var i = 0; i < Model.TblQuestionsList.Count; i++)
                 {
                     <div class="mb-4 question-item" data-question-id="@i">
-                        <!-- Question Header -->
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="fw-bold">Question @(@i + 1):</h5>
-                            <!-- Delete Icon -->
                             <button class="btn btn-sm btn-danger delete-question" data-index="@i">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
-                        <!-- Question Text -->
                         <p class="text-secondary">@Model.TblQuestionsList[i].Question</p>
 
-                        <!-- Validation Message for Question -->
                         <span class="text-danger" id="questionError-@i"></span>
 
-                        <!-- Options -->
                         @if (Model.TblQuestionsList[i].tblQuestionOptionlList != null && Model.TblQuestionsList[i].tblQuestionOptionlList.Any())
                         {
                             <ul class="list-group">
@@ -37,10 +32,6 @@
                                     </li>
                                 }
                             </ul>
-                        }
-                        else
-                        {
-                            
                         }
                     </div>
                 }
@@ -56,10 +47,9 @@
 </div>
 <script>
     $(document).ready(function () {
-        // Delegate event for dynamic elements
         $("#questionDetail").on("click", ".delete-question", function () {
             event.preventDefault();
-            var index = $(this).data("index"); // Get question index
+            var index = $(this).data("index");
             if (index === undefined || index === null) {
                 alert("Invalid question index. Please refresh the page.");
                 return;
@@ -70,37 +60,12 @@
                 type: 'POST',
                 data: { questionIndex: index },
                 success: function (response) {
-                    // Replace the content with updated questions list
                     $('#questionDetail').html(response);
                 },
                 error: function (xhr, status, error) {
-                    
                     console.error("Error: ", error);
                 }
             });
         });
     });
-        @* $(document).ready(function () {
-            // Validate the form before submission
-            $("form").on("submit", function (e) {
-                var isValid = true;
-                $(".question-item").each(function () {
-                    var questionId = $(this).data("question-id");
-                    var questionAnswer = $("#question-" + questionId).val();
-
-                    // Check if the answer is provided for the required fields
-                    if (!questionAnswer || questionAnswer.trim() === "") {
-                        isValid = false;
-                        $("#questionError-" + questionId).text("This field is required.");
-                    } else {
-                        $("#questionError-" + questionId).text("");
-                    }
-                });
-
-                if (!isValid) {
-                    e.preventDefault(); // Prevent form submission if validation fails
-                }
-            });
-        }); *@
-
 </script>

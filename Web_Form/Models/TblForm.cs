@@ -27,6 +27,9 @@ public partial class TblForm
     public DateTime? LastOpened { get; set; }
 
     public string? Createdby { get; set; }
+    public string? PrivateUser { get; set; }
+    public string? tag { get; set; }
+    public string? topic { get; set; }
 
     public DateTime? CreatedOn { get; set; }
 

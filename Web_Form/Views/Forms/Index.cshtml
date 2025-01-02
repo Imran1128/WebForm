@@ -5,7 +5,6 @@
 }
 
 <div class="container my-5">
-    <!-- Header Section -->
     <div class="text-center mb-5">
         <h1 class="display-4 text-primary fw-bold">Forms Dashboard</h1>
         <p class="text-muted lead">Manage, fill, and explore all your forms effortlessly.</p>
@@ -14,17 +13,12 @@
         </a>
     </div>
 
-    <!-- Forms Section -->
     <div class="row mt-5">
         <h2 class="fw-bold text-primary mb-4">Latest Templates</h2>
-        <div id="latest-forms" class="row">
-            <!-- Latest forms will be populated here via AJAX -->
-        </div>
+        <div id="latest-forms" class="row"></div>
 
         <h2 class="fw-bold text-primary mt-5 mb-4">Popular Templates</h2>
-        <div id="popular-forms" class="row">
-            <!-- Popular forms will be populated here via AJAX -->
-        </div>
+        <div id="popular-forms" class="row"></div>
     </div>
 </div>
 
@@ -32,42 +26,41 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            // Load Latest Templates using AJAX
             $.ajax({
-                url: '/Forms/LatestTemplateApi',  // Your API endpoint
+                url: '/Forms/LatestTemplateApi',
                 type: 'GET',
                 success: function (data) {
-                    $('#latest-forms').empty();  // Clear existing content
-                    data.slice(0, 5).forEach(function (item) {  // Get the first 5 items
+                    $('#latest-forms').empty();
+                    data.slice(0, 5).forEach(function (item) {
                         var likeLabel = item.likes === 1 ? 'Like' : 'Likes';
                         var cardHtml = `
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="card shadow-lg border-0 rounded-3 overflow-hidden h-100">
-                                        <div class="card-body p-4 d-flex flex-column bg-light rounded-3">
-                                            <a href="/Forms/Details?FormId=${item.formId}" class="text-decoration-none">
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <i class="bi bi-file-earmark-text-fill text-primary fs-4 me-2"></i>
-                                                    <h5 class="card-title text-primary fs-4 mb-0">${item.title}</h5>
-                                                </div>
-                                                <p class="card-text text-muted small mb-3">
-                                                    <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> ${item.createdOn}
-                                                </p>
-                                                <p class="card-text text-muted small mb-3">
-                                                    <strong><i class="bi bi-person-circle me-2"></i> Author:</strong> ${item.createdby}
-                                                </p>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <span class="badge bg-primary text-white">
-                                                        <i class="bi bi-pencil-fill me-1"></i> Fill Up
-                                                    </span>
-                                                    <span class="badge bg-danger text-white">
-                                                        <i class="bi bi-heart me-1"></i> ${item.likes} ${likeLabel}
-                                                    </span>
-                                                </div>
-                                            </a>
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <div class="card shadow-lg border-0 rounded-3 overflow-hidden h-100">
+                                            <div class="card-body p-4 d-flex flex-column bg-light rounded-3">
+                                                <a href="/Forms/Details?FormId=${item.formId}" class="text-decoration-none">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <i class="bi bi-file-earmark-text-fill text-primary fs-4 me-2"></i>
+                                                        <h5 class="card-title text-primary fs-4 mb-0">${item.title}</h5>
+                                                    </div>
+                                                    <p class="card-text text-muted small mb-3">
+                                                        <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> ${item.createdOn}
+                                                    </p>
+                                                    <p class="card-text text-muted small mb-3">
+                                                        <strong><i class="bi bi-person-circle me-2"></i> Author:</strong> ${item.createdby}
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <span class="badge bg-primary text-white">
+                                                            <i class="bi bi-pencil-fill me-1"></i> Fill Up
+                                                        </span>
+                                                        <span class="badge bg-danger text-white">
+                                                            <i class="bi bi-heart me-1"></i> ${item.likes} ${likeLabel}
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            `;
+                                `;
                         $('#latest-forms').append(cardHtml);
                     });
                 },
@@ -76,42 +69,41 @@
                 }
             });
 
-            // Load Popular Forms using AJAX
             $.ajax({
-                url: '/Forms/PopularFormApi',  // Your API endpoint
+                url: '/Forms/PopularFormApi',
                 type: 'GET',
                 success: function (data) {
-                    $('#popular-forms').empty();  // Clear existing content
-                    data.slice(0, 5).forEach(function (item) {  // Get the first 5 items
+                    $('#popular-forms').empty();
+                    data.slice(0, 5).forEach(function (item) {
                         var likeLabel = item.likes === 1 ? 'Like' : 'Likes';
                         var cardHtml = `
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="card shadow-lg border-0 rounded-3 overflow-hidden h-100">
-                                        <div class="card-body p-4 d-flex flex-column bg-light rounded-3">
-                                            <a href="/Forms/FillUp?FormId=${item.formId}" class="text-decoration-none">
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <i class="bi bi-file-earmark-text-fill text-primary fs-4 me-2"></i>
-                                                    <h5 class="card-title text-primary fs-4 mb-0">${item.title}</h5>
-                                                </div>
-                                                <p class="card-text text-muted small mb-3">
-                                                    <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> ${item.createdOn}
-                                                </p>
-                                                <p class="card-text text-muted small mb-3">
-                                                    <strong><i class="bi bi-person-circle me-2"></i> Author:</strong> ${item.createdby}
-                                                </p>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <span class="badge bg-primary text-white">
-                                                        <i class="bi bi-pencil-fill me-1"></i> Fill Up
-                                                    </span>
-                                                    <span class="badge bg-danger text-white">
-                                                        <i class="bi bi-heart me-1"></i> ${item.likes} ${likeLabel}
-                                                    </span>
-                                                </div>
-                                            </a>
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <div class="card shadow-lg border-0 rounded-3 overflow-hidden h-100">
+                                            <div class="card-body p-4 d-flex flex-column bg-light rounded-3">
+                                                <a href="/Forms/FillUp?FormId=${item.formId}" class="text-decoration-none">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <i class="bi bi-file-earmark-text-fill text-primary fs-4 me-2"></i>
+                                                        <h5 class="card-title text-primary fs-4 mb-0">${item.title}</h5>
+                                                    </div>
+                                                    <p class="card-text text-muted small mb-3">
+                                                        <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> ${item.createdOn}
+                                                    </p>
+                                                    <p class="card-text text-muted small mb-3">
+                                                        <strong><i class="bi bi-person-circle me-2"></i> Author:</strong> ${item.createdby}
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <span class="badge bg-primary text-white">
+                                                            <i class="bi bi-pencil-fill me-1"></i> Fill Up
+                                                        </span>
+                                                        <span class="badge bg-danger text-white">
+                                                            <i class="bi bi-heart me-1"></i> ${item.likes} ${likeLabel}
+                                                        </span>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            `;
+                                `;
                         $('#popular-forms').append(cardHtml);
                     });
                 },
@@ -121,6 +113,4 @@
             });
         });
     </script>
-
 }
-

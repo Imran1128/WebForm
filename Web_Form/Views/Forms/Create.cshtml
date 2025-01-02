@@ -13,9 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg rounded-lg">
-
                 <form method="post" asp-controller="forms" asp-action="Create" id="mainForm" class="p-4">
-
                     <input hidden asp-for="TblForm.Createdby" value="@user.Name" />
                     <input hidden asp-for="TblForm.UserId" value="@user.Id" />
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
@@ -24,13 +22,32 @@
                             <i class="fa-solid fa-paper-plane me-2"></i>Submit
                         </button>
                     </div>
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="tagInput" class="form-label">Topic</label>
+                                <input asp-for="TblForm.tag" type="text" id="tagInput" class="form-control" placeholder="Enter Tag">
+                                <div id="autocomplete-suggestions"></div>
+                                <div id="selected-data"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="tagSelect" class="form-label">Topic</label>
+                                <select asp-for="TblForm.topic" id="tagSelect" class="form-control">
+                                    <option value="">...Select a Topic...</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Health">Health</option>
+                                    <option value="Science">Science</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Quiz">Quiz</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
-
-                        <!-- Title Section -->
                         <div class="title mb-4">
                             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-                            <!-- Title Input -->
                             <div class="form-floating mb-4">
                                 <input asp-for="TblForm.Title" class="form-control" placeholder="Enter Title" id="title" />
                                 <label asp-for="TblForm.Title" for="title">
@@ -38,8 +55,6 @@
                                 </label>
                                 <span asp-validation-for="TblForm.Title" class="text-danger"></span>
                             </div>
-
-                            <!-- Description Input -->
                             <div class="form-floating mb-4">
                                 <textarea asp-for="TblForm.Description" class="form-control" placeholder="Enter Description" style="height: 120px;" id="description"></textarea>
                                 <label asp-for="TblForm.Description" for="description">
@@ -47,15 +62,8 @@
                                 </label>
                                 <span asp-validation-for="TblForm.Description" class="text-danger"></span>
                             </div>
-
                         </div>
-
-
-                        <!-- Question Section -->
-                        <div class="table-responsive " id="questionDetails">
-                            @*  @await Html.PartialAsync($"~/Views/forms/AddQuestion.cshtml", Model) *@
-                        </div>
-
+                        <div class="table-responsive" id="questionDetails"></div>
                     </div>
                     <div id="Question" class="mb-4">
                         <div class="form-floating mb-4">
@@ -65,76 +73,72 @@
                             </label>
                             <span asp-validation-for="TblQuestion.Question" class="text-danger"></span>
                         </div>
-
                         <div class="form-floating mb-4">
-                            <select asp-for="TblQuestion.QuestionType" class="form-control" aria-label="Select Question Type" id="TblQuestion_QuestionType" onchange="showOptionAddButton()">
+                            <select asp-for="TblQuestion.QuestionType" class="form-control" id="TblQuestion_QuestionType" onchange="showOptionAddButton()">
                                 <option value="">-- Select Question Type --</option>
                                 @foreach (var type in Model.QuestionType)
                                 {
                                     <option value="@type.KeywordId">@type.KeywordName</option>
                                 }
-
                             </select>
                             <label for="TblQuestion_QuestionType">
                                 <i class="fa-solid fa-cogs me-2"></i>Question Type
                             </label>
                             <span asp-validation-for="TblQuestion.QuestionType" class="text-danger"></span>
                         </div>
-
                         <div id="Option" class="form-floating mb-4">
-
-                            <div class="table-responsive " id="optionList">
-                                @await Html.PartialAsync($"~/Views/forms/AddOption.cshtml", Model)
-                            </div>
+                            <div class="table-responsive" id="optionList"></div>
                             <div>
                                 <label asp-for="tblQuestionOption.OptionText" for="questionText">
                                     <i class="fa-solid fa-question-circle me-2"></i>Option
                                 </label>
-                                <input asp-for="tblQuestionOption.OptionText" class="form-control" placeholder="Enter Question" id="questionText" />
-
+                                <input asp-for="tblQuestionOption.OptionText" class="form-control" placeholder="Enter Option" id="questionText" />
                                 <span asp-validation-for="tblQuestionOption.OptionText" class="text-danger"></span>
-
                                 <div class="d-flex justify-content-end">
-                                    <button id="AddOption" type="button" class="btn btn-light mt-2 btn-sm" title="Add New Option">
+                                    <button id="AddOption" type="button" class="btn btn-light mt-2 btn-sm">
                                         <i class="fa-solid fa-plus fa-lg"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <br />
                         <div class="d-flex justify-content-end">
-                            <button id="AddSection" type="button" class="btn btn-light btn-sm" title="Add New Section">
+                            <button id="AddSection" type="button" class="btn btn-light btn-sm">
                                 <i class="fa-solid fa-plus fa-lg"></i> Add Section
                             </button>
                         </div>
                     </div>
                     <div class="form-floating mb-4">
-                        <select asp-for="TblForm.IsPublic" id="visibility" class="form-control" aria-label="Select Visibility">
+                        <select asp-for="TblForm.IsPublic" id="visibility" class="form-control">
                             <option value="true">Public</option>
-                            <option value="false">Private</option>
+                            <option selected value="false">Private</option>
                         </select>
                         <label asp-for="TblForm.IsPublic">
                             <i class="fa-solid fa-eye me-2"></i>Visibility
                         </label>
                     </div>
-
-                    <div id="privateDetails" class="mt-4" style="display: none;">
-                        <!-- This will hold the partial view content -->
+                    <div id="privateDetails" class="mt-4">
+                        <label for="autoCompleteUser" class="form-label fw-bold">
+                            <i class="fas fa-user-plus me-2 text-primary"></i> Add User
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-primary">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input id="autoCompleteUser" type="text" asp-for="TblForm.PrivateUser" class="form-control" placeholder="Search for a user by ID..." autocomplete="off" />
+                        </div>
+                        <div id="autocompleteuser-suggestions" class="list-group mt-2"></div>
                     </div>
-
                 </form>
-
             </div>
         </div>
     </div>
-
-    <!-- Back Button -->
     <div class="text-center mt-3">
         <a asp-action="Index" class="btn btn-outline-secondary">
             <i class="fa-solid fa-arrow-left me-2"></i>Back to List
         </a>
     </div>
 </div>
+
 
 @section Scripts {
     <script type="text/javascript" asp-append-version="true">
@@ -244,28 +248,191 @@
             });
         });
         $(document).ready(function () {
-            // Monitor changes to the visibility dropdown
+    // Monitor changes to the visibility dropdown
             $('#visibility').on('change', function () {
                 const selectedValue = $(this).val();
 
-                if (selectedValue === 'Private') {
-                    // Show the private details partial view
-                    $.ajax({
-                        url: '/Forms/PrivateDetailsPartial', // Adjust the URL to your endpoint
-                        type: 'GET',
-                        success: function (response) {
-                            $('#privateDetails').html(response).show();
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("Error loading private details: " + error);
-                        }
-                    });
+                if (selectedValue === 'false') {
+                    // Show and enable the private details field
+                    $('#privateDetails').show(); // Make the div visible
+                    // Make the input visible
                 } else {
                     // Hide the private details section
-                    $('#privateDetails').hide().empty();
+                    $('#privateDetails').hide()
                 }
             });
+});
+        $(document).ready(function () {
+            let selectedUserId = null;
+
+            // Listen for input events on the autoCompleteUser field
+            $('#autoCompleteUser').on('input', function () {
+                const query = this.value;
+                if (query.length > 0) {
+                    fetch(`/forms/AutoCompleteUserApi?query=${query}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            displaySuggestions(data, query);
+                        })
+                        .catch(error => console.error('Error fetching autocomplete data:', error));
+                } else {
+                    clearSuggestions();
+                }
+            });
+
+            function displaySuggestions(data, query) {
+                const suggestionsContainer = $('#autocompleteuser-suggestions');
+                suggestionsContainer.empty(); // Clear existing suggestions
+
+                // Prioritize exact matches
+                const exactMatches = data.filter(user => user.id && user.id.toLowerCase() === query.toLowerCase());
+                const partialMatches = data.filter(user => user.id && user.id.toLowerCase().includes(query.toLowerCase()));
+
+                // Combine matches, with exact matches first
+                const sortedMatches = [...exactMatches, ...partialMatches.filter(user => !exactMatches.includes(user))];
+
+                sortedMatches.forEach(user => {
+                    const suggestionItem = $('<div>').addClass('suggestionuser-item').text(user.id);
+                    suggestionItem.on('click', function () {
+                        selectedUserId = user.id; // Store selected ID
+                        $('#autoCompleteUser').val(user.id);  // Set input field to ID
+                        clearSuggestions();
+                    });
+                    suggestionsContainer.append(suggestionItem);
+                });
+
+                if (sortedMatches.length === 0) {
+                    suggestionsContainer.html('<div class="suggestion-item">No results found</div>');
+                }
+            }
+
+            function clearSuggestions() {
+                $('#autocompleteuser-suggestions').empty();
+            }
+
+            // Event listener for Add Button
+            $('#add-button').on('click', function () {
+                if (selectedUserId) {
+                    // POST the selected data to the backend
+                    postSelectedData(selectedUserId);
+                } else {
+                    alert("Please select a user first.");
+                }
+            });
+
+            // Function to POST selected ID data to the backend
+            function postSelectedData(userId) {
+                fetch('https://localhost:7078/forms/SubmitSelectedData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: userId })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Data posted successfully:', data);
+                        // Display the selected user data below the input field
+                        displaySelectedData(data);
+                    })
+                    .catch(error => console.error('Error posting data:', error));
+            }
+
+            // Function to display the selected user data below the input field
+            function displaySelectedData(user) {
+                const selectedDataContainer = $('#selecteduser-data');
+                selectedDataContainer.text(`Selected User ID: ${user.id} - Name: ${user.name || 'No Name'}`);
+            }
         });
+        $(document).ready(function () {
+            let selectedTag = null;
+
+            // Listen for input events on the tag input field
+            $('#tagInput').on('input', function () {
+                const query = this.value.trim();
+                if (query.length > 0) {
+                    fetchTags(query);
+                } else {
+                    clearSuggestions();
+                }
+            });
+
+            // Fetch tags from the API endpoint
+            function fetchTags(query) {
+                fetch(`/forms/AutoCompleteTagApi?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        displaySuggestions(data, query);
+                    })
+                    .catch(error => console.error('Error fetching autocomplete data:', error));
+            }
+
+            // Display matching tags in the suggestions container
+            function displaySuggestions(forms, query) {
+                const suggestionsContainer = $('#autocomplete-suggestions');
+                suggestionsContainer.empty(); // Clear existing suggestions
+
+                // Filter forms to match the query
+                const matches = forms.filter(form => form.tag && form.tag.toLowerCase().includes(query.toLowerCase()));
+
+                if (matches.length > 0) {
+                    matches.forEach(form => {
+                        const suggestionItem = $('<div>')
+                            .addClass('suggestion-item')
+                            .text(form.tag);
+                        suggestionItem.on('click', function () {
+                            selectedTag = form.tag; // Store selected tag
+                            $('#tagInput').val(form.tag); // Set input field to tag
+                            clearSuggestions();
+                        });
+                        suggestionsContainer.append(suggestionItem);
+                    });
+                } else {
+                    suggestionsContainer.html('<div class="suggestion-item">No results found</div>');
+                }
+            }
+
+            // Clear suggestions container
+            function clearSuggestions() {
+                $('#autocomplete-suggestions').empty();
+            }
+
+            // Event listener for Add Button
+            $('#add-button').on('click', function () {
+                if (selectedTag) {
+                    // POST the selected tag to the backend
+                    postSelectedTag(selectedTag);
+                } else {
+                    alert("Please select a tag first.");
+                }
+            });
+
+            // Function to POST selected tag data to the backend
+            function postSelectedTag(tag) {
+                fetch('https://localhost:7078/forms/SubmitSelectedTag', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ tag: tag })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Tag posted successfully:', data);
+                        displaySelectedTag(tag);
+                    })
+                    .catch(error => console.error('Error posting tag:', error));
+            }
+
+            // Function to display the selected tag below the input field
+            function displaySelectedTag(tag) {
+                const selectedTagContainer = $('#selected-tag');
+                selectedTagContainer.text(`Selected Tag: ${tag}`);
+            }
+        });
+
+
+
 
     </script>
 }

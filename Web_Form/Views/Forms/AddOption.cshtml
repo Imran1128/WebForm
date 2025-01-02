@@ -20,14 +20,12 @@
                                     @Model.tblQuestionOptionList[i].OptionText
                                 </label>
                             </div>
-                            <!-- Add additional styles for spacing, hover effects, etc., here if needed -->
                         </li>
                     }
                 </ul>
             </div>
         </div>
 
-        <!-- Error message for validation -->
         <div id="optionsError" class="alert alert-danger mt-3 d-none" role="alert">
             Please select an option.
         </div>
@@ -43,15 +41,12 @@
 <script>
     $(document).ready(function () {
         $("form").submit(function (e) {
-            // Check if an option is selected
             var isSelected = $("input[name='selectedOption']:checked").length > 0;
 
             if (!isSelected) {
-                // Show error if no option is selected
                 $("#optionsError").removeClass("d-none").addClass("d-block");
-                e.preventDefault(); // Prevent form submission
+                e.preventDefault();
             } else {
-                // Hide error if an option is selected
                 $("#optionsError").removeClass("d-block").addClass("d-none");
             }
         });
