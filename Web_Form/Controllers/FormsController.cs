@@ -24,13 +24,15 @@ namespace Web_Form.Controllers
         private readonly IFormService formService;
         private readonly ILogger<FormsController> logger;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public FormsController(DbContext context, IFormService formService, ILogger<FormsController> logger, UserManager<ApplicationUser> userManager)
+        public FormsController(DbContext context, IFormService formService, ILogger<FormsController> logger, UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             this.formService = formService;
             this.logger = logger;
             this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         // GET: Forms
@@ -40,6 +42,11 @@ namespace Web_Form.Controllers
         }
         public async Task<IActionResult>  GetAllFormsApi()
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var user =await userManager.GetUserAsync(User);
             var isAdmin =await userManager.IsInRoleAsync(user, "Admin");
             if (isAdmin)
@@ -54,10 +61,16 @@ namespace Web_Form.Controllers
         }
         public IActionResult GetAllForms()
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             return View();
         }
         public IActionResult LatestTemplateApi()
         {
+
             var result = _context.TblForms.OrderBy(x => x.CreatedOn).ToList();
             return Ok(result);
         }
@@ -67,13 +80,20 @@ namespace Web_Form.Controllers
             return Ok(result);
         }
         // GET: Forms/Details/5
-        [Authorize]
+        
         public async Task<IActionResult> Details(int FormId)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+
+
             var subMittedByUser = _context.TblFormSubmissionByUsers
     .FirstOrDefault(e => e.FormId == FormId); // Fetch the single record or null
 
-            var userId = userManager.GetUserId(User); // Get the current user's ID
+             // Get the current user's ID
 
             if (subMittedByUser != null && subMittedByUser.UserId == userId) // Compare UserId safely
             {
@@ -149,9 +169,14 @@ namespace Web_Form.Controllers
 
 
         // GET: Forms/Create
-        [Authorize]
+        
         public IActionResult Create()
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var fullForm = new FullFormViewModel
             {
                 QuestionType = _context.TblKeywordMasters.Where(c => c.KeywordType == "QuestionType").ToList()
@@ -165,9 +190,14 @@ namespace Web_Form.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         
-        [Authorize]
+        
         public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             try
             {
                 if (ModelState.IsValid)
@@ -248,9 +278,14 @@ namespace Web_Form.Controllers
 
         // GET: Forms/Edit/5
         [HttpGet]
-        [Authorize]
+        
         public async Task<IActionResult> Edit(int id)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (id == null)
             {
                 return NotFound();
@@ -269,9 +304,14 @@ namespace Web_Form.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        
         public async Task<IActionResult> Edit(int id, [Bind("FormId,Title,HeaderPhoto,IsFavourite,FormStatus,BackgroundColor,Email,Name,Status,LastOpened,Createdby,CreatedOn,UpdatedBy,UpdatedOn")] TblForm tblForm)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (id != tblForm.FormId)
             {
                 return NotFound();
@@ -301,9 +341,14 @@ namespace Web_Form.Controllers
         }
 
         // GET: Forms/Delete/5
-        [Authorize]
+        
         public async Task<IActionResult> Delete(int id)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (id == null)
             {
                 return NotFound();
@@ -322,9 +367,14 @@ namespace Web_Form.Controllers
         // POST: Forms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var tblForm = await _context.TblForms.FindAsync(id);
             if (tblForm != null)
             {
@@ -341,9 +391,14 @@ namespace Web_Form.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        
         public async Task<IActionResult> AddQuestion(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.TblQuestion?.Question))
             {
                 var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
@@ -366,9 +421,14 @@ namespace Web_Form.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        
         public async Task<IActionResult> AddOption(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (!string.IsNullOrWhiteSpace(fullFormViewModel.tblQuestionOption.OptionText))
             {
                 var optionList = HttpContext.Session.Get<List<TblQuestionOption>>("TblQuestionOptionList") ?? new List<TblQuestionOption>();
@@ -391,6 +451,11 @@ namespace Web_Form.Controllers
         
         public async Task<IActionResult> AddOptionReset(FullFormViewModel fullFormViewModel, bool clearSession = false)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             HttpContext.Session.Remove("TblQuestionOptionList");
             fullFormViewModel.tblQuestionOptionList = new List<TblQuestionOption>();
             return PartialView($"AddOption", fullFormViewModel);
@@ -399,14 +464,19 @@ namespace Web_Form.Controllers
         [HttpPost]
         public IActionResult ClearSession()
         {
+
             HttpContext.Session.Clear(); // Clear all session data
             return Ok(new { message = "Session cleared successfully." });
         }
         [HttpPost]
-        [Authorize]
+        
         public IActionResult DeleteQuestion(int questionIndex)
         {
-
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
 
             if (questionIndex < 0 || questionIndex >= questionsList.Count)
@@ -425,9 +495,14 @@ namespace Web_Form.Controllers
             return PartialView("AddQuestion", model);
         }
         [HttpPost]
-        [Authorize]
+        
         public IActionResult AddComment(TblComment tblComment)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (ModelState.IsValid)
             {
                 // Ensure Commented_On is set to the current time
@@ -461,9 +536,14 @@ namespace Web_Form.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        
         public IActionResult GetComments(int formId)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var comments = _context.TblComments
     .Where(c => c.FormId == formId)
     .OrderByDescending(c => c.Commented_On) // Ensure this is a DateTime
@@ -478,9 +558,14 @@ namespace Web_Form.Controllers
 
             return Json(comments);
         }
-        [Authorize]
+        
         public async Task<IActionResult> Like(TblLike tblLike)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid data provided.");
@@ -512,9 +597,14 @@ namespace Web_Form.Controllers
             // Return the updated like count
             return RedirectToAction("Details", "Forms", new { FormId = tblLike.FormId });
         }
-        [Authorize]
+        
         public async Task<IActionResult> Unlike(int FormId)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             // Get the current authenticated user
             var user = await userManager.GetUserAsync(User);
 
@@ -552,10 +642,15 @@ namespace Web_Form.Controllers
             // Return the updated like count
             return RedirectToAction("Details", "Forms", new { FormId = FormId });
         }
-        [Authorize]
+        
         [HttpPost]
         public IActionResult SubmitForm(int formId, Dictionary<int, string> answers, string UniqueId, string SubmittedBy)
         {
+            var CurrentuserId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
 
             var userId = userManager.GetUserId(User);
 
@@ -612,26 +707,46 @@ namespace Web_Form.Controllers
             // If no answers are submitted, show an error page
             return View("Error");
         }
-        [Authorize]
+        
         public IActionResult AlreadySubmitted()
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             return View();
         }
-        [Authorize]
+        
         public ActionResult ThankYou()
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             return View();  // This will return the ThankYou.cshtml view
         }
         [HttpGet]
-        [Authorize]
+        
         public IActionResult SubmittedForms()
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             return View();
         }
         [HttpGet]
-        [Authorize]
+        
         public async Task<IActionResult> SubmittedFormsApi()
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             try
             {
                  // Assuming this is the identifier for the current user
@@ -691,9 +806,14 @@ namespace Web_Form.Controllers
 
 
         [HttpGet]
-        [Authorize]
+        
         public async Task<IActionResult>  ViewResponse(string uniqueId)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (string.IsNullOrWhiteSpace(uniqueId))
             {
                 return BadRequest(new { Message = "UniqueId is required." });
@@ -789,9 +909,14 @@ namespace Web_Form.Controllers
             return View(editResponseViewModels);
         }
         [HttpPost]
-        [Authorize]
+        
         public IActionResult EditResponse(List<EditResponseviewModel> model)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (model == null || !model.Any())
             {
                 return View("Error", "No data provided for updating responses.");
@@ -827,6 +952,11 @@ namespace Web_Form.Controllers
         [HttpGet]
         public async Task<IActionResult> EditForm(int FormId)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             var form = await _context.TblForms
                 .Include(f => f.TblQuestions)
                 .ThenInclude(q => q.TblQuestionOptions)
@@ -879,6 +1009,11 @@ namespace Web_Form.Controllers
         
         public async Task<IActionResult> EditForm(EditFormViewModel model)
         {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
             if (!ModelState.IsValid)
             {
                 return View(model); // Return the view with validation errors

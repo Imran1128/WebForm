@@ -30,7 +30,7 @@ namespace Web_Form.Areas.Identity.Pages.Account
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
-                return LocalRedirect(returnUrl);
+                return RedirectToAction("Index", "forms");
             }
             else
             {

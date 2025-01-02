@@ -8,8 +8,7 @@ using Web_Form.Models;
 
 namespace Web_Form.Controllers
 {
-    [Authorize]
-    [Authorize(Roles = "Admin")]
+    
     public class UserManagementController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -25,6 +24,18 @@ namespace Web_Form.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTableData()
         {
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+
+            var currentUser = await userManager.GetUserAsync(User);
+
+            if (currentUser != null && !await userManager.IsInRoleAsync(currentUser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
             //var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
             var users = await userManager.Users.OrderByDescending(x=> x.IsAdmin).ToListAsync();
@@ -36,12 +47,32 @@ namespace Web_Form.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageUser()
         {
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
 
+            var currentUser = await userManager.GetUserAsync(User);
+
+            if (currentUser != null && !await userManager.IsInRoleAsync(currentUser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+            var Currentuser = await userManager.GetUserAsync(User);
+            if (!signInManager.IsSignedIn(User) && await userManager.IsInRoleAsync(Currentuser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string[] email)
         {
+            var Currentuser = await userManager.GetUserAsync(User);
+            if (!signInManager.IsSignedIn(User) && await userManager.IsInRoleAsync(Currentuser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
             if (email.Count() > 0)
             {
                 foreach (var id in email)
@@ -60,6 +91,11 @@ namespace Web_Form.Controllers
         [HttpPost]
         public async Task<IActionResult> BlockUser(string[] email)
         {
+            var Currentuser = await userManager.GetUserAsync(User);
+            if (!signInManager.IsSignedIn(User) && await userManager.IsInRoleAsync(Currentuser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
             if (email.Length > 0)
             {
                 foreach (var id in email)
@@ -96,6 +132,11 @@ namespace Web_Form.Controllers
         [HttpPost]
         public async Task<IActionResult> UnBlockUser(string[] email)
         {
+            var Currentuser = await userManager.GetUserAsync(User);
+            if (!signInManager.IsSignedIn(User) && await userManager.IsInRoleAsync(Currentuser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
             if (email.Count() > 0)
             {
                 foreach (var id in email)
@@ -116,6 +157,11 @@ namespace Web_Form.Controllers
         [HttpPost]
         public async Task<IActionResult> MakeAdmin(string[] email)
         {
+            var Currentuser = await userManager.GetUserAsync(User);
+            if (!signInManager.IsSignedIn(User) && await userManager.IsInRoleAsync(Currentuser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
             if (email.Count() > 0)
             {
                 foreach (var id in email)
@@ -141,6 +187,11 @@ namespace Web_Form.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromAdmin(string[] email)
         {
+            var Currentuser = await userManager.GetUserAsync(User);
+            if (!signInManager.IsSignedIn(User) && await userManager.IsInRoleAsync(Currentuser, "Admin"))
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
             if (email.Count() > 0)
             {
                 foreach (var id in email)
