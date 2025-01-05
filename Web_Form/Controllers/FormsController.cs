@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Web_Form.Data;
 using Web_Form.Interfaces;
 using Web_Form.Models;
@@ -81,6 +84,13 @@ namespace Web_Form.Controllers
         public async Task<IActionResult> Details(int FormId)
         {
             var userId = userManager.GetUserId(User);
+            var isPrivateUser = _context.TblPrivateUsers
+                            .Any(pu => pu.UserId == userId && pu.FormId == FormId);
+            var form = _context.TblForms.Where(c => c.FormId == FormId).FirstOrDefault();
+            if (!form.IsPublic && !isPrivateUser)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
             if (!signInManager.IsSignedIn(User))
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
@@ -153,16 +163,26 @@ namespace Web_Form.Controllers
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
+            var appUsers = userManager.Users
+        .Select(u => new SelectListItem
+        {
+            Value = u.Id, 
+            Text = u.Id   
+        }).ToList()
+        .ToList();
+            
             var fullForm = new FullFormViewModel
             {
-                QuestionType = _context.TblKeywordMasters.Where(c => c.KeywordType == "QuestionType").ToList()
+                QuestionType = _context.TblKeywordMasters.Where(c => c.KeywordType == "QuestionType").ToList(),
+                appUsers = appUsers,
+               
             };
 
             return View(fullForm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel)
+        public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel, List<string> states, List<string>  tags)
         {
             var userId = userManager.GetUserId(User);
             if (!signInManager.IsSignedIn(User))
@@ -214,6 +234,43 @@ namespace Web_Form.Controllers
                                     await _context.SaveChangesAsync();
                                 }
                             }
+                            if (states != null && states.Any())
+                            {
+                                foreach (var stateId in states)
+                                {
+                                    var tblPrivateUsers = new TblPrivateUser
+                                    {
+                                        UserId = stateId,
+                                        FormId = fullFormViewModel.TblForm.FormId
+                                    };
+
+                                    _context.Add(tblPrivateUsers);
+                                    await _context.SaveChangesAsync();
+                                }
+                            }
+
+                            //if (tags != null && tags.Any())
+                            //{
+                            //    // Deserialize the JSON into a list of TblTag objects
+                            //    //var tagList = JsonConvert.DeserializeObject<List<TblTag>>(tags);
+
+                            //    // Extract just the values (e.g., "j" and "k")
+                            //    //var values = tagList.Select(tag => tag.Tag).ToList();
+
+                            //    // Loop through the list of values and save each tag
+                            //    foreach (var value in values)
+                            //    {
+                            //        var tbltag = new TblTag
+                            //        {
+
+                            //            Tag = value,  // Assign the individual string value from the values list
+                            //            FormId = fullFormViewModel.TblForm.FormId
+                            //        };
+                                    
+                            //        _context.Add(tbltag);
+                            //        await _context.SaveChangesAsync();
+                            //    }
+                            //}
 
                             await _context.SaveChangesAsync();
                         }
@@ -943,14 +1000,14 @@ namespace Web_Form.Controllers
 
         public IActionResult AutoCompleteTagApi()
         {
-            var result = _context.TblForms.ToList();
+            var result = _context.TblTags.ToList();
             return Ok(result);
         }
 
         public IActionResult AutoCompleteUserApi()
         {
             var result = userManager.Users.ToList();
-            return Ok(result);
+            return View("Create" , result);
         }
         [HttpPost]
         [HttpPost]

@@ -41,7 +41,7 @@ public partial class TblForm
     [Required(ErrorMessage = "Description is required.")]
     public string Description { get; set; }
 
-    public bool? IsPublic { get; set; }
+    public bool IsPublic { get; set; }
     public virtual ICollection<TblQuestion>? TblQuestions { get; set; } = new List<TblQuestion>();
     public virtual ICollection<TblLike>? TblLikes { get; set; } = new List<TblLike>();
     public virtual ICollection<TblComment>? TblComments { get; set; } = new List<TblComment>();

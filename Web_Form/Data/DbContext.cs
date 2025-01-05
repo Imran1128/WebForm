@@ -21,12 +21,13 @@ namespace Web_Form.Data
         public virtual DbSet<TblPrivateUser> TblPrivateUsers { get; set; }
         public virtual DbSet<TblResponse> TblResponses { get; set; }
         public virtual DbSet<TblComment> TblComments { get; set; }
+        public virtual DbSet<TblTag> TblTags { get; set; }
         public virtual DbSet<TblLike> TblLikes { get; set; }
         public virtual DbSet<TblFormSubmissionByUser> TblFormSubmissionByUsers { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=imr112868_;User ID=imr112868_;Password=Imr98765;Trusted_Connection=False;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //=> optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=imr112868_;User ID=imr112868_;Password=Imr98765;Trusted_Connection=False;MultipleActiveResultSets=true;TrustServerCertificate=True;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -88,6 +89,12 @@ namespace Web_Form.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
                 entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            });
+            modelBuilder.Entity<TblTag>(entity =>
+            {
+                entity.ToTable("tbl_Tag");
+
+                entity.Property(e => e.Tag).HasMaxLength(450);
             });
             modelBuilder.Entity<TblPrivateUser>(entity =>
             {
