@@ -18,11 +18,26 @@
 
     <style>
         /* Remove default margin from body */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0; /* Remove any default margin */
-            padding-top: 0; /* Ensure no padding on top */
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
         }
+
+        main {
+            background-color: #ffffff !important; /* Light background */
+            color: #000000 !important; /* Light text color */
+        }
+        [data-theme="dark"] {
+            --background-color: #2c3e50;
+            --color: #000000;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
 
         header {
            
@@ -58,7 +73,7 @@
             }
 
         footer {
-            background-color: #6200ea;
+            
             color: white;
             padding: 1rem 0;
             text-align: center;
@@ -111,23 +126,30 @@
                         <li class="nav-item">
                             @if (User.IsInRole("Admin"))
                             {
-                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="GetAllForms">
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="submittedforms">
                                     <i class="fas fa-comments"></i> All Responses
                                 </a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="GetAllForms">
+                                <a class="nav-link" asp-area="" asp-controller="Forms" asp-action="submittedforms">
                                     <i class="fas fa-reply"></i> My Responses
                                 </a>
                             }
                         </li>
+                        
 
                     </ul>
                 </div>
                 <!-- Right Side: User Info and Logout -->
                 <partial name="_LoginPartial.cshtml" />
             </div>
+            <div class="theme-toggle bottom-0 end-0 me-4">
+                <button id="themeSwitcher" class="btn btn-primary d-flex align-items-center shadow">
+                    <i id="themeIcon" class="bi bi-sun-fill"></i>
+                </button>
+            </div>
+
         </nav>
     </header>
 
@@ -165,9 +187,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tag-it/2.0/js/tag-it.min.js" integrity="sha512-/+S+ux3SPgnYy6QTupGfK3nvRnXTYDRHtXMiaGsZaBHBa7sMWWHXdktMhfRlcx1ELUCLINAyWqiaC6a7EaIRtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tagify/4.33.0/tagify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
     <script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js" asp-append-version="true"></script>
+    <script>
+        const options = {
+            bottom: '32px', // Position the toggle button
+            right: '32px', // Adjust placement
+            left: 'unset', // Override default left
+            time: '0.5s', // Transition time
+            mixColor: '', // Background color in light mode
+            backgroundColor: '', // Dark mode background
+            buttonColorDark: '#100f2c', // Button color in dark mode
+            buttonColorLight: '', // Button color in light mode
+            saveInCookies: true, // Save mode in cookies
+            label: '🌓', // Button label
+            autoMatchOsTheme: true // Automatically match system theme
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSwitcher = document.getElementById('themeSwitcher');
+            const themeIcon = document.getElementById('themeIcon');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+
+            // Apply saved theme
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            // Set initial icon based on the saved theme
+            themeIcon.className = currentTheme === 'dark' ? 'bi bi-moon-fill' : 'bi bi-sun-fill';
+
+            // Toggle theme on button click
+            themeSwitcher.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+
+                // Update icon
+                themeIcon.className = newTheme === 'dark' ? 'bi bi-moon-fill' : 'bi bi-sun-fill';
+            });
+        });
+
+
+    </script>
+
 </body>
 </html>

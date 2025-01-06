@@ -17,6 +17,7 @@ namespace Web_Form.ViewModels
         public TblTag?  tblTag { get; set; }
 
         public List<TblForm>? tblForms { get; set; } = new List<TblForm>();
+        public List<TblKeywordMaster>? tblKeywordMasters { get; set; } = new List<TblKeywordMaster>();
         public IEnumerable<SelectListItem>? appUsers { get; set; }
         public List<TblQuestionOption>? tblQuestionOptionList { get; set; }=new List<TblQuestionOption>();
         public List<TblResponse>? tblResponsesList { get; set; } = new List<TblResponse>();

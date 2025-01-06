@@ -9,14 +9,14 @@
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    @for (var i = 0; i < Model.tblQuestionOptionList.Count; i++)
+                    @for (var i = 0; i < Math.Min(Model.tblQuestionOptionList.Count, 4); i++)
                     {
                         <li class="list-group-item d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
                                 <input type="radio" name="selectedOption" value="@Model.tblQuestionOptionList[i].OptionId"
                                        id="option-@i" class="form-check-input me-3" required />
                                 <label for="option-@i" class="fw-semibold">
-                                    <i class="bi bi-check-circle text-success me-2"></i>
+                                   
                                     @Model.tblQuestionOptionList[i].OptionText
                                 </label>
                             </div>

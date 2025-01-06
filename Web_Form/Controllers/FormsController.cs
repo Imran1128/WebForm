@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -182,7 +183,7 @@ namespace Web_Form.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel, List<string> states, List<string>  tags)
+        public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel, List<string> states, List<string> tags)
         {
             var userId = userManager.GetUserId(User);
             if (!signInManager.IsSignedIn(User))
@@ -251,11 +252,12 @@ namespace Web_Form.Controllers
 
                             //if (tags != null && tags.Any())
                             //{
-                            //    // Deserialize the JSON into a list of TblTag objects
-                            //    //var tagList = JsonConvert.DeserializeObject<List<TblTag>>(tags);
+
+                            //    var tagList = Json.parse(tags);
 
                             //    // Extract just the values (e.g., "j" and "k")
-                            //    //var values = tagList.Select(tag => tag.Tag).ToList();
+                            //    var values = tagList.Select((Func<TblTag, string>)(tag => tag.Tag)).ToList();
+
 
                             //    // Loop through the list of values and save each tag
                             //    foreach (var value in values)
@@ -266,7 +268,7 @@ namespace Web_Form.Controllers
                             //            Tag = value,  // Assign the individual string value from the values list
                             //            FormId = fullFormViewModel.TblForm.FormId
                             //        };
-                                    
+
                             //        _context.Add(tbltag);
                             //        await _context.SaveChangesAsync();
                             //    }
@@ -1000,7 +1002,7 @@ namespace Web_Form.Controllers
 
         public IActionResult AutoCompleteTagApi()
         {
-            var result = _context.TblTags.ToList();
+            var result = _context.TblTags.Select(e=> e.Tag).ToList();
             return Ok(result);
         }
 

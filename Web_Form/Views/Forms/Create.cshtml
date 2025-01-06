@@ -28,7 +28,7 @@
                                 <label for="tagInput" class="form-label">Tag</label>
                                 @* <select asp-items="Model.tblTags" name="tags[]" multiple="multiple" id="tagSelect" class="tags-multiple form-control">
                                 </select> *@
-                                <input asp-for="tblTag.Tag" asp-items="Model.tblTags" id="tagsInput" name="tags"  placeholder="Type and press Enter to add tags" class="form-control">
+                                <input  id="tagsInput" name="tags"  placeholder="Type and press Enter to add tags" class="form-control">
 
                             </div>
                             <div class="col-md-6 mb-3">
@@ -111,8 +111,8 @@
                     </div>
                     <div class="form-floating mb-4">
                         <select asp-for="TblForm.IsPublic" id="visibility" class="form-control">
-                            <option value="true">Public</option>
-                            <option selected value="false">Private</option>
+                            <option selected value="true">Public</option>
+                            <option  value="false">Private</option>
                         </select>
                         <label asp-for="TblForm.IsPublic">
                             <i class="fa-solid fa-eye me-2"></i>Visibility
@@ -122,11 +122,11 @@
                         <label  class="form-label fw-bold">
                             <i class="fas fa-user-plus me-2 text-primary"></i> Add User
                         </label>
-                        <div >
-                            
-                            <select asp-items="Model.appUsers" name="states[]" multiple="multiple" id="tagSelect" class="user-multiple">
+                        <div>
+                            <select asp-items="Model.appUsers" name="states[]" multiple="multiple" id="tagSelect" class="user-multiple" style="width: 100%; max-width: 600px;">
                             </select>
                         </div>
+
                         
                     </div>
                 </form>
@@ -158,27 +158,44 @@
                 }
             });
         };
-        function showOptionAddButton() {
-            if ($('#TblQuestion_QuestionType').val() == 3) {
-                $("#Option").show();
-            }
-            else {
-                $("#Option").hide();
+        $(document).ready(function () {
+            // Initially hide the Option element
+            $("#Option").hide();
+
+            // Function to show/hide Option based on the QuestionType value
+            function showOptionAddButton() {
+                if ($('#TblQuestion_QuestionType').val() == 3) {
+                    $("#Option").show();
+                } else {
+                    $("#Option").hide();
+                }
             }
 
-        }
+            // Call the function when the page loads to check the initial value of QuestionType
+            showOptionAddButton();
+
+            // Call the function when the value of QuestionType changes
+            $('#TblQuestion_QuestionType').on('change', function () {
+                showOptionAddButton();
+            });
+        });
+
         $(document).ready(function () {
+            var tagify = new Tagify(document.getElementById('tagInput'));  // Initialize Tagify
 
             $("#Submit").on("click", function (e) {
                 e.preventDefault(); // Prevent default form submission
                 $("#Submit").prop('disabled', true); // Disable the submit button to prevent multiple clicks
+
+                // Get clean values from Tagify
+                
 
                 $.ajax({
                     async: true,
                     cache: false,
                     url: '/Forms/Create',
                     type: 'POST',
-                    data: $("#mainForm").serialize(),
+                    data: $("#mainForm").serialize(), // Append tag values to form data
                     success: function (response) {
                         console.log("Form submitted successfully");
                         // Optionally redirect or display a success message
@@ -191,6 +208,7 @@
                 });
             });
         });
+
 
         function ResetAddOption() {
             $.ajax({
@@ -250,6 +268,7 @@
         });
         $(document).ready(function () {
     // Monitor changes to the visibility dropdown
+            $('#privateDetails').hide();
             $('#visibility').on('change', function () {
                 const selectedValue = $(this).val();
 
@@ -263,88 +282,7 @@
                 }
             });
 });
-        // $(document).ready(function () {
-        //     let selectedUserId = null;
-
-        //     // Listen for input events on the autoCompleteUser field
-        //     $('#autoCompleteUser').on('input', function () {
-        //         const query = this.value;
-        //         if (query.length > 0) {
-        //             fetch(`/forms/AutoCompleteUserApi?query=${query}`)
-        //                 .then(response => response.json())
-        //                 .then(data => {
-        //                     displaySuggestions(data, query);
-        //                 })
-        //                 .catch(error => console.error('Error fetching autocomplete data:', error));
-        //         } else {
-        //             clearSuggestions();
-        //         }
-        //     });
-
-        //     function displaySuggestions(data, query) {
-        //         const suggestionsContainer = $('#autocompleteuser-suggestions');
-        //         suggestionsContainer.empty(); // Clear existing suggestions
-
-        //         // Prioritize exact matches
-        //         const exactMatches = data.filter(user => user.id && user.id.toLowerCase() === query.toLowerCase());
-        //         const partialMatches = data.filter(user => user.id && user.id.toLowerCase().includes(query.toLowerCase()));
-
-        //         // Combine matches, with exact matches first
-        //         const sortedMatches = [...exactMatches, ...partialMatches.filter(user => !exactMatches.includes(user))];
-
-        //         sortedMatches.forEach(user => {
-        //             const suggestionItem = $('<div>').addClass('suggestionuser-item').text(user.id);
-        //             suggestionItem.on('click', function () {
-        //                 selectedUserId = user.id; // Store selected ID
-        //                 $('#autoCompleteUser').val(user.id);  // Set input field to ID
-        //                 clearSuggestions();
-        //             });
-        //             suggestionsContainer.append(suggestionItem);
-        //         });
-
-        //         if (sortedMatches.length === 0) {
-        //             suggestionsContainer.html('<div class="suggestion-item">No results found</div>');
-        //         }
-        //     }
-
-        //     function clearSuggestions() {
-        //         $('#autocompleteuser-suggestions').empty();
-        //     }
-
-        //     // Event listener for Add Button
-        //     $('#add-button').on('click', function () {
-        //         if (selectedUserId) {
-        //             // POST the selected data to the backend
-        //             postSelectedData(selectedUserId);
-        //         } else {
-        //             alert("Please select a user first.");
-        //         }
-        //     });
-
-        //     // Function to POST selected ID data to the backend
-        //     function postSelectedData(userId) {
-        //         fetch('https://localhost:7078/forms/SubmitSelectedData', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //             },
-        //             body: JSON.stringify({ id: userId })
-        //         })
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 console.log('Data posted successfully:', data);
-        //                 // Display the selected user data below the input field
-        //                 displaySelectedData(data);
-        //             })
-        //             .catch(error => console.error('Error posting data:', error));
-        //     }
-
-        //     // Function to display the selected user data below the input field
-        //     function displaySelectedData(user) {
-        //         const selectedDataContainer = $('#selecteduser-data');
-        //         selectedDataContainer.text(`Selected User ID: ${user.id} - Name: ${user.name || 'No Name'}`);
-        //     }
-        // });
+        
         $(document).ready(function () {
             let selectedTag = null;
 
@@ -438,42 +376,66 @@
         });
 
         $(document).ready(function () {
-            // Initialize Tagify
-            var input = document.querySelector('#tagsInput');
-            var tagify = new Tagify(input, {
-                whitelist: ["Option 1", "Option 2", "Option 3"], // Predefined options (can come from the database)
-                enforceWhitelist: false,  // Allow new custom tags
-                dropdown: {
-                    enabled: 1,           // Show suggestions as dropdown
-                    maxItems: 10          // Max items to show in dropdown
+            // Fetch whitelist from the database via API
+            $.ajax({
+                url: '/forms/AutoCompleteTagApi',  // Replace with your actual API endpoint
+                method: 'GET',
+                success: function (response) {
+                    console.log('API response:', response);  // Log response for debugging
+
+                    // Ensure response is an array of strings (this should be true based on the example you provided)
+                    if (Array.isArray(response)) {
+                        var input = document.querySelector('#tagsInput');
+                        var tagify = new Tagify(input, {
+                            whitelist: response,  // Use the fetched whitelist
+                            enforceWhitelist: false,
+                            dropdown: {
+                                enabled: 1,
+                                maxItems: 10
+                            },
+                            addTagOnBlur: true,
+                            maxTags: 10,
+                        })
+                        tagify.getCleanValue();
+                    } else {
+                        console.error('Invalid whitelist format received from the API');
+                    }
                 },
-                addTagOnBlur: true,        // Add tag on blur (when losing focus)
-                maxTags: 10,               // Limit to 10 tags
+                error: function (error) {
+                    console.error('Error fetching whitelist:', error);
+                }
             });
+        
+            // // Handle the 'change' event to extract a list of strings from the tags
+        //     tagify.on('change', function (e) {
+        //         var tagValues = tagify.getCleanValue();  // e.g., [{ "value": "d" }, { "value": "df" }]
 
-            // Handle the 'change' event to extract a list of strings from the tags
-            tagify.on('change', function (e) {
-                var tagsArray = e.detail.value;  // This is an array of tag values (strings)
-                console.log(tagsArray);          // Prints the list of tags (strings)
+        //         // Map to extract only the 'value' property of each tag
+        //         var tagsArray = tagValues.map(tag => tag.value);  // e.g., ["d", "df"]
 
-                // Example: Sending the tags as a list of strings to the server
-                sendTags(tagsArray);
-            });
+        //         // Set the value of the hidden input field 'tagsData' to the tagsArray as JSON string
+        //         $('#tagsData').val(JSON.stringify(tagsArray));  // Add tag values as a JSON string
+        //         console.log(tagsArray)          // Prints the list of tags (strings)
 
-            // Function to send tags to the server
-            function sendTags(tagsArray) {
-                fetch('/YourController/YourAction', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ tags: tagsArray })
-                })
-                    .then(response => response.json())
-                    .then(data => console.log('Tags sent:', data))
-                    .catch(error => console.error('Error:', error));
-            }
+        //         // Example: Sending the tags as a list of strings to the server
+        //         sendTags(tagValues);
+        //     });
+
+            
+        //     function sendTags(tagValues) {
+        //         fetch('/YourController/YourAction', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             },
+        //             body: JSON.stringify({ tags: tagsArray })
+        //         })
+        //             .then(response => response.json())
+        //             .then(data => console.log('Tags sent:', data))
+        //             .catch(error => console.error('Error:', error));
+        //     }
         });
+        
 
     </script>
-}
+        }
