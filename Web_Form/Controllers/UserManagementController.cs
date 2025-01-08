@@ -196,6 +196,7 @@ namespace Web_Form.Controllers
             {
                 foreach (var id in email)
                 {
+                    var CurrentUser = await userManager.GetUserAsync(User);
                     var user = await userManager.FindByEmailAsync(id);
                     var role = await roleManager.RoleExistsAsync("Admin");
 
@@ -210,7 +211,7 @@ namespace Web_Form.Controllers
 
                             // Invalidate the user's authentication cookie
                             //await signInManager.SignOutAsync();
-                            await signInManager.SignInAsync(user, isPersistent: false);
+                            await signInManager.SignInAsync(CurrentUser, isPersistent: false);
                         }
                     
                     }

@@ -13,6 +13,7 @@ namespace Web_Form.ViewModels
         public TblLike? tblLike { get; set; }
         public List<TblQuestion>? TblQuestionsList { get; set; }=new List<TblQuestion>();
         public List<TblPrivateUser>? privateUsers { get; set; } = new List<TblPrivateUser>();
+        public List<TblTag>? tbltaglist { get; set; } = new List<TblTag>();
         public IEnumerable<SelectListItem>? tblTags { get; set; }
         public TblTag?  tblTag { get; set; }
 

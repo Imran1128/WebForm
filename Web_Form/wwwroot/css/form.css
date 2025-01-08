@@ -96,14 +96,57 @@ h1 {
 }
 
 .card {
-    border-radius: 15px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
     .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.card-body a {
+    color: #343a40;
+}
+
+    .card-body a:hover {
+        text-decoration: none;
+        color: #007bff; /* Link hover color */
+    }
+
+.badge {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    font-weight: 600;
+}
+
+    .badge i {
+        font-size: 1rem;
+    }
+
+    /* Adding transition for hover on badge */
+    .badge:hover {
+        background-color: #0056b3;
+        cursor: pointer;
+    }
+
+/* Increase the padding and give a smooth transition on hover */
+.card-body {
+    padding: 20px;
+    transition: padding 0.3s ease;
+}
+
+    .card-body:hover {
+        padding: 22px;
+    }
+
 
 
 

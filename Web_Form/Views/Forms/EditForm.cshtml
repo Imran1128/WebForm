@@ -95,9 +95,27 @@
 
                         </div>
 
-                        <button type="button" class="btn btn-light btn-sm add-question">
-                            <i class="fa-solid fa-plus"></i> Add Question
-                        </button>
+                       
+                    <div class="form-floating mb-4">
+                        <select asp-for="IsPublic" id="visibility" class="form-control">
+                            <option value="true">Public</option>
+                            <option value="false">Private</option>
+                        </select>
+                        <label asp-for="IsPublic">
+                            <i class="fa-solid fa-eye me-2"></i>Visibility
+                        </label>
+                    </div>
+                    <div id="privateDetails" class="mt-4">
+                        <label class="form-label fw-bold">
+                            <i class="fas fa-user-plus me-2 text-primary"></i> Add User
+                        </label>
+                        <div>
+                            <select asp-items="Model.appUsers" name="states[]" multiple="multiple" id="tagSelect" class="users-multiple" style="width: 100%; max-width: 600px;">
+                                
+                            </select>
+                        </div>
+
+
                     </div>
                 </form>
             </div>
@@ -113,6 +131,7 @@
 </div>
 
 @section Scripts {
+    <script src="/js/EditForm.js"></script>
     <script>
         $(document).ready(function () {
             // Add a new question dynamically

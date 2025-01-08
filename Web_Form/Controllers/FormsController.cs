@@ -37,7 +37,17 @@ namespace Web_Form.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TblForms.ToListAsync());
+            var tags = _context.TblTags
+                 .Select(t => new SelectListItem
+                 {
+                     Value = t.Tag,
+                     Text = t.Tag
+                 }).ToList();
+            var fullformviewmodel = new FullFormViewModel
+            {
+                tblTags = tags
+            };
+            return View(fullformviewmodel);
         }
 
         public async Task<IActionResult> GetAllFormsApi()
@@ -168,9 +178,8 @@ namespace Web_Form.Controllers
         .Select(u => new SelectListItem
         {
             Value = u.Id, 
-            Text = u.Id   
-        }).ToList()
-        .ToList();
+            Text = u.Name   
+        }).ToList();
             
             var fullForm = new FullFormViewModel
             {
@@ -183,7 +192,7 @@ namespace Web_Form.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel, List<string> states, List<string> tags)
+        public async Task<IActionResult> Create(FullFormViewModel fullFormViewModel, List<string> states, string tags)
         {
             var userId = userManager.GetUserId(User);
             if (!signInManager.IsSignedIn(User))
@@ -239,10 +248,12 @@ namespace Web_Form.Controllers
                             {
                                 foreach (var stateId in states)
                                 {
+                                    var AppUser =await userManager.FindByIdAsync(stateId);
                                     var tblPrivateUsers = new TblPrivateUser
                                     {
                                         UserId = stateId,
-                                        FormId = fullFormViewModel.TblForm.FormId
+                                        FormId = fullFormViewModel.TblForm.FormId,
+                                        
                                     };
 
                                     _context.Add(tblPrivateUsers);
@@ -250,31 +261,41 @@ namespace Web_Form.Controllers
                                 }
                             }
 
-                            //if (tags != null && tags.Any())
-                            //{
+                            if (tags != null)
+                            {
+                                // Step 1: Remove the surrounding brackets and escape characters
+                                string cleanString = tags.TrimStart('[').TrimEnd(']');
 
-                            //    var tagList = Json.parse(tags);
+                                // Step 2: Split the string based on the pattern (},{)
+                                string[] items = cleanString.Split(new string[] { "},{" }, StringSplitOptions.None);
 
-                            //    // Extract just the values (e.g., "j" and "k")
-                            //    var values = tagList.Select((Func<TblTag, string>)(tag => tag.Tag)).ToList();
+                                // Step 3: Extract the values from each item
+                                List<TblTag> values = new List<TblTag>();
+
+                                foreach (string item in items)
+                                {
+                                    // Find the value using string manipulation (extract the value inside the "value":"")
+                                    string value = item.Split(':')[1].Trim('\"');
+                                    value = value.Replace("\"", "");
+                                    value = value.Replace("}", "");
+
+                                    var tblTag = new TblTag
+                                    {
+                                        Tag = value,
+                                        FormId = fullFormViewModel.TblForm.FormId
+                                    };
+                                    values.Add(tblTag);
+                                }
 
 
-                            //    // Loop through the list of values and save each tag
-                            //    foreach (var value in values)
-                            //    {
-                            //        var tbltag = new TblTag
-                            //        {
 
-                            //            Tag = value,  // Assign the individual string value from the values list
-                            //            FormId = fullFormViewModel.TblForm.FormId
-                            //        };
 
-                            //        _context.Add(tbltag);
-                            //        await _context.SaveChangesAsync();
-                            //    }
-                            //}
+                                // Add the entire list to the database context
+                                await _context.AddRangeAsync(values);
 
-                            await _context.SaveChangesAsync();
+                                // Save changes in one go
+                                await _context.SaveChangesAsync();
+                            }
                         }
 
                         return RedirectToAction("Index");
@@ -289,24 +310,24 @@ namespace Web_Form.Controllers
                 throw;
             }
         }
-    
 
-// GET: Forms/Edit/5
-[HttpGet]
 
-        public async Task<IActionResult> Edit(int id)
+        // GET: Forms/Edit/5
+        [HttpGet]
+
+        public async Task<IActionResult> Edit(int FormId)
         {
             var userId = userManager.GetUserId(User);
             if (!signInManager.IsSignedIn(User))
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
-            if (id == null)
+            if (FormId == null)
             {
                 return NotFound();
             }
 
-            var tblForm = await _context.TblForms.FindAsync(id);
+            var tblForm = await _context.TblForms.FindAsync(FormId);
             if (tblForm == null)
             {
                 return NotFound();
@@ -428,7 +449,31 @@ namespace Web_Form.Controllers
 
             return PartialView($"AddQuestion", fullFormViewModel);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddQuestionEdit(EditFormViewModel editFormViewModel)
+        {
+            var userId = userManager.GetUserId(User);
+            if (!signInManager.IsSignedIn(User))
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+            if (!string.IsNullOrWhiteSpace(editFormViewModel.TblQuestion?.Question))
+            {
+                var questionsList = HttpContext.Session.Get<List<TblQuestion>>("TblQuestionsList") ?? new List<TblQuestion>();
 
+                if (!string.IsNullOrWhiteSpace(editFormViewModel.TblQuestion?.Question))
+                {
+                    editFormViewModel.TblQuestion.tblQuestionOptionlList = HttpContext.Session.Get<List<TblQuestionOption>>("TblQuestionOptionList");
+                    questionsList.Add(editFormViewModel.TblQuestion);
+                }
+
+                HttpContext.Session.Set("TblQuestionsList", questionsList);
+                editFormViewModel.TblQuestionsList = questionsList;
+            }
+
+            return PartialView($"AddQuestion", editFormViewModel);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOption(FullFormViewModel fullFormViewModel, bool clearSession = false)
@@ -901,6 +946,14 @@ namespace Web_Form.Controllers
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
+            
+            var privateUsers = userManager.Users
+                .Select(e=> new SelectListItem
+                {
+                    
+                    Value= e.Id,
+                    Text = e.Name
+                }).ToList();
             var form = await _context.TblForms
                 .Include(f => f.TblQuestions)
                     .ThenInclude(q => q.TblQuestionOptions)
@@ -914,6 +967,7 @@ namespace Web_Form.Controllers
             var viewModel = new EditFormViewModel
             {
                 FormId = form.FormId,
+                QuestionType = _context.TblKeywordMasters.Where(c => c.KeywordType == "QuestionType").ToList(),
                 Title = form.Title,
                 Description = form.Description,
                 HeaderPhoto = form.HeaderPhoto,
@@ -921,6 +975,7 @@ namespace Web_Form.Controllers
                 FormStatus = form.FormStatus,
                 BackgroundColor = form.BackgroundColor,
                 Email = form.Email,
+                appUsers = privateUsers,
                 Name = form.Name,
                 Status = form.Status,
                 LastOpened = form.LastOpened,
@@ -951,7 +1006,7 @@ namespace Web_Form.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditForm(EditFormViewModel model)
+        public async Task<IActionResult> EditForm(EditFormViewModel model, List<string> states)
         {
             var userId = userManager.GetUserId(User);
             if (!signInManager.IsSignedIn(User))
@@ -962,6 +1017,7 @@ namespace Web_Form.Controllers
             {
                 return View(model);
             }
+            
 
             var form = await _context.TblForms
                 .Include(f => f.TblQuestions)
@@ -974,6 +1030,7 @@ namespace Web_Form.Controllers
 
             form.Title = model.Title;
             form.Description = model.Description;
+            form.IsPublic = model.IsPublic;
             form.FormId = model.FormId;
             form.UpdatedOn = DateTime.Now;
 
@@ -991,6 +1048,22 @@ namespace Web_Form.Controllers
 
             _context.TblForms.Update(form);
             await _context.SaveChangesAsync();
+            if (states != null && states.Any())
+            {
+                foreach (var stateId in states)
+                {
+                    var AppUser = await userManager.FindByIdAsync(stateId);
+                    var tblPrivateUsers = new TblPrivateUser
+                    {
+                        UserId = stateId,
+                        FormId = model.FormId,
+
+                    };
+
+                    _context.Add(tblPrivateUsers);
+                    await _context.SaveChangesAsync();
+                }
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -1016,20 +1089,40 @@ namespace Web_Form.Controllers
         public async Task<IActionResult> DeleteForm(int FormId)
         {
             var form = await _context.TblForms.FindAsync(FormId);
+            var question = await _context.TblQuestions.Where(e=> e.FormId == FormId).ToListAsync();
+            var QuestionId = question.Select(e=> e.QuestionId).ToList();
+            var options =  _context.TblQuestionOptions.Where(e=> QuestionId.Contains(e.QuestionId)).ToList();
 
             if (form == null)
             {
                 return NotFound();
             }
 
-            // Remove the form and save changes
+            _context.TblQuestionOptions.RemoveRange(options);
+            await _context.SaveChangesAsync();
+            _context.TblQuestions.RemoveRange(question);
+            await _context.SaveChangesAsync();
             _context.TblForms.Remove(form);
             await _context.SaveChangesAsync();
 
             // Optionally, you can redirect to another action or return a JSON response
             return RedirectToAction(nameof(GetAllForms)); // or any other action you want to redirect to after deleting
         }
+        public IActionResult getByTag(List<string> tags)
+        {
+            var taglist = _context.TblTags.Where(c=> tags.Contains(c.Tag)).ToList();
+            var formIds = taglist.Select(c => c.FormId);
+            var forms = _context.TblForms.Where(c => formIds.Contains(c.FormId)).ToList();
+            return Ok(forms);
 
+        }
+    public IActionResult DeleteForm(string uniqueId)
+        {
+            var response = _context.TblResponses.Where(e=> e.UniqueId == uniqueId).ToList();
+            _context.TblResponses.RemoveRange(response);
+            _context.SaveChanges();
+            return RedirectToAction("SubmittedForms");
+        }
 
 
     }

@@ -21,12 +21,24 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Create.js",
+      "PackagePath": "staticwebassets\\js\\Create.js"
+    },
+    {
+      "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\EditForm.js",
+      "PackagePath": "staticwebassets\\js\\EditForm.js"
+    },
+    {
       "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Form.js",
       "PackagePath": "staticwebassets\\js\\Form.js"
     },
     {
       "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\Users.js",
       "PackagePath": "staticwebassets\\js\\Users.js"
+    },
+    {
+      "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\index.js",
+      "PackagePath": "staticwebassets\\js\\index.js"
     },
     {
       "Id": "F:\\WebForm\\Web_Form\\wwwroot\\js\\site.js",

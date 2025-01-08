@@ -4,9 +4,23 @@ F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\appsettings.json
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Web_Form.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Web_Form.runtimeconfig.json
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Web_Form.pdb
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\en\Web_Form.resources.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\pl\Web_Form.resources.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Azure.Core.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Azure.Identity.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Api.Gax.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Api.Gax.Rest.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Apis.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Apis.Auth.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Apis.Core.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Apis.Translate.v2.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Cloud.Translation.V2.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Humanizer.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.Razor.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.Helpers.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.WebPages.Deployment.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.WebPages.Razor.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.WebPages.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authorization.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Components.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Components.Forms.dll
@@ -73,6 +87,7 @@ F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.VisualStudio.Web.Cod
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.Web.Infrastructure.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Mono.TextTemplating.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.dll
@@ -101,6 +116,7 @@ F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Drawing.Common.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Formats.Asn1.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.IO.Pipelines.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Management.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Memory.Data.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Reflection.MetadataLoadContext.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Runtime.Caching.dll
@@ -276,6 +292,7 @@ F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\win-arm64\native\e_sq
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\win-x64\native\e_sqlite3.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\win-x86\native\e_sqlite3.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Management.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll

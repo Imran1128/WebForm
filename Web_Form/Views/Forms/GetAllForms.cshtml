@@ -120,12 +120,12 @@
                         alert("Form deleted successfully.");
                         location.reload(); // Optionally refresh the page
                     } else {
-                        alert("Error deleting form.");
+                        location.reload();
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred while deleting the form.");
+                    location.reload();
                 });
         }
     }
