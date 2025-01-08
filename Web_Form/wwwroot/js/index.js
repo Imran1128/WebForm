@@ -4,7 +4,21 @@
         type: 'GET',
         success: function (data) {
             $('#latest-forms').empty();
+            
             data.slice(0, 3).forEach(function (item) {
+                var createdDate = new Date(item.createdOn);
+
+                var formattedTime = createdDate.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+
+                var formattedDate = createdDate.toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
                 var likeLabel = item.likes === 1 ? 'Like' : 'Likes';
                 var cardHtml = `
                                             <div class="col-lg-4 col-md-6 mb-4">
@@ -16,7 +30,8 @@
                             <h5 class="card-title text-primary fs-4 mb-0" style="font-weight: 600;">${item.title}</h5>
                         </div>
                         <p class="card-text text-muted small mb-3">
-                            <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> ${item.createdOn}
+                            <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> <span class="datetime-time"><i class="bi bi-clock datetime-icon"></i>${formattedTime}</span>-
+                                        <span class="datetime-date">${formattedDate}</span>
                         </p>
                         <p class="card-text text-muted small mb-3">
                             <strong><i class="bi bi-person-circle me-2"></i> Author:</strong> ${item.createdby}
@@ -49,6 +64,19 @@
         success: function (data) {
             $('#popular-forms').empty();
             data.slice(0, 3).forEach(function (item) {
+                var createdDate = new Date(item.createdOn);
+
+                var formattedTime = createdDate.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+
+                var formattedDate = createdDate.toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
                 var likeLabel = item.likes === 1 ? 'Like' : 'Likes';
                 var cardHtml = `
                                     <div class="col-lg-4 col-md-6 mb-4">
@@ -60,7 +88,8 @@
                                                         <h5 class="card-title text-primary fs-4 mb-0">${item.title}</h5>
                                                     </div>
                                                     <p class="card-text text-muted small mb-3">
-                                                        <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> ${item.createdOn}
+                                                        <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> <span class="datetime-time"><i class="bi bi-clock datetime-icon"></i>${formattedTime}</span>-
+                                        <span class="datetime-date">${formattedDate}</span>
                                                     </p>
                                                     <p class="card-text text-muted small mb-3">
                                                         <strong><i class="bi bi-person-circle me-2"></i> Author:</strong> ${item.createdby}
@@ -113,6 +142,19 @@ $(document).ready(function () {
 
 
                     data.slice(0, 3).forEach(function (item) {
+                        var createdDate = new Date(item.createdOn);
+
+                        var formattedTime = createdDate.toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                        });
+
+                        var formattedDate = createdDate.toLocaleDateString('en-US', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                        });
                         var likeLabel = item.likes === 1 ? 'Like' : 'Likes';
                         var cardHtml = `
                                     <div class="col-lg-4 col-md-6 mb-4">
@@ -124,7 +166,8 @@ $(document).ready(function () {
                                                         <h5 class="card-title text-primary fs-4 mb-0">${item.title}</h5>
                                                     </div>
                                                     <p class="card-text text-muted small mb-3">
-                                                        <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> ${item.createdOn}
+                                                        <strong><i class="bi bi-calendar-event me-2"></i> Created On:</strong> <span class="datetime-time"><i class="bi bi-clock datetime-icon"></i>${formattedTime}</span>-
+                                        <span class="datetime-date">${formattedDate}</span>
                                                     </p>
                                                     <p class="card-text text-muted small mb-3">
                                                         <strong><i class="bi bi-person-circle me-2"></i> Author:</strong> ${item.createdby}

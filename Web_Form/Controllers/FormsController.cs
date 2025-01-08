@@ -43,8 +43,10 @@ namespace Web_Form.Controllers
                      Value = t.Tag,
                      Text = t.Tag
                  }).ToList();
+            
             var fullformviewmodel = new FullFormViewModel
             {
+                
                 tblTags = tags
             };
             return View(fullformviewmodel);
@@ -82,13 +84,13 @@ namespace Web_Form.Controllers
 
         public IActionResult LatestTemplateApi()
         {
-            var result = _context.TblForms.OrderBy(x => x.CreatedOn).ToList();
+            var result = _context.TblForms.OrderByDescending(x => x.CreatedOn).ToList();
             return Ok(result);
         }
 
         public IActionResult PopularFormApi()
         {
-            var result = _context.TblForms.OrderBy(x => x.SubmissionCount).ToList();
+            var result = _context.TblForms.OrderByDescending(x => x.SubmissionCount).ToList();
             return Ok(result);
         }
 
@@ -1097,9 +1099,11 @@ namespace Web_Form.Controllers
             {
                 return NotFound();
             }
-
-            _context.TblQuestionOptions.RemoveRange(options);
-            await _context.SaveChangesAsync();
+            if (question != null) {
+                _context.TblQuestionOptions.RemoveRange(options);
+                await _context.SaveChangesAsync();
+            }
+           
             _context.TblQuestions.RemoveRange(question);
             await _context.SaveChangesAsync();
             _context.TblForms.Remove(form);
