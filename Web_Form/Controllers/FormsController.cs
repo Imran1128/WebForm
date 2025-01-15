@@ -1129,6 +1129,7 @@ namespace Web_Form.Controllers
         }
 
 
+        public IActionResult SaleForce() { return Ok(); }
     }
 }
 

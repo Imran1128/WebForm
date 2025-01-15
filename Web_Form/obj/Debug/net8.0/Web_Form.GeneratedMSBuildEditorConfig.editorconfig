@@ -270,6 +270,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlck1hbmFnZW1lbnRcTWFuYWdlVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/WebForm/Web_Form/Views/User/CreateJiraTicketForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGVKaXJhVGlja2V0Rm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/WebForm/Web_Form/Views/User/CreateSalesforceAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGVTYWxlc2ZvcmNlQWNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/WebForm/Web_Form/Views/User/JiraSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxKaXJhU3VjY2Vzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/WebForm/Web_Form/Views/User/SaleforceSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTYWxlZm9yY2VTdWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/WebForm/Web_Form/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

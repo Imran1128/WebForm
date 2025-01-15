@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Web_Form")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9307b0e80f1eb44ccea5f623da010e3a47c135d5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8c05a94b3522bb4515f2891d62b3d401b650fae")]
 [assembly: System.Reflection.AssemblyProductAttribute("Web_Form")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Web_Form")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

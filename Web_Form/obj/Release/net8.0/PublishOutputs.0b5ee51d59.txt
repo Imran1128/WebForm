@@ -17,6 +17,7 @@ F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Apis.Translate.v2.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Google.Cloud.Translation.V2.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Humanizer.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.Razor.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Net.Http.Formatting.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.Helpers.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.WebPages.Deployment.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\System.Web.WebPages.Razor.dll
@@ -91,6 +92,7 @@ F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.Web.Infrastructure.d
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Mono.TextTemplating.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.dll
+F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\NuGet.Common.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\NuGet.Configuration.dll
 F:\WebForm\Web_Form\obj\Release\net8.0\PubTmp\Out\NuGet.DependencyResolver.Core.dll

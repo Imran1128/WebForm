@@ -37,6 +37,8 @@ public partial class TblQuestion
     public DateTime? UpdatedOn { get; set; }
    
     public virtual TblForm? Form { get; set; }
+    public virtual ICollection<TblResponse>? TblResponses { get; set; } = new List<TblResponse>();
+
 
     //public virtual TblKeywordMaster? QuestionTypeNavigation { get; set; }
     public virtual ICollection<TblQuestionOption>? TblQuestionOptions { get; set; } = new List<TblQuestionOption>();

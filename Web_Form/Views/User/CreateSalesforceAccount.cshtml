@@ -1,0 +1,17 @@
+﻿@model SalesforceAccountViewModel
+
+<form asp-controller="User" asp-action="CreateSalesforceAccount" method="post">
+    <div class="form-group">
+        <label for="FullName">Full Name</label>
+        <input type="text" id="FullName" name="FullName" class="form-control" value="@Model.FullName" required />
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+    </div>
+    <div class="form-group">
+        <label for="Phone">Phone</label>
+        <input type="text" id="Phone" name="Phone" class="form-control" value="@Model.Phone" />
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

@@ -23,6 +23,32 @@ namespace Web_Form.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ApiToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ApiTokens");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -583,6 +609,12 @@ namespace Web_Form.Migrations
                     b.Property<string>("SubmittedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TblFormFormId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TblQuestionQuestionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UniqueId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -598,6 +630,10 @@ namespace Web_Form.Migrations
                     b.HasIndex("OptionId");
 
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("TblFormFormId");
+
+                    b.HasIndex("TblQuestionQuestionId");
 
                     b.ToTable("tbl_Response", (string)null);
                 });
@@ -620,6 +656,17 @@ namespace Web_Form.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbl_Tag", (string)null);
+                });
+
+            modelBuilder.Entity("ApiToken", b =>
+                {
+                    b.HasOne("Web_Form.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -738,6 +785,14 @@ namespace Web_Form.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_tbl_Response_tbl_Questions");
 
+                    b.HasOne("Web_Form.Models.TblForm", null)
+                        .WithMany("TblResponses")
+                        .HasForeignKey("TblFormFormId");
+
+                    b.HasOne("Web_Form.Models.TblQuestion", null)
+                        .WithMany("TblResponses")
+                        .HasForeignKey("TblQuestionQuestionId");
+
                     b.Navigation("Form");
 
                     b.Navigation("Option");
@@ -752,11 +807,15 @@ namespace Web_Form.Migrations
                     b.Navigation("TblLikes");
 
                     b.Navigation("TblQuestions");
+
+                    b.Navigation("TblResponses");
                 });
 
             modelBuilder.Entity("Web_Form.Models.TblQuestion", b =>
                 {
                     b.Navigation("TblQuestionOptions");
+
+                    b.Navigation("TblResponses");
                 });
 #pragma warning restore 612, 618
         }

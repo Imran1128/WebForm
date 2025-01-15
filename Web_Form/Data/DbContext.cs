@@ -24,6 +24,8 @@ namespace Web_Form.Data
         public virtual DbSet<TblTag> TblTags { get; set; }
         public virtual DbSet<TblLike> TblLikes { get; set; }
         public virtual DbSet<TblFormSubmissionByUser> TblFormSubmissionByUsers { get; set; }
+        public virtual DbSet<ApiToken> ApiTokens { get; set; }
+
 
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -43,6 +43,8 @@ public partial class TblForm
 
     public bool IsPublic { get; set; }
     public virtual ICollection<TblQuestion>? TblQuestions { get; set; } = new List<TblQuestion>();
+    public virtual ICollection<TblResponse>? TblResponses { get; set; } = new List<TblResponse>();
+
     public virtual ICollection<TblLike>? TblLikes { get; set; } = new List<TblLike>();
     public virtual ICollection<TblComment>? TblComments { get; set; } = new List<TblComment>();
 }

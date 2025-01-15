@@ -1,0 +1,50 @@
+﻿@model JiraViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = UserManager.GetUserAsync(User).Result;
+}
+@{
+    ViewData["Title"] = "Create Ticket";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center"><i class="fa-solid fa-ticket-alt me-2"></i>Create Jira Ticket</h1>
+    <form method="post" asp-controller="User" asp-action="CreateJiraTicket" class="p-4 border rounded shadow-sm bg-light">
+        <input hidden asp-for="reportedByEmail" value="@user.Email" />
+        <input hidden asp-for="link" id="currentPageLink" value="" />
+
+        <!-- Priority Field -->
+        <div class="mb-3">
+            <label for="priority" class="form-label"><i class="fa-solid fa-exclamation-circle me-2"></i>Priority</label>
+            <select asp-for="priority" class="form-select">
+                <option>Highest</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+                <option>Lowest</option>
+            </select>
+        </div>
+
+        <!-- Summary Field -->
+        <div class="mb-3">
+            <label for="summary" class="form-label"><i class="fa-solid fa-pen me-2"></i>Summary</label>
+            <textarea asp-for="summary" class="form-control" rows="4" placeholder="Enter a brief summary..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-paper-plane me-2"></i>Submit
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Get the current page URL
+    const currentPageLink = window.location.href;
+
+    // Set the value of the hidden input field
+    document.getElementById('currentPageLink').value = currentPageLink;
+</script>

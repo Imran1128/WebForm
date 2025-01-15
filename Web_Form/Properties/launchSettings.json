@@ -29,10 +29,17 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "DOTNET_USE_POLLING_FILE_WATCHER": "1"
+      }
+    },
+    "Web_Form": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_USE_POLLING_FILE_WATCHER": "1"
       }
     }
+
   }
 }

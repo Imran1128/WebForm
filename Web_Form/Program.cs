@@ -23,7 +23,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Account/Logout";
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
-
+builder.Services.AddHttpClient<SalesforceService>();
 builder.Services.AddScoped<IFormService, FormRepository>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>(); // Register the custom email sender
 
@@ -34,7 +34,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<DbContext>()
 .AddDefaultTokenProviders();
-
+builder.Services.AddScoped<ApiTokenService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddRateLimiter(options =>
@@ -76,7 +76,7 @@ app.UseSession();
 app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseWebSockets();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Forms}/{action=Index}/{id?}");
